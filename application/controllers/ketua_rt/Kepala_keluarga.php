@@ -25,7 +25,7 @@ class Kepala_keluarga extends CI_controller
   //kk
   public function index($id='')
   {
-    $view = array('judul'   =>'Data Kepala Keluarga',
+    $view = array('judul'   =>'Data Kepala Keluarga RT '.$this->session->userdata('no_rt'),
               'data'        =>$this->m_kk->view_id_kk($id),
             );
      $this->load->view('ketua_rt/kepala_keluarga/form',$view);
@@ -86,15 +86,9 @@ class Kepala_keluarga extends CI_controller
           'id_rt'             =>$this->session->userdata('id_rt'),
           'id_kk'             =>$this->id_kk_urut(),
           'no_kk'             =>$this->input->post('no_kk'),
-          'nik_ktp'           =>$this->input->post('nik_ktp'),
           'nama_kk'           =>$this->input->post('nama_kk'),
-          'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
-          'tgl_lahir'         =>$this->input->post('tgl_lahir'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
-          'agama'             =>$this->input->post('agama'),
-          'pendidikan'        =>$this->input->post('pendidikan'),
-          'pekerjaan'         =>$this->input->post('pekerjaan'),
           'password'          =>md5($this->input->post('password')),
           );
   
@@ -143,15 +137,9 @@ public function detail($id='')
     'judul'             =>'Data Keluarga',
     'id_kk'             =>$data['id_kk'],
     'no_kk'             =>$data['no_kk'],
-    'nik_ktp'           =>$data['nik_ktp'],
     'nama_kk'           =>$data['nama_kk'],
-    'jenis_kelamin'     =>$data['jenis_kelamin'],
-    'tgl_lahir'         =>$data['tgl_lahir'],
     'alamat'            =>$data['alamat'],
     'no_hp'             =>$data['no_hp'],
-    'agama'             =>$data['agama'],
-    'pendidikan'        =>$data['pendidikan'],
-    'pekerjaan'         =>$data['pekerjaan'],
     'foto_kk'           =>$data['foto_kk'],
     'password'          =>$data['password'],
     'id_rt'             =>$data['id_rt'],
@@ -172,15 +160,9 @@ $data=$this->m_kk->view_id($id)->row_array();
 
     $SQLupdate=array(
     'no_kk'             =>$this->input->post('no_kk'),
-    'nik_ktp'           =>$this->input->post('nik_ktp'),
     'nama_kk'           =>$this->input->post('nama_kk'),
-    'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
-    'tgl_lahir'         =>$this->input->post('tgl_lahir'),
     'alamat'            =>$this->input->post('alamat'),
     'no_hp'             =>$this->input->post('no_hp'),
-    'agama'             =>$this->input->post('agama'),
-    'pendidikan'        =>$this->input->post('pendidikan'),
-    'pekerjaan'         =>$this->input->post('pekerjaan'),
 
     );
 

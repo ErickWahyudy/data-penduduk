@@ -29,10 +29,10 @@ class Home extends CI_controller
 		$data= $this->db->get_where('tb_rt',array('id_rt'=>$id))->row_array();
 	 $view = array(
         'judul'             =>'Halaman Administrator',
-        'count_kk'          => $this->M_count->count_kk_rt_laki()+$this->M_count->count_kk_rt_perempuan(),
-        'count_anggota'     => $this->M_count->count_anggota_rt_laki()+$this->M_count->count_anggota_rt_perempuan()+$this->M_count->count_kk_rt_laki()+$this->M_count->count_kk_rt_perempuan(),
-		'count_kk_laki'     => $this->M_count->count_kk_rt_laki()+$this->M_count->count_anggota_rt_laki(),
-		'count_kk_perempuan'=> $this->M_count->count_kk_rt_perempuan()+$this->M_count->count_anggota_rt_perempuan(),
+        'count_kk'          => $this->M_count->count_kk_rt(),
+        'count_anggota'     => $this->M_count->count_anggota_rt_laki()+$this->M_count->count_anggota_rt_perempuan(),
+		'count_kk_laki'     => $this->M_count->count_anggota_rt_laki(),
+		'count_kk_perempuan'=> $this->M_count->count_anggota_rt_perempuan(),
 		'no_rt'             => $data['no_rt'],
 		'informasi'         => $this->M_informasi->view(),
      );

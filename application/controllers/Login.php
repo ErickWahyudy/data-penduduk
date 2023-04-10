@@ -53,6 +53,7 @@ class Login extends CI_controller
         $sessionKetuaRT = array(
             'ketua_rt'      => TRUE,
             'id_rt'         => $DataKetuaRT['id_rt'],
+            'no_rt'         => $DataKetuaRT['no_rt'],
             'nama'          => $DataKetuaRT['nama'],
             'no_hp'         => $DataKetuaRT['no_hp'],
             'password'      => $DataKetuaRT['password'],
@@ -69,7 +70,6 @@ class Login extends CI_controller
             'kepala_kk'      => TRUE,
             'id_kk'          => $DataKepalaKK['id_kk'],
             'no_kk'          => $DataKepalaKK['no_kk'],
-            'nik_ktp'        => $DataKepalaKK['nik_ktp'],
             'nama'           => $DataKepalaKK['nama'],
             'no_hp'          => $DataKepalaKK['no_hp'],
             'password'       => $DataKepalaKK['password'],

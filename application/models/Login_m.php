@@ -17,9 +17,9 @@ class login_m extends CI_model
   return $this->db->query("SELECT * from tb_rt where (nama_rt='$nama' OR no_hp='$no_hp') AND password='$password' limit 1");
  }
 
-  public function kepala_kk($nama='', $no_hp='', $no_kk='', $nik='', $password='')
+  public function kepala_kk($nama='', $no_hp='', $no_kk='', $password='')
     {
-    return $this->db->query("SELECT * from tb_kk where (nama_kk='$nama' OR no_hp='$no_hp' OR no_kk='$no_kk' OR nik_ktp='$nik') AND password='$password' limit 1");
+    return $this->db->query("SELECT * from tb_kk where (nama_kk='$nama' OR no_hp='$no_hp' OR no_kk='$no_kk') AND password='$password' limit 1");
     }
 
 }

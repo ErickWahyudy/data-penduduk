@@ -21,6 +21,14 @@ class Anggota extends CI_controller
     $this->load->model('m_anggota');
 	}
 
+  public function index($value='')
+  { 
+     $view = array('judul'    =>'Data Penduduk RT '.$this->session->userdata('no_rt'),
+                    'data'    =>$this->m_anggota->view_anggota_kk(),
+            );
+    $this->load->view('ketua_rt/penduduk/form', $view);
+  }
+
   private function acak_id($panjang)
     {
         $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';

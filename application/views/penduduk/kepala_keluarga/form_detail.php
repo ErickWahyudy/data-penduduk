@@ -20,18 +20,6 @@ if($aksi == "detail"):
                 <td><?= $no_kk ?></td>
             </tr>
             <tr>
-                <th>NIK</th>
-                <td><?= $nik_ktp ?></td>
-            </tr>
-            <tr>
-                <th>Tanggal Lahir</th>
-                <td><?= tgl_indo($tgl_lahir) ?></td>
-            </tr>
-            <tr>
-                <th>Jenis Kelamin</th>
-                <td><?= $jenis_kelamin ?></td>
-            </tr>
-            <tr>
                 <th>No HP</th>
                 <td>
                     <?= $no_hp ?>
@@ -52,20 +40,9 @@ if($aksi == "detail"):
         <div class="card-body">
             <table class="table table-bordered table-striped">
             <tr>
-                <th class="col-lg-3">Agama</th>
-                <td><?= $agama ?></td>
-            </tr>
-            <tr>
-                <th>Pendidikan</th>
-                <td><?= $pendidikan ?></td>
-            </tr>
-            <tr>
-                <th>Pekerjaan</th>
-                <td><?= $pekerjaan ?></td>
-            </tr>
-            <tr>
                 <th>Foto KK</th>
-                <td><?php if($foto_kk == ''): ?>
+                <td>
+                <?php if($foto_kk == ''): ?>
                         <img src="<?= base_url('themes/admin/no_images.png') ?>" width="50px">
                     <?php else: ?>
                     <a href="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" target="_blank">
@@ -122,32 +99,6 @@ if($aksi == "detail"):
                                 </td>
                             </tr>
                             <tr>
-                                <th>NIK</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" name="nik_ktp" value="<?= $nik_ktp ?>" class="form-control" autocomplete="off" required>
-                                </td>
-                            <tr>
-                                <th>Jenis Kelamin</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="jenis_kelamin" class="form-control" required="">
-                                        <option value="Laki-laki" <?php if($jenis_kelamin == 'Laki-laki'){echo "selected";} ?>>Laki-laki</option>
-                                        <option value="Perempuan" <?php if($jenis_kelamin == 'Perempuan'){echo "selected";} ?>>Perempuan</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Tgl Lahir</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="date" name="tgl_lahir" value="<?= $tgl_lahir ?>" class="form-control" required="">
-                                </td>
-                            </tr>
-                            <tr>
                                 <th>No HP</th>
                             </tr>
                             <tr>
@@ -161,139 +112,6 @@ if($aksi == "detail"):
                             <tr>
                                 <td>
                                     <textarea name="alamat" class="form-control" required=""><?= $alamat ?></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Agama</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="agama" class="form-control" required="">
-                                        <option value="Islam" <?php if($agama == 'Islam'){echo "selected";} ?>>Islam</option>
-                                        <option value="Kristen" <?php if($agama == 'Kristen'){echo "selected";} ?>>Kristen</option>
-                                        <option value="Katholik" <?php if($agama == 'Katholik'){echo "selected";} ?>>Katholik</option>
-                                        <option value="Hindu" <?php if($agama == 'Hindu'){echo "selected";} ?>>Hindu</option>
-                                        <option value="Budha" <?php if($agama == 'Budha'){echo "selected";} ?>>Budha</option>
-                                        <option value="Konghucu" <?php if($agama == 'Konghucu'){echo "selected";} ?>>Konghucu</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Pendidikan</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="pendidikan" class="form-control" required="">
-                                        <option value="Tidak Sekolah" <?php if($pendidikan == 'Tidak Sekolah'){echo "selected";} ?>>Tidak Sekolah</option>
-                                        <option value="SD" <?php if($pendidikan == 'SD'){echo "selected";} ?>>SD</option>
-                                        <option value="SMP" <?php if($pendidikan == 'SMP'){echo "selected";} ?>>SMP</option>
-                                        <option value="SMA" <?php if($pendidikan == 'SMA'){echo "selected";} ?>>SMA</option>
-                                        <option value="D1" <?php if($pendidikan == 'D1'){echo "selected";} ?>>D1</option>
-                                        <option value="D2" <?php if($pendidikan == 'D2'){echo "selected";} ?>>D2</option>
-                                        <option value="D3" <?php if($pendidikan == 'D3'){echo "selected";} ?>>D3</option>
-                                        <option value="D4" <?php if($pendidikan == 'D4'){echo "selected";} ?>>D4</option>
-                                        <option value="S1" <?php if($pendidikan == 'S1'){echo "selected";} ?>>S1</option>
-                                        <option value="S2" <?php if($pendidikan == 'S2'){echo "selected";} ?>>S2</option>
-                                        <option value="S3" <?php if($pendidikan == 'S3'){echo "selected";} ?>>S3</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Pekerjaan</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <select name="pekerjaan" class="form-control" required="">
-                                        <option value="Belum/Tidak Bekerja" <?php if($pekerjaan == 'Belum/Tidak Bekerja'){echo "selected";} ?>>Belum/Tidak Bekerja</option>
-                                        <option value="Pelajar/Mahasiswa" <?php if($pekerjaan == 'Pelajar/Mahasiswa'){echo "selected";} ?>>Pelajar/Mahasiswa</option>
-                                        <option value="Mengurus Rumah Tangga" <?php if($pekerjaan == 'Mengurus Rumah Tangga'){echo "selected";} ?>>Mengurus Rumah Tangga</option>
-                                        <option value="Pensiunan" <?php if($pekerjaan == 'Pensiunan'){echo "selected";} ?>>Pensiunan</option>
-                                        <option value="Pegawai Negeri Sipil" <?php if($pekerjaan == 'Pegawai Negeri Sipil'){echo "selected";} ?>>Pegawai Negeri Sipil</option>
-                                        <option value="Tentara Nasional Indonesia" <?php if($pekerjaan == 'Tentara Nasional Indonesia'){echo "selected";} ?>>Tentara Nasional Indonesia</option>
-                                        <option value="Kepolisian RI" <?php if($pekerjaan == 'Kepolisian RI'){echo "selected";} ?>>Kepolisian RI</option>
-                                        <option value="Perdagangan" <?php if($pekerjaan == 'Perdagangan'){echo "selected";} ?>>Perdagangan</option>
-                                        <option value="Petani/Pekebun" <?php if($pekerjaan == 'Petani/Pekebun'){echo "selected";} ?>>Petani/Pekebun</option>
-                                        <option value="Peternak" <?php if($pekerjaan == 'Peternak'){echo "selected";} ?>>Peternak</option>
-                                        <option value="Nelayan/Perikanan" <?php if($pekerjaan == 'Nelayan/Perikanan'){echo "selected";} ?>>Nelayan/Perikanan</option>
-                                        <option value="Industri" <?php if($pekerjaan == 'Industri'){echo "selected";} ?>>Industri</option>
-                                        <option value="Konstruksi" <?php if($pekerjaan == 'Konstruksi'){echo "selected";} ?>>Konstruksi</option>
-                                        <option value="Transportasi" <?php if($pekerjaan == 'Transportasi'){echo "selected";} ?>>Transportasi</option>
-                                        <option value="Karyawan Swasta" <?php if($pekerjaan == 'Karyawan Swasta'){echo "selected";} ?>>Karyawan Swasta</option>
-                                        <option value="Karyawan BUMN" <?php if($pekerjaan == 'Karyawan BUMN'){echo "selected";} ?>>Karyawan BUMN</option>
-                                        <option value="Karyawan BUMD" <?php if($pekerjaan == 'Karyawan BUMD'){echo "selected";} ?>>Karyawan BUMD</option>
-                                        <option value="Karyawan Honorer" <?php if($pekerjaan == 'Karyawan Honorer'){echo "selected";} ?>>Karyawan Honorer</option>
-                                        <option value="Buruh Harian Lepas" <?php if($pekerjaan == 'Buruh Harian Lepas'){echo "selected";} ?>>Buruh Harian Lepas</option>
-                                        <option value="Buruh Tani/Perkebunan" <?php if($pekerjaan == 'Buruh Tani/Perkebunan'){echo "selected";} ?>>Buruh Tani/Perkebunan</option>
-                                        <option value="Buruh Nelayan/Perikanan" <?php if($pekerjaan == 'Buruh Nelayan/Perikanan'){echo "selected";} ?>>Buruh Nelayan/Perikanan</option>
-                                        <option value="Buruh Peternakan" <?php if($pekerjaan == 'Buruh Peternakan'){echo "selected";} ?>>Buruh Peternakan</option>
-                                        <option value="Pembantu Rumah Tangga" <?php if($pekerjaan == 'Pembantu Rumah Tangga'){echo "selected";} ?>>Pembantu Rumah Tangga</option>
-                                        <option value="Tukang Cukur" <?php if($pekerjaan == 'Tukang Cukur'){echo "selected";} ?>>Tukang Cukur</option>
-                                        <option value="Tukang Listrik" <?php if($pekerjaan == 'Tukang Listrik'){echo "selected";} ?>>Tukang Listrik</option>
-                                        <option value="Tukang Batu" <?php if($pekerjaan == 'Tukang Batu'){echo "selected";} ?>>Tukang Batu</option>
-                                        <option value="Tukang Kayu" <?php if($pekerjaan == 'Tukang Kayu'){echo "selected";} ?>>Tukang Kayu</option>
-                                        <option value="Tukang Sol Sepatu" <?php if($pekerjaan == 'Tukang Sol Sepatu'){echo "selected";} ?>>Tukang Sol Sepatu</option>
-                                        <option value="Tukang Las/Pandai Besi" <?php if($pekerjaan == 'Tukang Las/Pandai Besi'){echo "selected";} ?>>Tukang Las/Pandai Besi</option>
-                                        <option value="Tukang Jahit" <?php if($pekerjaan == 'Tukang Jahit'){echo "selected";} ?>>Tukang Jahit</option>
-                                        <option value="Tukang Gigi" <?php if($pekerjaan == 'Tukang Gigi'){echo "selected";} ?>>Tukang Gigi</option>
-                                        <option value="Penata Rambut" <?php if($pekerjaan == 'Penata Rambut'){echo "selected";} ?>>Penata Rambut</option>
-                                        <option value="Penata Rias" <?php if($pekerjaan == 'Penata Rias'){echo "selected";} ?>>Penata Rias</option>
-                                        <option value="Penata Busana" <?php if($pekerjaan == 'Penata Busana'){echo "selected";} ?>>Penata Busana</option>
-                                        <option value="Mekanik" <?php if($pekerjaan == 'Mekanik'){echo "selected";} ?>>Mekanik</option>
-                                        <option value="Seniman" <?php if($pekerjaan == 'Seniman'){echo "selected";} ?>>Seniman</option>
-                                        <option value="Tabib" <?php if($pekerjaan == 'Tabib'){echo "selected";} ?>>Tabib</option>
-                                        <option value="Paraji" <?php if($pekerjaan == 'Paraji'){echo "selected";} ?>>Paraji</option>
-                                        <option value="Perancang Busana" <?php if($pekerjaan == 'Perancang Busana'){echo "selected";} ?>>Perancang Busana</option>
-                                        <option value="Penterjemah" <?php if($pekerjaan == 'Penterjemah'){echo "selected";} ?>>Penterjemah</option>
-                                        <option value="Imam Masjid" <?php if($pekerjaan == 'Imam Masjid'){echo "selected";} ?>>Imam Masjid</option>
-                                        <option value="Pendeta" <?php if($pekerjaan == 'Pendeta'){echo "selected";} ?>>Pendeta</option>
-                                        <option value="Pastur" <?php if($pekerjaan == 'Pastur'){echo "selected";} ?>>Pastur</option>
-                                        <option value="Wartawan" <?php if($pekerjaan == 'Wartawan'){echo "selected";} ?>>Wartawan</option>
-                                        <option value="Ustadz/Mubaligh" <?php if($pekerjaan == 'Ustadz/Mubaligh'){echo "selected";} ?>>Ustadz/Mubaligh</option>
-                                        <option value="Juru Masak" <?php if($pekerjaan == 'Juru Masak'){echo "selected";} ?>>Juru Masak</option>
-                                        <option value="Promotor Acara" <?php if($pekerjaan == 'Promotor Acara'){echo "selected";} ?>>Promotor Acara</option>
-                                        <option value="Anggota DPR-RI" <?php if($pekerjaan == 'Anggota DPR-RI'){echo "selected";} ?>>Anggota DPR-RI</option>
-                                        <option value="Anggota DPD" <?php if($pekerjaan == 'Anggota DPD'){echo "selected";} ?>>Anggota DPD</option>
-                                        <option value="Anggota BPK" <?php if($pekerjaan == 'Anggota BPK'){echo "selected";} ?>>Anggota BPK</option>
-                                        <option value="Presiden" <?php if($pekerjaan == 'Presiden'){echo "selected";} ?>>Presiden</option>
-                                        <option value="Wakil Presiden" <?php if($pekerjaan == 'Wakil Presiden'){echo "selected";} ?>>Wakil Presiden</option>
-                                        <option value="Anggota Mahkamah Konstitusi" <?php if($pekerjaan == 'Anggota Mahkamah Konstitusi'){echo "selected";} ?>>Anggota Mahkamah Konstitusi</option>
-                                        <option value="Anggota Kabinet/Kementerian" <?php if($pekerjaan == 'Anggota Kabinet/Kementerian'){echo "selected";} ?>>Anggota Kabinet/Kementerian</option>
-                                        <option value="Duta Besar" <?php if($pekerjaan == 'Duta Besar'){echo "selected";} ?>>Duta Besar</option>
-                                        <option value="Gubernur" <?php if($pekerjaan == 'Gubernur'){echo "selected";} ?>>Gubernur</option>
-                                        <option value="Wakil Gubernur" <?php if($pekerjaan == 'Wakil Gubernur'){echo "selected";} ?>>Wakil Gubernur</option>
-                                        <option value="Bupati" <?php if($pekerjaan == 'Bupati'){echo "selected";} ?>>Bupati</option>
-                                        <option value="Wakil Bupati" <?php if($pekerjaan == 'Wakil Bupati'){echo "selected";} ?>>Wakil Bupati</option>
-                                        <option value="Walikota" <?php if($pekerjaan == 'Walikota'){echo "selected";} ?>>Walikota</option>
-                                        <option value="Wakil Walikota" <?php if($pekerjaan == 'Wakil Walikota'){echo "selected";} ?>>Wakil Walikota</option>
-                                        <option value="Anggota DPRD Propinsi" <?php if($pekerjaan == 'Anggota DPRD Propinsi'){echo "selected";} ?>>Anggota DPRD Propinsi</option>
-                                        <option value="Anggota DPRD Kabupaten/Kota" <?php if($pekerjaan == 'Anggota DPRD Kabupaten/Kota'){echo "selected";} ?>>Anggota DPRD Kabupaten/Kota</option>
-                                        <option value="Dosen" <?php if($pekerjaan == 'Dosen'){echo "selected";} ?>>Dosen</option>
-                                        <option value="Guru" <?php if($pekerjaan == 'Guru'){echo "selected";} ?>>Guru</option>
-                                        <option value="Pilot" <?php if($pekerjaan == 'Pilot'){echo "selected";} ?>>Pilot</option>
-                                        <option value="Pengacara" <?php if($pekerjaan == 'Pengacara'){echo "selected";} ?>>Pengacara</option>
-                                        <option value="Notaris" <?php if($pekerjaan == 'Notaris'){echo "selected";} ?>>Notaris</option>
-                                        <option value="Arsitek" <?php if($pekerjaan == 'Arsitek'){echo "selected";} ?>>Arsitek</option>
-                                        <option value="Akuntan" <?php if($pekerjaan == 'Akuntan'){echo "selected";} ?>>Akuntan</option>
-                                        <option value="Konsultan" <?php if($pekerjaan == 'Konsultan'){echo "selected";} ?>>Konsultan</option>
-                                        <option value="Dokter" <?php if($pekerjaan == 'Dokter'){echo "selected";} ?>>Dokter</option>
-                                        <option value="Bidan" <?php if($pekerjaan == 'Bidan'){echo "selected";} ?>>Bidan</option>
-                                        <option value="Perawat" <?php if($pekerjaan == 'Perawat'){echo "selected";} ?>>Perawat</option>
-                                        <option value="Apoteker" <?php if($pekerjaan == 'Apoteker'){echo "selected";} ?>>Apoteker</option>
-                                        <option value="Psikiater/Psikolog" <?php if($pekerjaan == 'Psikiater/Psikolog'){echo "selected";} ?>>Psikiater/Psikolog</option>
-                                        <option value="Penyiar Televisi" <?php if($pekerjaan == 'Penyiar Televisi'){echo "selected";} ?>>Penyiar Televisi</option>
-                                        <option value="Penyiar Radio" <?php if($pekerjaan == 'Penyiar Radio'){echo "selected";} ?>>Penyiar Radio</option>
-                                        <option value="Pelaut" <?php if($pekerjaan == 'Pelaut'){echo "selected";} ?>>Pelaut</option>
-                                        <option value="Peneliti" <?php if($pekerjaan == 'Peneliti'){echo "selected";} ?>>Peneliti</option>
-                                        <option value="Sopir" <?php if($pekerjaan == 'Sopir'){echo "selected";} ?>>Sopir</option>
-                                        <option value="Pialang" <?php if($pekerjaan == 'Pialang'){echo "selected";} ?>>Pialang</option>
-                                        <option value="Paranormal" <?php if($pekerjaan == 'Paranormal'){echo "selected";} ?>>Paranormal</option>
-                                        <option value="Pedagang" <?php if($pekerjaan == 'Pedagang'){echo "selected";} ?>>Pedagang</option>
-                                        <option value="Perangkat Desa" <?php if($pekerjaan == 'Perangkat Desa'){echo "selected";} ?>>Perangkat Desa</option>
-                                        <option value="Kepala Desa" <?php if($pekerjaan == 'Kepala Desa'){echo "selected";} ?>>Kepala Desa</option>
-                                        <option value="Biarawati" <?php if($pekerjaan == 'Biarawati'){echo "selected";} ?>>Biarawati</option>
-                                        <option value="Wiraswasta" <?php if($pekerjaan == 'Wiraswasta'){echo "selected";} ?>>Wiraswasta</option>
-                                        <option value="Lainnya" <?php if($pekerjaan == 'Lainnya'){echo "selected";} ?>>Lainnya</option>
-                                    </select>
                                 </td>
                             </tr>
                             <tr>

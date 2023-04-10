@@ -11,18 +11,10 @@ private $table2 = 'tb_rt';
 private $table3 = 'tb_anggota';
 
 //count_anggota tb_kk laki-laki
-public function count_kk_laki($id='')
+public function count_kk($id='')
 {
   $this->db->select ('*');
-  $this->db->from ($this->table)->where ('jenis_kelamin', 'Laki-laki');
-    return $this->db->get()->num_rows();
-}
-
-//count_anggota tb_kk laki-laki
-public function count_kk_perempuan($id='')
-{
-  $this->db->select ('*');
-  $this->db->from ($this->table)->where ('jenis_kelamin', 'Perempuan');
+  $this->db->from ($this->table);
     return $this->db->get()->num_rows();
 }
 
@@ -53,22 +45,14 @@ public function count_rt($id='')
 
 
 //count kk untuk rt
-public function count_kk_rt_laki($id='')
+public function count_kk_rt($id='')
 {
   $id = $this->session->userdata['id_rt'];
   $this->db->select ('*');
-  $this->db->from ($this->table)->where ('id_rt', $id)->where ('jenis_kelamin', 'Laki-laki');
+  $this->db->from ($this->table)->where ('id_rt', $id);
     return $this->db->get()->num_rows();
 }
 
-//count anggota untuk rt
-public function count_kk_rt_perempuan($id='')
-{
-  $id = $this->session->userdata['id_rt'];
-  $this->db->select ('*');
-  $this->db->from ($this->table)->where ('id_rt', $id)->where ('jenis_kelamin', 'Perempuan');
-    return $this->db->get()->num_rows();
-}
 
 //count anggota untuk rt
 public function count_anggota_rt_laki($id='')

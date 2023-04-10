@@ -28,10 +28,10 @@ class Home extends CI_controller
 	 $view = array(
         'judul'             =>'Halaman Administrator',
         'count_rt'          => $this->M_count->count_rt(),
-        'count_kk'          => $this->M_count->count_kk_laki()+$this->M_count->count_kk_perempuan(),
-        'count_anggota'     => $this->M_count->count_anggota_laki()+$this->M_count->count_anggota_perempuan()+$this->M_count->count_kk_laki()+$this->M_count->count_kk_perempuan(),
-		'count_kk_laki'     => $this->M_count->count_kk_laki()+$this->M_count->count_anggota_laki(),
-		'count_kk_perempuan'=> $this->M_count->count_kk_perempuan()+$this->M_count->count_anggota_perempuan(),
+        'count_kk'          => $this->M_count->count_kk(),
+        'count_anggota'     => $this->M_count->count_anggota_laki()+$this->M_count->count_anggota_perempuan(),
+		'count_kk_laki'     => $this->M_count->count_anggota_laki(),
+		'count_kk_perempuan'=> $this->M_count->count_anggota_perempuan(),
      );
 	 $this->load->view('admin/home',$view);
 	}

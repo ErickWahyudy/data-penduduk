@@ -64,7 +64,7 @@ public function view_id_kk($id='')
   $this->db->from($this->table2);
   $this->db->join($this->table, 'tb_kk.id_rt = tb_rt.id_rt');
   $this->db->where('tb_kk.id_rt', $id);
-  $this->db->order_by('id_kk', 'ASC');
+  $this->db->order_by('nama_kk', 'ASC');
   return $this->db->get();
 }
 

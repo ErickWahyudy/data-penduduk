@@ -107,33 +107,12 @@ class Kepala_keluarga extends CI_controller
       }
       else
 
-      //cek no nik sudah pernah terdaftar
-      $proses_cek=$this->db->get_where('tb_kk',array('nik_ktp'=>$this->input->post('nik_ktp')))->num_rows();
-      if ($proses_cek > 0) {
-          $this->session->set_flashdata('pesan', '<script>
-              swal({
-                  title: "Nomor NIK sudah terdaftar",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-              });
-          </script>');
-          redirect('admin/kepala_keluarga');
-      }
-      else
-
       $SQLinsert=array(
           'id_kk'             =>$this->id_kk_urut(),
           'no_kk'             =>$this->input->post('no_kk'),
-          'nik_ktp'           =>$this->input->post('nik_ktp'),
           'nama_kk'           =>$this->input->post('nama_kk'),
-          'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
-          'tgl_lahir'         =>$this->input->post('tgl_lahir'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
-          'agama'             =>$this->input->post('agama'),
-          'pendidikan'        =>$this->input->post('pendidikan'),
-          'pekerjaan'         =>$this->input->post('pekerjaan'),
           'password'          =>md5($this->input->post('password')),
           'id_rt'             =>$this->input->post('id_rt'),
           );
@@ -183,15 +162,9 @@ public function detail($id='')
     'judul'             =>'Data Keluarga',
     'id_kk'             =>$data['id_kk'],
     'no_kk'             =>$data['no_kk'],
-    'nik_ktp'           =>$data['nik_ktp'],
     'nama_kk'           =>$data['nama_kk'],
-    'jenis_kelamin'     =>$data['jenis_kelamin'],
-    'tgl_lahir'         =>$data['tgl_lahir'],
     'alamat'            =>$data['alamat'],
     'no_hp'             =>$data['no_hp'],
-    'agama'             =>$data['agama'],
-    'pendidikan'        =>$data['pendidikan'],
-    'pekerjaan'         =>$data['pekerjaan'],
     'foto_kk'           =>$data['foto_kk'],
     'password'          =>$data['password'],
     'id_rt'             =>$data['id_rt'],
@@ -213,15 +186,9 @@ $data=$this->m_kk->view_id($id)->row_array();
 
     $SQLupdate=array(
     'no_kk'             =>$this->input->post('no_kk'),
-    'nik_ktp'           =>$this->input->post('nik_ktp'),
     'nama_kk'           =>$this->input->post('nama_kk'),
-    'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
-    'tgl_lahir'         =>$this->input->post('tgl_lahir'),
     'alamat'            =>$this->input->post('alamat'),
     'no_hp'             =>$this->input->post('no_hp'),
-    'agama'             =>$this->input->post('agama'),
-    'pendidikan'        =>$this->input->post('pendidikan'),
-    'pekerjaan'         =>$this->input->post('pekerjaan'),
     'id_rt'             =>$this->input->post('id_rt'),
 
     );
@@ -327,6 +294,28 @@ if(isset($_POST['kirim'])){
         </script>';
      $this->session->set_flashdata('pesan',$pesan);
    redirect(base_url('admin/kepala_keluarga/detail/'.$id));
+    }
+  }
+}
+
+public function ganti_password($id='') {
+    if (isset($_POST['kirim'])) {
+        $SQLinsert=array(
+            'password'    =>md5($this->input->post('password'))
+    );
+    $cek=$this->m_kk->update($id,$SQLinsert);
+    if($cek){
+        $pesan='<script>
+            swal({
+                title: "Berhasil Ganti Password",
+                text: "",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonText: "OKEE"
+                });
+        </script>';
+         $this->session->set_flashdata('pesan',$pesan);
+      redirect(base_url('admin/kepala_keluarga/detail/'.$id));
     }
   }
 }

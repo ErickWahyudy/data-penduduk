@@ -204,7 +204,7 @@ if($this->session->userdata('level') =="Administrator"){
           </a>
           <ul class="treeview-menu active">
       <li><a href="<?= base_url('admin/kepala_keluarga') ?>" class="active"><i class="fa fa-cubes"></i>Kepala Keluarga</a></li>
-      <li><a href="<?= base_url('admin/penduduk') ?>"><i class="fa fa-creative-commons"></i>Data Penduduk</a></li>
+      <li><a href="<?= base_url('admin/anggota') ?>"><i class="fa fa-creative-commons"></i>Data Penduduk</a></li>
           </ul>
         </li>
 
@@ -227,6 +227,7 @@ if($this->session->userdata('level') =="Administrator"){
  <li class="treeview"> 
       <li><a href="<?= base_url('ketua_rt/profile'); ?>"><i class="fa fa-user"></i>Profile RT</a></li>
       <li><a href="<?= base_url('ketua_rt/kepala_keluarga'); ?>"><i class="fa fa-cubes"></i>Kepala Keluarga</a></li>
+      <li><a href="<?= base_url('ketua_rt/anggota'); ?>"><i class="fa fa-creative-commons"></i>Data Penduduk</a></li>
   </li> 
 
   <li class="header">OTHER</li>
