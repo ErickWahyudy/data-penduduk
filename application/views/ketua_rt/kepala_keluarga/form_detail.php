@@ -44,12 +44,13 @@ if($aksi == "detail"):
                 <th>Foto KK</th>
                 <td><?php if($foto_kk == ''): ?>
                         <img src="<?= base_url('themes/admin/no_images.png') ?>" width="50px">
+                        <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#uploadKK<?= $id_kk ?>" title="Upload Foto KK"><i class="fa fa-upload"></i></a>
                     <?php else: ?>
                     <a href="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" target="_blank">
                         <img src="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" width="50%">
+                        <a href="<?= base_url('ketua_rt/kepala_keluarga/hapusimage/'.$id_kk) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Yakin ingin menghapus foto ini?')" title="Hapus Foto KK untuk memperbarui"><i class="fa fa-trash"></i></a>
                     </a>
                     <?php endif; ?>
-                    <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#uploadKK<?= $id_kk ?>"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
             <tr>

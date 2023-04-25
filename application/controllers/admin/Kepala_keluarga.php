@@ -342,6 +342,32 @@ public function hapus($id='')
        redirect(base_url('admin/kepala_keluarga'));
      }
     }
+
+    public function hapusimage($id='')
+    {
+      //hapus file di folder berdasarkan id
+      $data=$this->m_kk->view_id($id)->row_array();
+      $file=$data['foto_kk'];
+      unlink('./themes/foto_kk/'.$file);
+      //hapus data di database
+      $SQLupdate=array(
+      'foto_kk'               =>'',
+    );
+    $cek=$this->m_kk->update($id,$SQLupdate);
+    if($cek){
+     $pesan='<script>
+            swal({
+                title: "Berhasil Hapus Foto KK",
+                text: "",
+                type: "success",
+                showConfirmButton: true,
+                confirmButtonText: "OKEE"
+                });
+        </script>';
+     $this->session->set_flashdata('pesan',$pesan);
+    redirect(base_url('admin/kepala_keluarga/detail/'.$id));
+        }
+    }
         
 
   	

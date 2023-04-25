@@ -126,12 +126,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav me-auto p-3 p-lg-0">
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Login Aplikasi</a>
-                    <div class="dropdown-menu border-0 rounded-0 rounded-bottom m-0">
-                        <a href="login" target="" class="dropdown-item">Login</a>
-                    </div>
-                </div>
+            <a href="login" class="nav-item nav-link <?php if($this->uri->segment(1)=="login"){echo "active";}?>">login aplikasi</a>
+            <a href="contact" class="nav-item nav-link <?php if($this->uri->segment(1)=="contact"){echo "active";}?>">contact us</a>
             </div>
             <!-- <a href="register" target="" class="btn btn-sm btn-light rounded-pill py-2 px-4">Daftar sekarang ?</a> -->
         </div>
