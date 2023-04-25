@@ -20,6 +20,12 @@ if($aksi == "lihat"):
             </td>
         </tr>
         <tr>
+            <th>Email</th>
+            <td>
+                : <?= $email ?>
+            </td>
+        </tr>
+        <tr>
             <th>No RT</th>
             <td>
                 : <?= $no_rt ?>
@@ -87,6 +93,15 @@ if($aksi == "lihat"):
                             <td>
                                 <input type="text" name="no_hp" value="<?= $no_hp ?>" class="form-control"
                                     placeholder="penulisan nomor 6281123xxxxxx" autocomplete="off" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="email" name="email" value="<?= $email ?>" class="form-control"
+                                    autocomplete="off" required>
                             </td>
                         </tr>
                         <tr>

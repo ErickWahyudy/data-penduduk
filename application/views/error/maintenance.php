@@ -54,7 +54,7 @@
                 <div class="col-lg-6">
                     <i class="bi bi-exclamation-triangle display-1 text-primary"></i>                   
                     <h3 class="mb-4">Halaman ini masih dalam pengembangan <br>
-                        information by KassandraWiFi
+                        information by Kassandra Production
                     </h3>
                         <!-- mundur 1 kali ke halaman sebelumnya -->
                     <a href="javascript:history.back()" class="btn btn-primary">Go Back</a>

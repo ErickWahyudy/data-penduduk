@@ -56,7 +56,7 @@
                     <h3 class="mb-4">Page Not Found</h3>
                     <p class="mb-4">We’re sorry, the page you have looked for does not exist in our website! Maybe go to
                         our home page or try to use a search? <br>
-                        information by KassandraWiFi
+                        information by Kassandra Production
                     </p>
                         <!-- mundur 1 kali ke halaman sebelumnya -->
                     <a href="javascript:history.back()" class="btn btn-primary">Go Back</a>

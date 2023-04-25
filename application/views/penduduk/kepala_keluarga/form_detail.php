@@ -48,7 +48,7 @@ if($aksi == "detail"):
                     <a href="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" target="_blank">
                         <img src="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" width="50%">
                     </a>
-                    <?php endif; ?>
+                    <?php endif; ?> 
                     <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#uploadKK<?= $token ?>"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>

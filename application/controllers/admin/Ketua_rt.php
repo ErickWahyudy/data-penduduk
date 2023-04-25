@@ -12,6 +12,7 @@ class Ketua_rt extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
@@ -142,6 +143,7 @@ class Ketua_rt extends CI_controller
           'nama_rt'           =>$this->input->post('nama_rt'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
+          'email'             =>$this->input->post('email'),
           'password'          =>md5($this->input->post('password'))
           );
   
@@ -170,6 +172,7 @@ class Ketua_rt extends CI_controller
           'nama_rt'              =>$this->input->post('nama_rt'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
+          'email'             =>$this->input->post('email'),
           'password'          =>md5($this->input->post('password'))
 
         );

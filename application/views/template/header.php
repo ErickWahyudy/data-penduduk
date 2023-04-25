@@ -7,7 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <meta name="keywords" content="wifi kassandra my id, kassandra my id, kassandra wifi, kassandra, kassandra hd production, KASSANDRA, KASSANDRA HD PRODUCTION">
-  <meta name="description" content="Layanan hotspot wifi unlimited 24 jam non stop tanpa lemot kecuali saat wifi down">
+  <meta name="description" content="Pendataan penduduk dan keluarga guna mempermudah dalam proses pelayanan administrasi dengan menggunakan teknologi informasi">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -131,7 +131,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('admin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi Data Penduduk'))" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php }elseif($this->session->userdata('level') == "ketua_rt"){ ?>
@@ -140,7 +140,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('ketua_rt/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi Data Penduduk'))" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php } ?>
@@ -172,7 +172,8 @@ if($this->session->userdata('level') =="Administrator"){
               <img src="<?= base_url('themes/admin') ?>/dist/img/user.png" class="img-circle" width="25%" alt="User Image">                  
                 <span class="pull-left info"><?= ucfirst($data['nama_rt']) ?> <br><br>
                   <small class="label label-warning">
-                  <span>Ketua RT <?= $data['no_rt'] ?></span>               
+                  <span>Ketua RT <?= $data['no_rt'] ?></span> |
+                  <span> <?= $data['alamat'] ?></span>               
               <?php } ?> 
         </small>
         </span>
@@ -236,7 +237,7 @@ if($this->session->userdata('level') =="Administrator"){
   
 <?php } ?>
   <!-- logout -->
-  <li> <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi KassandraWiFi'))"><i class="fa fa-sign-out"></i>Sign out</a>
+  <li> <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi Data Penduduk'))"><i class="fa fa-sign-out"></i>Sign out</a>
   <li class="header">END MAIN NAVIGATION</li>
       </ul>
     </section>

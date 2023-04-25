@@ -14,6 +14,7 @@
                 <th>Nama</th>
                 <th>Alamat</th>
                 <th>No HP</th>
+                <th>Email</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -26,9 +27,10 @@
                 <td><?= $rt['alamat'] ?></td>
                 <td>
                     <?= $rt['no_hp'] ?> &nbsp;
-                    <a href="https://api.whatsapp.com/send?phone=<?= $rt['no_hp'] ?>" target="_blank" class="btn btn-success btn-xs"><i
-                            class="fa fa-whatsapp"></i></a>
+                    <a href="https://api.whatsapp.com/send?phone=62<?= $rt['no_hp'] ?>/&text=Assalamualaikum%20Sdr/i%20<?= $rt['nama_rt'] ?>%20berikut%20kami%20sampaikan%20data%20akun%20RT%20anda%20untuk%20login%20ke%20web%20aplikasi%0ANama%20Pengguna%20%3A%20<?= $rt['nama_rt'] ?>%0ANo%20HP%20%3A%20<?= $rt['no_hp'] ?>%0AEmail%20%3A%20<?= $rt['email'] ?>%0AKetua%20RT%20%3A%20<?= $rt['no_rt'] ?>%0AAlamat%20%3A%20<?= $rt['alamat'] ?>%0A%0A<?= base_url('') ?>"
+                        class="btn btn-success" target="_blank"><i class="fa fa-whatsapp"></i></a>
                 </td>
+                <td><?= $rt['email'] ?></td>
                 <td>
                     <a href="" class="btn btn-warning" data-toggle="modal"
                         data-target="#edit<?= $rt['id_rt'] ?>"><i class="fa fa-edit"></i>
@@ -85,6 +87,15 @@
                                 <td>
                                     <input type="number" name="no_hp" class="form-control"
                                         placeholder="No HP" required="" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="email" name="email" class="form-control"
+                                        placeholder="Email" autocomplete="off">
                                 </td>
                             </tr>
                             <tr>
@@ -163,12 +174,21 @@
                                 </td>
                             </tr>
                             <tr>
+                                <th>Email</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="email" name="email" value="<?= $rt['email'] ?>"
+                                        class="form-control" required="">
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Password</th>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="password" name="password" class="form-control" value="<?= $rt['password'] ?>"
-                                        placeholder="Password" autocomplete="off">
+                                    <p> <?= $rt['password'] ?></p>
+                                    <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" required="">
                                 </td>
                             </tr>
 

@@ -30,6 +30,8 @@
                 <td>
                     <a href="<?= base_url('ketua_rt/kepala_keluarga/detail/'.$kk['id_kk']) ?>"
                         class="btn btn-info"><i class="fa fa-eye"></i></a>
+                        <a href="<?= base_url('ketua_rt/kepala_keluarga/generate_token/'.$kk['id_kk']) ?>"
+                        class="btn btn-warning" title="Refresh Token"><i class="fa fa-refresh"></i></a>
                 </td>
             </tr>
             <?php $no++; endforeach; ?>

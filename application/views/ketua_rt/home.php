@@ -13,7 +13,7 @@
             <div class="inner">
               <h3><?= $count_kk;?></h3>
 
-              <p>Data Kepala Keluarga RT <?= $no_rt;?></p>
+              <p>Data Kepala Keluarga RT <?= $no_rt;?> <?= $alamat;?></p>
             </div>
             <div class="icon">
              <i class="fa fa-user"></i>
@@ -27,7 +27,7 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3><?= $count_kk_laki;?> </h3>
-              <p>Data Anggota KK Laki-laki RT <?= $no_rt;?></p>
+              <p>Data Anggota KK Laki-laki RT <?= $no_rt;?> <?= $alamat;?></p>
             </div>
             <div class="icon">
              <i class="fa fa-male"></i>
@@ -41,7 +41,7 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3><?= $count_kk_perempuan;?> </h3>
-              <p>Data Anggota KK Perempuan RT <?= $no_rt;?></p>
+              <p>Data Anggota KK Perempuan RT <?= $no_rt;?> <?= $alamat;?></p>
             </div>
             <div class="icon">
              <i class="fa fa-female"></i>
@@ -56,7 +56,7 @@
             <div class="inner">
               <h3><?= $count_anggota;?> </h3>
 
-              <p>Data Jumlah KK Laki-laki Dan Perempuan RT <?= $no_rt;?></p>
+              <p>Data Jumlah KK Laki-laki Dan Perempuan RT <?= $no_rt;?> <?= $alamat;?></p>
             </div>
             <div class="icon">
              <i class="fa fa-users"></i>

@@ -12,6 +12,7 @@ class Anggota extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){

@@ -34,6 +34,7 @@ class Home extends CI_controller
 		'count_kk_laki'     => $this->M_count->count_anggota_rt_laki(),
 		'count_kk_perempuan'=> $this->M_count->count_anggota_rt_perempuan(),
 		'no_rt'             => $data['no_rt'],
+		'alamat'            => $data['alamat'],
 		'informasi'         => $this->M_informasi->view(),
      );
 	 $this->load->view('ketua_rt/home',$view);

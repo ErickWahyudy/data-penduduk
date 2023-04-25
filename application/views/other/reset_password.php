@@ -1,4 +1,4 @@
-<?php $this->load->view('landingpage/header') ?>
+<?php $this->load->view('other/header') ?>
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
@@ -58,4 +58,4 @@
     </div>
     <!-- Register End -->
 
-<?php $this->load->view('landingpage/footer') ?>
+<?php $this->load->view('other/footer') ?>

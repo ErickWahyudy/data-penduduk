@@ -31,6 +31,30 @@ class Kepala_keluarga extends CI_controller
      $this->load->view('ketua_rt/kepala_keluarga/form',$view);
   }
 
+  public function generate_token($id='')
+  {
+    $token = $this->acak_id(20);
+
+    $SQLupdate=array(
+        'uuid'             =>$token,
+    );
+
+    $cek=$this->m_kk->update($id,$SQLupdate);
+    if($cek){
+        $pesan='<script>
+              swal({
+                  title: "Berhasil Perbarui Token",
+                  text: "",
+                  type: "success",
+                  showConfirmButton: true,
+                  confirmButtonText: "OKEE"
+                  });
+          </script>';
+        $this->session->set_flashdata('pesan',$pesan);
+        redirect(base_url('ketua_rt/kepala_keluarga'));
+    }    
+}
+
   private function acak_id($panjang)
 {
     $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';

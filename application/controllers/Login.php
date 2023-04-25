@@ -31,7 +31,7 @@ class Login extends CI_controller
      
      //cek data login
      $admin     = $this->Login_m->Admin($email,md5($password));
-     $ketua_rt  = $this->Login_m->Ketua_RT($nama,$no_hp,md5($password));
+     $ketua_rt  = $this->Login_m->Ketua_RT($nama,$no_hp,$email,md5($password));
      $kepala_kk = $this->Login_m->Kepala_KK($nama,$no_hp,$no_kk,$nik,md5($password));
      
      if($admin->num_rows() > 0 ){

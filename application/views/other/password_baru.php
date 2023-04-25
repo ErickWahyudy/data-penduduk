@@ -8,7 +8,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="keywords" content="wifi kassandra my id, kassandra my id, kassandra wifi, kassandra, kassandra hd production, KASSANDRA, KASSANDRA HD PRODUCTION">
-    <meta name="description" content="Layanan hotspot wifi unlimited 24 jam non stop tanpa lemot kecuali saat wifi down">
+    <meta name="description" content="Pendataan penduduk dan keluarga guna mempermudah dalam proses pelayanan administrasi dengan menggunakan teknologi informasi">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet"
         href="<?= base_url('themes/admin') ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -85,9 +85,9 @@ if($expired >= $datetime) :
                             <table class="table table-reposive">
                                 <form action="" method="POST">
                                 <tr>
-                                    <th class="col-md-3">Nama Pelanggan</th>
+                                    <th class="col-md-3">Nama Pengguna</th>
                                     <td>
-                                        <input type="text" name="nama" class="form-control" value="<?= $nama ?>" readonly>
+                                        <input type="text" name="nama_rt" class="form-control" value="<?= $nama_rt ?>" readonly>
                                     </td>
                                 </tr>
                                 <tr>
@@ -108,7 +108,7 @@ if($expired >= $datetime) :
 
         <footer class="main-footer">
             <strong>Copyright &copy; <?php echo date('Y'); ?>
-			<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved.<br>
+			<a href="https://bit.ly/kassandrahdproduction" target="blank">Kassandra Production</a>.</strong> All rights reserved.<br>
         </footer>
         
 <?php 
@@ -127,7 +127,7 @@ elseif($expired <= $datetime):
                 <a href="<?= base_url('reset_password') ?>" class="btn btn-warning">Reset Password</a>
                <br><br>
             <strong>Copyright &copy; <?php echo date('Y'); ?>
-			<a href="https://bit.ly/kassandrahdproduction" target="blank">KassandraWifi</a>.</strong> All rights reserved.<br>
+			<a href="https://bit.ly/kassandrahdproduction" target="blank">Kassandra Production</a>.</strong> All rights reserved.<br>
             </div>
         </div>
     </div>

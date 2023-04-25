@@ -140,7 +140,7 @@ class Reset_password extends CI_controller
             // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
             // $mail->SMTPSecure = 'tls';
             // $mail->Port = 587;
-            $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
+            $mail->setFrom('cs@kassandra.my.id' , 'Kassandra Production'); // Email dan nama pengirim
             $mail->addAddress($this->input->post('email')); // Email dan nama penerima
             $mail->Subject = 'Selamat '.$this->input->post('nama').' Token Untuk Reset Password Berhasil Terkirim'; // Subject email
             $mail->isHTML(true);
@@ -176,9 +176,9 @@ class Reset_password extends CI_controller
                               </tr>
                               </thead></table>
                                               <p style=font-size:16px>
-                              <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
+                              <i>Pesan ini dikirim otomatis oleh system aplikasi Data Penduduk</i>
                               <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
-                              <br><b>~ wifi@kassandra.my.id ~</b></p>' ;
+                              <br><b>~ cs@kassandra.my.id ~</b></p>' ;
                                 
             $mail->Body = $content;
             if ($mail->send());
@@ -223,8 +223,8 @@ class Reset_password extends CI_controller
     'judul'           =>'Password Baru',
     'id_token'        =>$data['id_token'],
     'expired'         =>$data['expired'],
-    'id_pelanggan'    =>$data['id_pelanggan'],
-    'nama'            =>$data['nama'],
+    'id_rt'           =>$data['id_rt'],
+    'nama_rt'         =>$data['nama_rt'],
     'email'           =>$data['email'],
     'password'        =>$data['password'],
   );
@@ -266,17 +266,17 @@ class Reset_password extends CI_controller
           // $mail->Password = 'abzdjiivohwzwieo'; // Password gmail anda
           // $mail->SMTPSecure = 'tls';
           // $mail->Port = 587;
-          $mail->setFrom('wifi@kassandra.my.id' , 'Kassandra WiFi'); // Email dan nama pengirim
+          $mail->setFrom('cs@kassandra.my.id' , 'Kassandra Production'); // Email dan nama pengirim
           $mail->addAddress($data['email']); // Email dan nama penerima
-          $mail->Subject = 'Selamat '.$data['nama'].' Password anda berhasil di ganti'; // Subject email
+          $mail->Subject = 'Selamat '.$data['nama_rt'].' Password anda berhasil di ganti'; // Subject email
           $mail->isHTML(true);
           $content = '</p><table><thead><tr><td style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif;border-width:1px;border-style:dashed;border-color:rgb(37,63,89);background:lavender;color:rgb(0,0,0);font-size:16px;padding-left:1em;padding-right:1em>'.
                       '<br>Berhasil mengganti password, berikut data akun anda :'.
-                          '<br><br>Nama : '.$this->input->post('nama') .
+                          '<br><br>Nama : '.$this->input->post('nama_rt') .
                           '<br>Password : '.$this->input->post('password') .
                           '<br><br><p align=center colspan=2 style=font-family:Roboto,RobotoDraft,Helvetica,Arial,sans-serif>
                           <a href="https://wifi.kassandra.my.id" style=color:rgb(255,255,255);background-color:#589bf2;border-width:initial;border-style:none;border-radius:15px;padding:10px 20px target=_blank >' .
-                          '<b>Login Aplikasi KassandraWiFi</b></a></p>' .
+                          '<b>Login Aplikasi Data Penduduk</b></a></p>' .
                           '<br></td></tr></thead></table>
                               <table><thead>
                               <tr><td></td></tr>
@@ -304,9 +304,9 @@ class Reset_password extends CI_controller
                             </tr>
                             </thead></table>
                                             <p style=font-size:16px>
-                            <i>Pesan ini dikirim otomatis oleh system aplikasi KassandraWiFi</i>
+                            <i>Pesan ini dikirim otomatis oleh system aplikasi Data Penduduk</i>
                             <br><img src="https://wifi.kassandra.my.id/themes/kassandra-wifi/img/img/wifi.png">
-                            <br><b>~ wifi@kassandra.my.id ~</b></p>' ;
+                            <br><b>~ cs@kassandra.my.id ~</b></p>' ;
                               
           $mail->Body = $content;
           if ($mail->send());

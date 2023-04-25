@@ -33,6 +33,7 @@ class Profile extends CI_controller
     'nama_rt'         =>$data['nama_rt'],
     'alamat'          =>$data['alamat'],
     'no_hp'           =>$data['no_hp'],
+    'email'           =>$data['email'],
     'password'        =>$data['password'],
   );
     $this->load->view('ketua_rt/profile/form',$x);
@@ -43,7 +44,8 @@ class Profile extends CI_controller
         $SQLupdate=array(
           'nama_rt'           =>$this->input->post('nama_rt'),
           'alamat'            =>$this->input->post('alamat'),
-          'no_hp'             =>$this->input->post('no_hp')
+          'no_hp'             =>$this->input->post('no_hp'),
+          'email'             =>$this->input->post('email')
 
         );
         $cek=$this->m_rt->update($id,$SQLupdate);

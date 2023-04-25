@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Apr 2023 pada 09.55
+-- Waktu pembuatan: 25 Apr 2023 pada 05.39
 -- Versi server: 10.4.19-MariaDB
 -- Versi PHP: 7.3.28
 
@@ -124,7 +124,7 @@ CREATE TABLE `tb_kk` (
 INSERT INTO `tb_kk` (`id_kk`, `no_kk`, `nama_kk`, `alamat`, `no_hp`, `foto_kk`, `password`, `id_rt`, `uuid`, `level`) VALUES
 ('K001MehsVaetEa2N', '3502112407070001', 'Mualif Syaiful Bakri', 'Jl. Gajah Mada Dkh. Medelan', '087758999875', 'Mualif Syaiful Bakri_64339cb808121.jpg', '202cb962ac59075b964b07152d234b70', 'jfeed001jddSWc', 'JvibHIeIkLvlswEuGmny', 'kepala_kk'),
 ('K003OsocExjAHR9C', '3502110405210001', 'Soiman', 'Jl. H. Agus salim', '111111111111', '', '202cb962ac59075b964b07152d234b70', 'jfeed001jddSWc', 'Vy7DkCPz0iNaQ13wBSgt', 'kepala_kk'),
-('K004pP0LF3wzmZ8n', '3502111211011026', 'Sabar Wahyu Eko', 'Jl. H. Agus Salim RT. 007 RW. 003 Dkh. Medelan Ds. Jalen', '999999999999', '', '202cb962ac59075b964b07152d234b70', 'jfeed001jddSWc', 'ShPozgf8ZHGsBYRFTcjB', 'kepala_kk');
+('K004pP0LF3wzmZ8n', '3502111211011026', 'Sabar Wahyu Eko', 'Jl. H. Agus Salim RT. 007 RW. 003 Dkh. Medelan Ds. Jalen', '999999999999', '', '202cb962ac59075b964b07152d234b70', 'jfeed001jddSWc', 'aarvOIC1SZRtK7AKznPZ', 'kepala_kk');
 
 -- --------------------------------------------------------
 
@@ -148,7 +148,8 @@ CREATE TABLE `tb_rt` (
 
 INSERT INTO `tb_rt` (`id_rt`, `no_rt`, `nama_rt`, `alamat`, `no_hp`, `password`, `level`) VALUES
 ('jfeed001jddSWc', '007', 'Zhamrin', 'Jl. H. Agus salim', '087758999875', '202cb962ac59075b964b07152d234b70', 'ketua_rt'),
-('RT001KeaT2w', '001', 'Wahyu', 'Jl. blbla dkh. medelan', '1233456789', '202cb962ac59075b964b07152d234b70', 'ketua_rt');
+('RT00183eRdZr0ObWy', '002', 'Soilan', 'Jl. Hassanudin Dkh. Medelan', '999999999999', '202cb962ac59075b964b07152d234b70', 'ketua_rt'),
+('RT001KeaT2w', '001', 'Wahyu', 'Jl. blbla dkh. jalen', '1233456789', '202cb962ac59075b964b07152d234b70', 'ketua_rt');
 
 --
 -- Indexes for dumped tables
