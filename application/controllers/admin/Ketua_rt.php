@@ -172,8 +172,7 @@ class Ketua_rt extends CI_controller
           'nama_rt'              =>$this->input->post('nama_rt'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
-          'email'             =>$this->input->post('email'),
-          'password'          =>md5($this->input->post('password'))
+          'email'             =>$this->input->post('email')
 
         );
         $cek=$this->m_rt->update($id,$SQLupdate);
@@ -189,6 +188,28 @@ class Ketua_rt extends CI_controller
             </script>';
          $this->session->set_flashdata('pesan',$pesan);
        redirect(base_url('admin/ketua_rt'));
+        }
+      }
+    }
+
+    public function ganti_password($id='') {
+        if (isset($_POST['kirim'])) {
+            $SQLinsert=array(
+                'password'    =>md5($this->input->post('password'))
+        );
+        $cek=$this->m_rt->update($id,$SQLinsert);
+        if($cek){
+            $pesan='<script>
+                swal({
+                    title: "Berhasil Ganti Password",
+                    text: "",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                    });
+            </script>';
+             $this->session->set_flashdata('pesan',$pesan);
+          redirect(base_url('admin/ketua_rt'));
         }
       }
     }

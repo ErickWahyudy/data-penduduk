@@ -33,7 +33,8 @@
                 <td><?= $rt['email'] ?></td>
                 <td>
                     <a href="" class="btn btn-warning" data-toggle="modal"
-                        data-target="#edit<?= $rt['id_rt'] ?>"><i class="fa fa-edit"></i>
+                        data-target="#edit<?= $rt['id_rt'] ?>"><i class="fa fa-edit"></i></a> &nbsp;
+                        <a href="" class="btn btn-info" data-toggle="modal" data-target="#ganti_password<?= $rt['id_rt'] ?>"><i class="fa fa-key"></i></a> 
                 </td>
             </tr>
             <?php $no++; endforeach; ?>
@@ -182,16 +183,7 @@
                                         class="form-control" required="">
                                 </td>
                             </tr>
-                            <tr>
-                                <th>Password</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p> <?= $rt['password'] ?></p>
-                                    <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="off" required="">
-                                </td>
-                            </tr>
-
+                            
                             <tr>
                                 <td>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
@@ -212,6 +204,52 @@
     </div>
     <?php endforeach; ?>
     <!-- End Modal -->
+
+<!-- Modal ganti password  -->
+<?php foreach($data->result_array() as $rt): ?>
+<div class="modal fade" id="ganti_password<?= $rt['id_rt'] ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-green">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ganti Password</h4>
+            </div>
+            <div class="modal-body table-responsive">
+                <table class="table table-bordered table-striped">
+                    <form action="<?= base_url('admin/ketua_rt/ganti_password/'.$rt['id_rt']) ?>" method="POST" enctype="multipart/form-data">
+                        <tr>
+                            <th class="col-md-12">Nama Kepala Keluarga</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="form-control"><?= $rt['nama_rt'] ?></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Masukkan Password Baru</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="password" id="password" name="password" class="form-control" required=""> 
+								<input type="checkbox" onclick="viewPassword()"> Lihat Password
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                                &nbsp;&nbsp;
+                                <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
+                            </th>
+                        </tr>
+                    </form>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endforeach; ?>
+<!-- End Modal -->
 
 
 <?php $this->load->view('template/footer'); ?>

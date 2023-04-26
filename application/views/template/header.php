@@ -226,12 +226,12 @@ if($this->session->userdata('level') =="Administrator"){
         </li>
         <li class="header">OLAH DATA</li>
  <li class="treeview"> 
-      <li><a href="<?= base_url('ketua_rt/profile'); ?>"><i class="fa fa-user"></i>Profile RT</a></li>
       <li><a href="<?= base_url('ketua_rt/kepala_keluarga'); ?>"><i class="fa fa-cubes"></i>Kepala Keluarga</a></li>
       <li><a href="<?= base_url('ketua_rt/anggota'); ?>"><i class="fa fa-creative-commons"></i>Data Penduduk</a></li>
   </li> 
 
   <li class="header">OTHER</li>
+      <li><a href="<?= base_url('ketua_rt/profile'); ?>"><i class="fa fa-user"></i>Profile RT</a></li>
       <li><a href="<?= base_url('ketua_rt/informasi'); ?>"><i class="fa fa-bullhorn"></i> Informasi</a></li>
    </li> 
   

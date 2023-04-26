@@ -44,12 +44,13 @@ if($aksi == "detail"):
                 <td>
                 <?php if($foto_kk == ''): ?>
                         <img src="<?= base_url('themes/admin/no_images.png') ?>" width="50px">
+                        <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#uploadKK<?= $token ?>" title="Upload Foto KK"><i class="fa fa-upload"></i></a>
                     <?php else: ?>
                     <a href="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" target="_blank">
                         <img src="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" width="50%">
                     </a>
+                    <p>*hubungi ketua RT atau <a href="<?= base_url('contact') ?>" target="_blank">klik disini..</a> untuk memperbarui foto kartu keluarga</p>
                     <?php endif; ?> 
-                    <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#uploadKK<?= $token ?>"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
             <tr>
@@ -83,19 +84,20 @@ if($aksi == "detail"):
                     <table class="table table-bordered table-striped">
                         <form action="<?= base_url('penduduk/kepala_keluarga/edit/'.$token) ?>" method="post" enctype="multipart/form-data">
                             <tr>
+                                <th>No KK</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="no_kk" value="<?= $no_kk ?>" class="form-control" autocomplete="off" readonly>
+                                    <p>*hubungi ketua RT atau <a href="<?= base_url('contact') ?>" target="_blank">klik disini..</a> untuk memperbarui no kartu keluarga</p>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Nama Kepala Keluarga</th>
                             </tr>
                             <tr>
                                 <td>
                                     <input type="text" name="nama_kk" value="<?= $nama_kk ?>" class="form-control" autocomplete="off" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>No KK</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" name="no_kk" value="<?= $no_kk ?>" class="form-control" autocomplete="off" required>
                                 </td>
                             </tr>
                             <tr>
