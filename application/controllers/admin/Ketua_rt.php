@@ -79,11 +79,6 @@ class Ketua_rt extends CI_controller
               'rules' => 'required'
           ),
           array(
-              'field' => 'no_hp',
-              'label' => 'No HP',
-              'rules' => 'required'
-          ),
-          array(
               'field' => 'alamat',
               'label' => 'Alamat',
               'rules' => 'required'

@@ -65,25 +65,25 @@
                                 <th>Nama</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="nama_kk" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z ]+" title="Nama harus berupa huruf"></td>
+                                <td><input type="text" name="nama_kk" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z ]+" title="Nama harus berupa huruf" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>No HP</th>
                             </tr>
                             <tr>
-                                <td><input type="number" name="no_hp" class="form-control" required placeholder="No HP" pattern="[0-9]+"></td>
+                                <td><input type="number" name="no_hp" class="form-control" required placeholder="No HP" pattern="[0-9]+" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Alamat</th>
                             </tr>
                             <tr>
-                                <td><textarea name="alamat" class="form-control" required placeholder="Alamat"></textarea></td>
+                                <td><input name="alamat" class="form-control" required placeholder="Alamat"></td>
                             </tr>
                            <tr>
                                 <td>Password</td>
                            </tr>
                             <tr>
-                                  <td><input type="password" name="password" class="form-control" required></td>
+                                  <td><input type="password" name="password" class="form-control" required placeholder="Password" title="Password harus berupa huruf dan angka" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <td>Ketua RT</td>

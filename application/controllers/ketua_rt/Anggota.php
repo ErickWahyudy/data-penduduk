@@ -12,6 +12,7 @@ class Anggota extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('ketua_rt') != TRUE){
@@ -65,21 +66,40 @@ class Anggota extends CI_controller
   public function add($value='') {
         
    if (isset($_POST['kirim'])) {
-
-     //cek nama sudah pernah terdaftar
-     $proses_cek=$this->db->get_where('tb_anggota',array('nik'=>$this->input->post('nik')))->num_rows();
-     if ($proses_cek > 0) {
-         $this->session->set_flashdata('pesan', '<script>
-             swal({
-                 title: "NIK sudah terdaftar",
-                 type: "error",
-                 showConfirmButton: true,
-                 confirmButtonText: "OKEE"
-             });
-         </script>');
-         redirect('ketua_rt/kepala_keluarga/detail/'.$this->input->post('id_kk'));
-     }
-     else
+    $rules = array(
+      array(
+          'field' => 'nik',
+          'label' => 'NIK',
+          'rules' => 'required|numeric|is_unique[tb_anggota.nik]',
+          'errors' => array(
+              'required' => 'NIK tidak boleh kosong',
+              'numeric' => 'NIK harus berupa angka',
+              'is_unique' => 'NIK sudah terdaftar',
+          ),
+      ),
+      array(
+          'field' => 'nama',
+          'label' => 'Nama',
+          'rules' => 'required',
+          'errors' => array(
+              'required' => 'Nama tidak boleh kosong',
+          ),
+      )
+  );
+  $this->form_validation->set_rules($rules);
+  if ($this->form_validation->run() == FALSE) {
+      $pesan='<script>
+          swal({
+              title: "'.form_error('nik').form_error('nama').'",
+              text: "",
+              type: "error",
+              showConfirmButton: true,
+              confirmButtonText: "OKEE"
+              });
+      </script>';
+      $this->session->set_flashdata('pesan',$pesan);
+      redirect(base_url('ketua_rt/kepala_keluarga/detail/'.$this->input->post('id_kk')));
+  }else
 
      $SQLinsert=array(
            'id_anggota'             =>$this->id_anggota_urut(),

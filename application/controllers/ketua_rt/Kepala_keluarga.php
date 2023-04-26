@@ -12,6 +12,7 @@ class Kepala_keluarga extends CI_controller
       // needed ???
       $this->load->database();
       $this->load->library('session');
+      $this->load->library('form_validation');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('ketua_rt') != TRUE){
@@ -90,20 +91,65 @@ class Kepala_keluarga extends CI_controller
     
    public function add($value='') {    
     if (isset($_POST['kirim'])) {
-
-      //cek no KK sudah pernah terdaftar
-      $proses_cek=$this->db->get_where('tb_kk',array('no_kk'=>$this->input->post('no_kk')))->num_rows();
-      if ($proses_cek > 0) {
-          $this->session->set_flashdata('pesan', '<script>
-              swal({
-                  title: "Nomor KK sudah terdaftar",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-              });
-          </script>');
-          redirect('ketua_rt/kepala_keluarga');
-      }
+        $rules = array(
+            array(
+                'field' => 'no_kk',
+                'label' => 'Nomor KK',
+                'rules' => 'required|numeric|is_unique[tb_kk.no_kk]',
+                'errors' => array(
+                    'required' => 'Nomor KK tidak boleh kosong',
+                    'numeric' => 'Nomor KK harus berupa angka',
+                    'is_unique' => 'Nomor KK sudah terdaftar',
+                ),
+            ),
+            array(
+                'field' => 'nama_kk',
+                'label' => 'Nama Kepala Keluarga',
+                'rules' => 'required',
+                'errors' => array(
+                    'required' => 'Nama Kepala Keluarga tidak boleh kosong',
+                ),
+            ),
+            array(
+                'field' => 'alamat',
+                'label' => 'Alamat',
+                'rules' => 'required',
+                'errors' => array(
+                    'required' => 'Alamat tidak boleh kosong',
+                ),
+            ),
+            array(
+                'field' => 'no_hp',
+                'label' => 'Nomor HP',
+                'rules' => 'required|numeric',
+                'errors' => array(
+                    'required' => 'Nomor HP tidak boleh kosong',
+                    'numeric' => 'Nomor HP harus berupa angka',
+                ),
+            ),
+            array(
+                'field' => 'password',
+                'label' => 'Password',
+                'rules' => 'required',
+                'errors' => array(
+                    'required' => 'Password tidak boleh kosong',
+                ),
+            )
+        );
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == FALSE) {
+            $pesan='<script>
+                swal({
+                    title: "'.form_error('no_kk').form_error('nama_kk').form_error('alamat').form_error('no_hp').form_error('password').'",
+                    text: "",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                    });
+            </script>';
+            $this->session->set_flashdata('pesan',$pesan);
+            redirect(base_url('ketua_rt/kepala_keluarga'));
+        }
       else
 
       $SQLinsert=array(

@@ -78,7 +78,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea name="alamat" class="form-control" placeholder="Alamat" required=""></textarea>
+                                    <input name="alamat" class="form-control" placeholder="Alamat" required="">
                                 </td>
                             </tr>
                             <tr>
