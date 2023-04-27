@@ -104,7 +104,11 @@ class Anggota extends CI_controller
            'agama'                  =>$this->input->post('agama'),
            'pendidikan'             =>$this->input->post('pendidikan'),
            'pekerjaan'              =>$this->input->post('pekerjaan'),
-           'hubungan'               =>$this->input->post('hubungan')
+           'hubungan'               =>$this->input->post('hubungan'),
+           'perkawinan'             =>$this->input->post('perkawinan'),
+           'kewarganegaraan'        =>$this->input->post('kewarganegaraan'),
+           'nama_ayah'              =>$this->input->post('nama_ayah'),
+           'nama_ibu'               =>$this->input->post('nama_ibu')
          );
  
          if ($this->m_anggota->add($SQLinsert)) {
@@ -139,6 +143,10 @@ public function edit($id='')
     'pendidikan'        =>$this->input->post('pendidikan'),
     'pekerjaan'         =>$this->input->post('pekerjaan'),
     'hubungan'          =>$this->input->post('hubungan'),
+    'perkawinan'        =>$this->input->post('perkawinan'),
+    'kewarganegaraan'   =>$this->input->post('kewarganegaraan'),
+    'nama_ayah'         =>$this->input->post('nama_ayah'),
+    'nama_ibu'          =>$this->input->post('nama_ibu'),
     );
 
   $cek=$this->m_anggota->update($id,$SQLupdate);

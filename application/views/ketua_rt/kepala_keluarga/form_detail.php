@@ -235,6 +235,10 @@ if($aksi == "detail"):
             <th>Pendidikan</th>
             <th>Pekerjaan</th>
             <th>Hubungan</th>
+            <th>Status Perkawinan</th>
+            <th>Kewarganegaraan</th>
+            <th>Nama Ayah</th>
+            <th>Nama Ibu</th>
             <th>Aksi</th>
         </tr>
         </thead>
@@ -250,6 +254,10 @@ if($aksi == "detail"):
             <td><?= $kk['pendidikan'] ?></td>
             <td><?= $kk['pekerjaan'] ?></td>
             <td><?= $kk['hubungan'] ?></td>
+            <td><?= $kk['perkawinan'] ?></td>
+            <td><?= $kk['kewarganegaraan'] ?></td>
+            <td><?= $kk['nama_ayah'] ?></td>
+            <td><?= $kk['nama_ibu'] ?></td>
             <td>
                 <a href="" class="btn btn-warning" data-toggle="modal" data-target="#editAnggotaKK<?= $kk['id_anggota'] ?>"><i class="fa fa-edit"></i></a> &nbsp;
                 <a href="<?= base_url('admin/anggota/hapus/'.$kk['id_anggota']) ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
@@ -274,9 +282,10 @@ if($aksi == "detail"):
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
+                    <p style="color: red;">Yang bertanda * wajib diisi</p>
                         <form action="<?= base_url('ketua_rt/anggota/add') ?>" method="post" enctype="multipart/form-data">
                             <tr>
-                                <th>No KK</th>
+                                <th>No KK *</th>
                             </tr>
                             <tr>
                                 <td>
@@ -285,25 +294,25 @@ if($aksi == "detail"):
                                 </td>
                             </tr>
                             <tr>
-                                <th>NIK</th>
+                                <th>NIK *</th>
                             </tr>
                             <tr>
                             <td><input type="number" name="nik" class="form-control" required placeholder="NIK" pattern="[0-9]+" maxlength="16" minlength="16" oninvalid="this.setCustomValidity('NIK harus 16 digit angka')" oninput="setCustomValidity('')" autocomplete="off"></td>
                             </tr>
                             <tr>
-                                <th>Nama</th>
+                                <th>Nama *</th>
                             </tr>
                             <tr>
                                 <td><input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z ]+"></td>
                             </tr>
                             <tr>
-                                <th>Tanggal Lahir</th>
+                                <th>Tanggal Lahir *</th>
                             </tr>
                             <tr>
                                 <td><input type="date" name="tgl_lahir" class="form-control" value="<?= date('Y-m-d') ?>" required></td>
                             </tr>
                             <tr>
-                                <th>Jenis Kelamin</th>
+                                <th>Jenis Kelamin *</th>
                             </tr>
                             <tr>
                                 <td>
@@ -315,7 +324,7 @@ if($aksi == "detail"):
                                 </td>
                             </tr>
                             <tr>
-                                <th>Agama</th>
+                                <th>Agama *</th>
                             </tr>
                             <tr>
                                 <td>
@@ -330,7 +339,7 @@ if($aksi == "detail"):
                                 </td>
                             </tr>
                             <tr>
-                                <th>Pendidikan</th>
+                                <th>Pendidikan *</th>
                             </tr>
                             <tr>
                                 <td>
@@ -351,7 +360,7 @@ if($aksi == "detail"):
                                 </td>
                             </tr>
                             <tr>
-                                <th>Pekerjaan</th>
+                                <th>Pekerjaan *</th>
                             </tr>
                             <tr>
                                 <td>
@@ -450,13 +459,13 @@ if($aksi == "detail"):
                                 </td>
                             </tr>
                             <tr>
-                                <td>Hubungan Keluarga</td>
+                                <th>Hubungan Keluarga *</th>
                             </tr>
                             <tr>
                                 <td>
                                     <select name="hubungan" class="form-control" required>
                                         <option value="">-- Pilih Hubungan Keluarga --</option>
-                                        <option value="Suami">Suami</option>
+                                        <option value="Kepala Keluarga">Kepala Keluarga</option>
                                         <option value="Istri">Istri</option>
                                         <option value="Kakak">Kakak</option>
                                         <option value="Adik">Adik</option>
@@ -464,6 +473,44 @@ if($aksi == "detail"):
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>Status Perkawinan *</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="perkawinan" class="form-control" required>
+                                        <option value="">-- Pilih Status Perkawinan --</option>
+                                        <option value="Kawin">Kawin</option>
+                                        <option value="Belum Kawin">Belum Kawin</option>
+                                        <option value="Cerai Hidup">Cerai Hidup</option>
+                                        <option value="Cerai Mati">Cerai Mati</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Kewarganegaraan *</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="kewarganegaraan" class="form-control" required>
+                                        <option value="">-- Pilih Kewarganegaraan --</option>
+                                        <option value="WNI">WNI</option>
+                                        <option value="WNA">WNA</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Nama ayah</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="nama_ayah" class="form-control" placeholder="Nama ayah"></td>
+                            </tr>
+                            <tr>
+                                <th>Nama ibu</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="nama_ibu" class="form-control" placeholder="Nama ibu"></td>
                             </tr>
                         </table>
                             <a href="" class="btn btn-default" data-dismiss="modal">Kembali</a> &nbsp; &nbsp;
@@ -665,7 +712,7 @@ if($aksi == "detail"):
                             <tr>
                                 <td>
                                     <select name="hubungan" class="form-control" required>
-                                        <option value="Suami" <?php if($kk['hubungan'] == 'Suami'){echo "selected";} ?>>Suami</option>
+                                        <option value="Kepala Keluarga" <?php if($kk['hubungan'] == 'Kepala Keluarga'){echo "selected";} ?>>Kepala Keluarga</option>
                                         <option value="Istri" <?php if($kk['hubungan'] == 'Istri'){echo "selected";} ?>>Istri</option>
                                         <option value="Kakak" <?php if($kk['hubungan'] == 'Kakak'){echo "selected";} ?>>Kakak</option>
                                         <option value="Adik" <?php if($kk['hubungan'] == 'Adik'){echo "selected";} ?>>Adik</option>
@@ -673,6 +720,42 @@ if($aksi == "detail"):
                                         <option value="Lainnya" <?php if($kk['hubungan'] == 'Lainnya'){echo "selected";} ?>>Lainnya</option>
                                     </select>
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>Status Perkawinan</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="perkawinan" class="form-control" required>
+                                        <option value="Kawin" <?php if($kk['perkawinan'] == 'Kawin'){echo "selected";} ?>>Kawin</option>
+                                        <option value="Belum Kawin" <?php if($kk['perkawinan'] == 'Belum Kawin'){echo "selected";} ?>>Belum Kawin</option>
+                                        <option value="Cerai Hidup" <?php if($kk['perkawinan'] == 'Cerai Hidup'){echo "selected";} ?>>Cerai Hidup</option>
+                                        <option value="Cerai Mati" <?php if($kk['perkawinan'] == 'Cerai Mati'){echo "selected";} ?>>Cerai Mati</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Kewarganegaraan</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="kewarganegaraan" class="form-control" required>
+                                        <option value="WNI" <?php if($kk['kewarganegaraan'] == 'WNI'){echo "selected";} ?>>WNI</option>
+                                        <option value="WNA" <?php if($kk['kewarganegaraan'] == 'WNA'){echo "selected";} ?>>WNA</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Nama ayah</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="nama_ayah" value="<?php echo $kk['nama_ayah']; ?>" class="form-control" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>Nama ibu</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="nama_ibu" value="<?php echo $kk['nama_ibu']; ?>" class="form-control" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <td>

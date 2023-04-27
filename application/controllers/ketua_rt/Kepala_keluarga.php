@@ -119,15 +119,6 @@ class Kepala_keluarga extends CI_controller
                 ),
             ),
             array(
-                'field' => 'no_hp',
-                'label' => 'Nomor HP',
-                'rules' => 'required|numeric',
-                'errors' => array(
-                    'required' => 'Nomor HP tidak boleh kosong',
-                    'numeric' => 'Nomor HP harus berupa angka',
-                ),
-            ),
-            array(
                 'field' => 'password',
                 'label' => 'Password',
                 'rules' => 'required',

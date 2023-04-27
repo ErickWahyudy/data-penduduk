@@ -154,6 +154,22 @@
                                             <td><?= $penduduk['hubungan'] ?></td>
                                         </tr>
                                         <tr>
+                                            <th>Status Perkawinan</th>
+                                            <td><?= $penduduk['perkawinan'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Kewarganegaraan</th>
+                                            <td><?= $penduduk['kewarganegaraan'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nama Ayah</th>
+                                            <td><?= $penduduk['nama_ayah'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nama Ibu</th>
+                                            <td><?= $penduduk['nama_ibu'] ?></td>
+                                        </tr>
+                                        <tr>
                                             <th>Kepala Keluarga</th>
                                             <td><?= $penduduk['nama_kk'] ?></td>
                                         </tr>
