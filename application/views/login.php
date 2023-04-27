@@ -75,6 +75,9 @@
           <div class="checkbox icheck">
             <label>
               lupa password? <a href="<?= base_url('reset_password') ?>">klik disini</a>
+            </label> <br>
+            <label>
+              Cari data warga tanpa login? <a href="<?= base_url('cari_penduduk') ?>">klik disini</a>
             </label>
           </div>
         		<center>

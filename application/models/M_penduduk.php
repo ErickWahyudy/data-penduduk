@@ -41,4 +41,14 @@ public function update($token='',$SQLupdate){
   return $this->db-> update($this->table, $SQLupdate);
 }
 
+public function get_by_nik($nama, $tgl_lahir)
+{
+    $this->db->select('*');
+    $this->db->from ($this->table);
+    $this->db->join($this->table3, 'tb_anggota.id_kk = tb_kk.id_kk');
+    $this->db->where('nama', $nama);
+    $this->db->where('tgl_lahir', $tgl_lahir);
+    return $this->db->get();
+}
+
 }
