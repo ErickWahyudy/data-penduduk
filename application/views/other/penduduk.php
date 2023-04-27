@@ -92,6 +92,12 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th>Nama ibu</th>
+                                    <td>
+                                        <input type="text" name="nama_ibu" class="form-control" placeholder="Masukkan nama ibu" required autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td></td>
                                     <th>
                                         <input type="submit" name="cari" value="Cari" class="btn btn-primary">

@@ -34,6 +34,14 @@ class Cari_Penduduk extends CI_controller
                     'required' => 'Tanggal Lahir harus diisi',
                 ),
             ),
+            array(
+                'field' => 'nama_ibu',
+                'label' => 'Nama Ibu',
+                'rules' => 'required',
+                'errors' => array(
+                    'required' => 'Nama Ibu harus diisi',
+                ),
+            )
         );
         $this->form_validation->set_rules($rules);
         if ($this->form_validation->run() == FALSE) {
@@ -41,12 +49,14 @@ class Cari_Penduduk extends CI_controller
         } else {
             $nama      = $this->input->post('nama');
             $tgl_lahir = $this->input->post('tgl_lahir');
+            $nama_ibu  = $this->input->post('nama_ibu');
             
             $view = array(
                 'judul'    =>'Data Penduduk',
-                'data'     => $this->m_penduduk->get_by_nik($nama,$tgl_lahir),
+                'data'     => $this->m_penduduk->get_by_nama($nama,$tgl_lahir,$nama_ibu),
                 'nama'     => $nama,
                 'tgl_lahir'=> $tgl_lahir,
+                'nama_ibu' => $nama_ibu,
                 'depan'    => TRUE,
             );
             $this->load->view('other/penduduk',$view);
