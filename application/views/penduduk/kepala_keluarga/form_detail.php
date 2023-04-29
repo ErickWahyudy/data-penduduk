@@ -460,13 +460,13 @@ if($aksi == "detail"):
                                 <th>Nama ayah</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="ayah" class="form-control" placeholder="Nama ayah"></td>
+                                <td><input type="text" name="ayah" class="form-control" placeholder="Nama ayah" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Nama ibu</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="ibu" class="form-control" placeholder="Nama ibu"></td>
+                                <td><input type="text" name="ibu" class="form-control" placeholder="Nama ibu" autocomplete="off"></td>
                             </tr>
                         </table>
                             <a href="" class="btn btn-default" data-dismiss="modal">Kembali</a> &nbsp; &nbsp;
