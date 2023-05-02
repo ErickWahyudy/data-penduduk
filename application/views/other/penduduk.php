@@ -131,6 +131,10 @@
                                             <td><?= tgl_indo($penduduk['tgl_lahir']) ?></td>
                                         </tr>
                                         <tr>
+                                            <th>Tempat Lahir</th>
+                                            <td><?= $penduduk['tempat_lahir'] ?></td>
+                                        </tr>
+                                        <tr>
                                             <th>Jenis Kelamin</th>
                                             <td><?= $penduduk['jenis_kelamin'] ?></td>
                                         </tr>

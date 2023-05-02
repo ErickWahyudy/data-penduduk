@@ -12,6 +12,7 @@
                 <th>NIK</th>
                 <th>Jenis Kelamin</th>
                 <th>Tanggal lahir</th>
+                <th>Tempat Lahir</th>
                 <th>Agama</th>
                 <th>Pendidikan</th>
                 <th>Pekerjaan</th>
@@ -33,6 +34,7 @@
                 <td><?= $anggota['nik'] ?></td>
                 <td><?= $anggota['jenis_kelamin'] ?></td>
                 <td><?= tgl_indo($anggota['tgl_lahir']) ?></td>
+                <td><?= $anggota['tempat_lahir'] ?></td>
                 <td><?= $anggota['agama'] ?></td>
                 <td><?= $anggota['pendidikan'] ?></td>
                 <td><?= $anggota['pekerjaan'] ?></td>

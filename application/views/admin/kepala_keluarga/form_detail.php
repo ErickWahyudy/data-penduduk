@@ -256,6 +256,7 @@ if($aksi == "detail"):
             <th>Nama</th>
             <th>NIK</th>
             <th>Tanggal Lahir</th>
+            <th>Tempat Lahir</th>
             <th>Jenis Kelamin</th>
             <th>Agama</th>
             <th>Pendidikan</th>
@@ -275,6 +276,7 @@ if($aksi == "detail"):
             <td><?= $kk['nama'] ?></td>
             <td><?= $kk['nik'] ?></td>
             <td><?= tgl_indo($kk['tgl_lahir']) ?></td>
+            <td><?= $kk['tempat_lahir'] ?></td>
             <td><?= $kk['jenis_kelamin'] ?></td>
             <td><?= $kk['agama'] ?></td>
             <td><?= $kk['pendidikan'] ?></td>
@@ -337,6 +339,12 @@ if($aksi == "detail"):
                             </tr>
                             <tr>
                                 <td><input type="date" name="tgl_lahir" class="form-control" value="<?= date('Y-m-d') ?>" required></td>
+                            </tr>
+                            <tr>
+                                <th>Tempat Lahir *</th>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="tempat_lahir" class="form-control" required placeholder="Tempat Lahir" pattern="[A-Za-z !@#$%^&*()_+]{3,}" oninvalid="this.setCustomValidity('Tempat Lahir minimal 3 huruf')" oninput="setCustomValidity('')" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Jenis Kelamin *</th>
@@ -630,6 +638,14 @@ if($aksi == "detail"):
                             <tr>
                                 <td>
                                     <input type="date" name="tgl_lahir" value="<?= $kk['tgl_lahir'] ?>" class="form-control" required="">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Tempat Lahir</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="tempat_lahir" value="<?= $kk['tempat_lahir'] ?>" class="form-control" autocomplete="off" required="">
                                 </td>
                             </tr>
                             <tr>
