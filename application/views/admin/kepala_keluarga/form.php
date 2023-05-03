@@ -11,6 +11,7 @@
             <tr>
                 <th>No</th>
                 <th>Kepala Keluarga</th>
+                <th>No KK</th>
                 <th>RT / Alamat</th>
                 <th>No HP</th>
                 <th>Aksi</th>
@@ -21,6 +22,7 @@
             <tr>
                 <td><?= $no ?></td>
                 <td><?= $kk['nama_kk'] ?></td>
+                <td><?= $kk['no_kk'] ?></td>
                 <td>RT <?= $kk['no_rt'] ?> / <?= $kk['alamat'] ?></td>
                 <td>
                     <?= $kk['no_hp'] ?>
@@ -75,7 +77,7 @@
                                 <th>No HP</th>
                             </tr>
                             <tr>
-                                <td><input type="number" name="no_hp" class="form-control" required placeholder="No HP" pattern="[0-9]+" autocomplete="off"></td>
+                                <td><input type="number" name="no_hp" class="form-control" placeholder="No HP" pattern="[0-9]+" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Alamat *</th>

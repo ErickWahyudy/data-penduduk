@@ -305,7 +305,7 @@ if($aksi == "detail"):
                                 <th>Nama *</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z ]+" autocomplete="off"></td>
+                                <td><input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir *</th>

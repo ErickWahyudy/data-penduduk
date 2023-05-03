@@ -332,7 +332,7 @@ if($aksi == "detail"):
                                 <th>Nama *</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z !@#$%^&*()_+]{3,}" oninvalid="this.setCustomValidity('Nama minimal 3 huruf')" oninput="setCustomValidity('')" autocomplete="off"></td>
+                                <td><input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir *</th>

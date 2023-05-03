@@ -208,7 +208,7 @@ if($this->session->userdata('level') =="Administrator"){
       <li><a href="<?= base_url('admin/anggota') ?>"><i class="fa fa-creative-commons"></i>Data Penduduk</a></li>
           </ul>
         </li>
-
+        <li><a href="<?= base_url('admin/data_lain') ?>"><i class="fa fa-odnoklassniki-square"></i> <span>Data Lainnya</span></a></li>
       <li class="header">OTHER</li>
          <li><a href="<?= base_url('admin/informasi') ?>"><i class="fa fa-bullhorn"></i> <span>Informasi</span></a></li>
          <li><a href="<?= base_url('admin/user_admin') ?>" class="active"><i class="fa fa-user"></i> Data Administrator</a></li>
@@ -229,7 +229,7 @@ if($this->session->userdata('level') =="Administrator"){
       <li><a href="<?= base_url('ketua_rt/kepala_keluarga'); ?>"><i class="fa fa-cubes"></i>Kepala Keluarga</a></li>
       <li><a href="<?= base_url('ketua_rt/anggota'); ?>"><i class="fa fa-creative-commons"></i>Data Penduduk</a></li>
   </li> 
-
+  <li><a href="<?= base_url('ketua_rt/data_lain') ?>"><i class="fa fa-odnoklassniki-square"></i> <span>Data Lainnya</span></a></li>
   <li class="header">OTHER</li>
       <li><a href="<?= base_url('ketua_rt/profile'); ?>"><i class="fa fa-user"></i>Profile RT</a></li>
       <li><a href="<?= base_url('ketua_rt/informasi'); ?>"><i class="fa fa-bullhorn"></i> Informasi</a></li>
