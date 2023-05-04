@@ -206,6 +206,7 @@
 			<a href="https://bit.ly/kassandrahdproduction" target="blank">Kassandra Production</a>.</strong> All rights reserved.<br>
         </footer>
 
+        <?php $this->load->view('template/akses'); ?>
 
 <?php
  //format tanggal indonesia

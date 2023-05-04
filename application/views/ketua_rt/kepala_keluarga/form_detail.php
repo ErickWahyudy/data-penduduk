@@ -791,7 +791,6 @@ if($aksi == "detail"):
 <?php endif; ?>
 
 <?php $this->load->view('template/footer'); ?>
-<?php $this->load->view('template/akses'); ?>
 <?php 
 //membuat format tanggal indonesia
 function tgl_indo($tanggal){
