@@ -98,6 +98,7 @@
                                     <select name="keterangan" class="form-control" required>
                                         <option value="">--Pilih Keterangan--</option>
                                         <option value="Pindah">Pindah</option>
+                                        <option value="Pendatang">Pendatang</option>
                                         <option value="Meninggal">Meninggal</option>
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
@@ -186,6 +187,7 @@
                                 <td>
                                     <select name="keterangan" class="form-control" required>
                                         <option value="Pindah" <?php if($data_lain['keterangan'] == 'Pindah'){echo 'selected';} ?>>Pindah</option>
+                                        <option value="Pendatang" <?php if($data_lain['keterangan'] == 'Pendatang'){echo 'selected';} ?>>Pendatang</option>
                                         <option value="Meninggal" <?php if($data_lain['keterangan'] == 'Meninggal'){echo 'selected';} ?>>Meninggal</option>
                                         <option value="Lainnya" <?php if($data_lain['keterangan'] == 'Lainnya'){echo 'selected';} ?>>Lainnya</option>
                                     </select>
