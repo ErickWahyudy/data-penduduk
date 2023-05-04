@@ -108,4 +108,3 @@
     <!-- End Modal -->
 
 <?php $this->load->view('template/footer'); ?>
-<?php $this->load->view('template/akses'); ?>
