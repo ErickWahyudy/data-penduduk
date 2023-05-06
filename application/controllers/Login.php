@@ -25,14 +25,11 @@ class Login extends CI_controller
       $email=$this->input->post('email');
       $nama=$this->input->post('email');
       $no_hp=$this->input->post('email');
-      $no_kk=$this->input->post('email');
-      $nik=$this->input->post('email');
       $password=$this->input->post('password');
      
      //cek data login
      $admin     = $this->Login_m->Admin($email,md5($password));
      $ketua_rt  = $this->Login_m->Ketua_RT($nama,$no_hp,$email,md5($password));
-     $kepala_kk = $this->Login_m->Kepala_KK($nama,$no_hp,$no_kk,$nik,md5($password));
      
      if($admin->num_rows() > 0 ){
         $DataAdmin=$admin->row_array();
@@ -63,21 +60,6 @@ class Login extends CI_controller
      $this->session->set_userdata($sessionKetuaRT);
      $this->session->set_flashdata('pesan','<div class="btn btn-success">Anda Berhasil Login .....</div>');
      redirect(base_url('ketua_rt/home'));
-
-      }elseif($kepala_kk->num_rows() > 0){
-        $DataKepalaKK=$kepala_kk->row_array();
-        $sessionKepalaKK = array(
-            'kepala_kk'      => TRUE,
-            'id_kk'          => $DataKepalaKK['id_kk'],
-            'no_kk'          => $DataKepalaKK['no_kk'],
-            'nama'           => $DataKepalaKK['nama'],
-            'no_hp'          => $DataKepalaKK['no_hp'],
-            'password'       => $DataKepalaKK['password'],
-            'level'          => 'kepala_kk',
-              );
-      $this->session->set_userdata($sessionKepalaKK);
-      $this->session->set_flashdata('pesan','<div class="btn btn-success">Anda Berhasil Login .....</div>');
-      redirect(base_url('keluarga/home'));
 
      }else{
           $pesan='<script>
