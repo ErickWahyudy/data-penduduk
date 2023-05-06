@@ -29,7 +29,7 @@
                     <?= $kk['no_hp'] ?>
                     <?php if($kk['uuid'] == null): ?>
                     <?php else: ?>
-                    <a href="https://api.whatsapp.com/send?phone=<?= $kk['no_hp'] ?>/&text=Assalamualaikum%20Sdr/i%20<?= $kk['nama_kk'] ?>%20kami%20dari%20ketua%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>%20mohon%20bantuannya%20untuk%20melakukan%20pembaruan%20data%20KK%20anda%20di%20sistem%20pendataan%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>,%20terima%20kasih%20atas%20perhatiannya.%0Auntuk%20pembaruan%20data%20KK%20anda%20silahkan%20klik%20link%20berikut%20<?= base_url('penduduk/kepala_keluarga/detail/'.$kk['uuid']) ?>"
+                    <a href="https://api.whatsapp.com/send?phone=<?= $kk['no_hp'] ?>/&text=Assalamualaikum%20Sdr/i%20<?= $kk['nama_kk'] ?>%20kami%20dari%20ketua%20RT%20<?= $kk['no_rt'] ?>%20/%20<?= $kk['nama_rt'] ?>%20<?= $kk['alamat'] ?>%20mohon%20bantuannya%20untuk%20melakukan%20pembaruan%20data%20KK%20anda%20di%20sistem%20pendataan%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>,%20terima%20kasih%20atas%20perhatiannya.%0AUntuk%20pembaruan%20data%20KK%20anda%20silahkan%20klik%20link%20berikut%20<?= base_url('penduduk/kepala_keluarga/detail/'.$kk['uuid']) ?>"
                         class="btn btn-success" target="_blank"><i class="fa fa-whatsapp"></i></a>
                     <?php endif; ?>
                 </td>
