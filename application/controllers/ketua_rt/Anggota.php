@@ -19,6 +19,7 @@ class Anggota extends CI_controller
      redirect(base_url(''));
      exit;
 	};
+    $this->load->model('m_kk');
     $this->load->model('m_anggota');
 	}
 
@@ -29,6 +30,13 @@ class Anggota extends CI_controller
             );
     $this->load->view('ketua_rt/penduduk/form', $view);
   }
+
+  private function datetime()
+   {
+    date_default_timezone_set('Asia/Jakarta');
+    $date = date('Y-m-d H:i:s');
+    return $date;
+   }
 
   private function acak_id($panjang)
     {
@@ -121,6 +129,11 @@ class Anggota extends CI_controller
          );
  
          if ($this->m_anggota->add($SQLinsert)) {
+
+          $SQLUpdate1=array(
+            'tgl_update'             =>$this->datetime(),
+             );
+          $cek=$this->m_kk->update($id=$this->input->post('id_kk'),$SQLUpdate1);
  
     $pesan='<script>
                swal({
@@ -160,6 +173,12 @@ public function edit($id='')
     );
 
   $cek=$this->m_anggota->update($id,$SQLupdate);
+
+  $SQLUpdate1=array(
+    'tgl_update'             =>$this->datetime(),
+     );
+  $cek=$this->m_kk->update($id=$this->input->post('id_kk'),$SQLUpdate1);
+  
   if($cek){
     	$pesan='<script>
               swal({

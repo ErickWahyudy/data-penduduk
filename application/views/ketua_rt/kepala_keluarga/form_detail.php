@@ -100,7 +100,9 @@ if($aksi == "detail"):
                                 </td>
                             </tr>
                             <tr>
-                                <th>No HP</th>
+                                <th>No HP
+                                    <small>(awali 62)</small> *
+                                </th>
                             </tr>
                             <tr>
                                 <td>
@@ -112,7 +114,7 @@ if($aksi == "detail"):
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea name="alamat" class="form-control" required=""><?= $alamat ?></textarea>
+                                    <input type="text" name="alamat" value="<?= $alamat ?>" class="form-control" autocomplete="off" required>
                                 </td>
                             </tr>
                             <tr>

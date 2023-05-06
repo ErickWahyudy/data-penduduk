@@ -31,6 +31,13 @@ class Kepala_keluarga extends CI_controller
      $this->load->view('penduduk/kepala_keluarga/form',$view);
   }
 
+  private function datetime()
+   {
+    date_default_timezone_set('Asia/Jakarta');
+    $date = date('Y-m-d H:i:s');
+    return $date;
+   }
+
 public function detail($token='')
   {
   $data=$this->m_penduduk->view_id($token)->row_array();
@@ -64,7 +71,6 @@ public function detail($token='')
     'alamat'            =>$data['alamat'],
     'no_hp'             =>$data['no_hp'],
     'foto_kk'           =>$data['foto_kk'],
-    'password'          =>$data['password'],
     'id_rt'             =>$data['id_rt'],
     'rt'                =>$this->db->get('tb_rt')->result_array(),
     'level'             =>$data['level'],
@@ -86,6 +92,7 @@ $data=$this->m_penduduk->view_id($token)->row_array();
     'nama_kk'           =>$this->input->post('nama_kk'),
     'alamat'            =>$this->input->post('alamat'),
     'no_hp'             =>$this->input->post('no_hp'),
+    'tgl_update'        =>$this->datetime(),
 
     );
 
@@ -177,6 +184,7 @@ public function upload_fotoKK($token='')
 if(isset($_POST['kirim'])){
     $SQLupdate=array(
       'foto_kk'    =>$this->upload_bukti_kk(),
+      'tgl_update' =>$this->datetime(),
     );
     $cek=$this->m_penduduk->update($token,$SQLupdate);
     if($cek){

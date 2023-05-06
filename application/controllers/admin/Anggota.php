@@ -19,6 +19,7 @@ class Anggota extends CI_controller
      redirect(base_url(''));
      exit;
 	};
+    $this->load->model('m_kk');
     $this->load->model('m_anggota');
 	}
 
@@ -29,6 +30,13 @@ class Anggota extends CI_controller
             );
     $this->load->view('admin/penduduk/form', $view);
   }
+
+  private function datetime()
+   {
+    date_default_timezone_set('Asia/Jakarta');
+    $date = date('Y-m-d H:i:s');
+    return $date;
+   }
 
   private function acak_id($panjang)
     {
@@ -120,9 +128,14 @@ class Anggota extends CI_controller
            'nama_ayah'              =>$this->input->post('nama_ayah'),
            'nama_ibu'               =>$this->input->post('nama_ibu')
             );
- 
+                    
          if ($this->m_anggota->add($SQLinsert)) {
- 
+          
+      $SQLUpdate1=array(
+            'tgl_update'             =>$this->datetime(),
+             );
+          $cek=$this->m_kk->update($id=$this->input->post('id_kk'),$SQLUpdate1);
+          
     $pesan='<script>
                swal({
                    title: "Berhasil Menambahkan Data",
@@ -135,7 +148,8 @@ class Anggota extends CI_controller
         $this->session->set_flashdata('pesan',$pesan);
      redirect(base_url('admin/kepala_keluarga/detail/'.$this->input->post('id_kk')));
     }
-   }
+  }
+   
 }
 
 
@@ -163,6 +177,11 @@ public function edit($id='')
     );
 
   $cek=$this->m_anggota->update($id,$SQLupdate);
+    
+  $SQLUpdate1=array(
+    'tgl_update'             =>$this->datetime(),
+     );
+  $cek=$this->m_kk->update($id=$this->input->post('id_kk'),$SQLUpdate1);
   if($cek){
     	$pesan='<script>
               swal({
@@ -179,6 +198,7 @@ public function edit($id='')
    echo "QUERY SQL ERROR";
   
        }
+      
       }else{
       	$this->load->view('admin/kepala_keluarga/form_detail',$x);
       }

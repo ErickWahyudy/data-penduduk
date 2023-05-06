@@ -20,6 +20,7 @@ class Anggota extends CI_controller
   //    exit;
 	// };
     $this->load->model('m_anggota');
+    $this->load->model('m_penduduk');
 	}
 
   private function acak_id($panjang)
@@ -32,6 +33,13 @@ class Anggota extends CI_controller
         }
         return $string;
     }
+
+  private function datetime()
+   {
+    date_default_timezone_set('Asia/Jakarta');
+    $date = date('Y-m-d H:i:s');
+    return $date;
+   }
   
   //mengambil id anggota urut terakhir
   private function id_anggota_urut($value='')
@@ -113,6 +121,11 @@ class Anggota extends CI_controller
          );
  
          if ($this->m_anggota->add($SQLinsert)) {
+
+            $SQLUpdate1=array(
+                'tgl_update'             =>$this->datetime(),
+                );
+            $cek=$this->m_penduduk->update($id=$this->input->post('token'),$SQLUpdate1);
  
     $pesan='<script>
                swal({
@@ -136,7 +149,7 @@ public function edit($id='')
  if (isset($_POST['kirim'])) {     
 
     $SQLupdate=array(
-    'nik'           =>$this->input->post('nik'),
+    'nik'               =>$this->input->post('nik'),
     'nama'              =>$this->input->post('nama'),
     'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
     'tgl_lahir'         =>$this->input->post('tgl_lahir'),
@@ -152,6 +165,11 @@ public function edit($id='')
     );
 
   $cek=$this->m_anggota->update($id,$SQLupdate);
+
+  $SQLUpdate1=array(
+    'tgl_update'             =>$this->datetime(),
+     );
+  $cek=$this->m_penduduk->update($id=$this->input->post('token'),$SQLUpdate1);
   if($cek){
     	$pesan='<script>
               swal({

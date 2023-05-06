@@ -13,7 +13,8 @@
                 <th>Kepala Keluarga</th>
                 <th>No KK</th>
                 <th>RT / Alamat</th>
-                <th>No HP</th>
+                <th>Kirim Link Pembaruan Data</th>
+                <th>Terakhir Update</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -28,13 +29,14 @@
                     <?= $kk['no_hp'] ?>
                     <?php if($kk['uuid'] == null): ?>
                     <?php else: ?>
-                    <a href="https://api.whatsapp.com/send?phone=62<?= $kk['no_hp'] ?>/&text=Assalamualaikum%20Sdr/i%20<?= $kk['nama_kk'] ?>%20kami%20dari%20ketua%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>%20mohon%20bantuannya%20untuk%20melakukan%20pembaruan%20data%20KK%20anda%20di%20sistem%20pendataan%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>,%20terima%20kasih%20atas%20perhatiannya.%0Auntuk%20pembaruan%20data%20KK%20anda%20silahkan%20klik%20link%20berikut%20<?= base_url('penduduk/kepala_keluarga/detail/'.$kk['uuid']) ?>"
+                    <a href="https://api.whatsapp.com/send?phone=<?= $kk['no_hp'] ?>/&text=Assalamualaikum%20Sdr/i%20<?= $kk['nama_kk'] ?>%20kami%20dari%20ketua%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>%20mohon%20bantuannya%20untuk%20melakukan%20pembaruan%20data%20KK%20anda%20di%20sistem%20pendataan%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>,%20terima%20kasih%20atas%20perhatiannya.%0Auntuk%20pembaruan%20data%20KK%20anda%20silahkan%20klik%20link%20berikut%20<?= base_url('penduduk/kepala_keluarga/detail/'.$kk['uuid']) ?>"
                         class="btn btn-success" target="_blank"><i class="fa fa-whatsapp"></i></a>
                     <?php endif; ?>
                 </td>
+                <td><?= tgl_indo($kk['tgl_update']) ?></td>
                 <td>
                     <a href="<?= base_url('admin/kepala_keluarga/detail/'.$kk['id_kk']) ?>" title="Detail Data KK"
-                        class="btn btn-info"><i class="fa fa-eye"></i></a>
+                        class="btn btn-info"><i class="fa fa-eye"></i></a> &emsp;
                     <a href="<?= base_url('admin/kepala_keluarga/generate_token/'.$kk['id_kk']) ?>"
                         class="btn btn-warning" title="Refresh Token"><i class="fa fa-refresh"></i></a>
                 </td>
@@ -74,7 +76,9 @@
                                 <td><input type="text" name="nama_kk" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z ]+" title="Nama harus berupa huruf" autocomplete="off"></td>
                             </tr>
                             <tr>
-                                <th>No HP</th>
+                                <th>No HP
+                                    <small>(awali 62)</small> *
+                                </th>
                             </tr>
                             <tr>
                                 <td><input type="number" name="no_hp" class="form-control" placeholder="No HP" pattern="[0-9]+" autocomplete="off"></td>
@@ -121,3 +125,54 @@
     <!-- End Modal -->
 
 <?php $this->load->view('template/footer'); ?>
+<?php 
+//membuat format tanggal dan waktu
+function tgl_indo($tgl){
+    $tanggal = substr($tgl,8,2);
+    $bulan = getBulan(substr($tgl,5,2));
+    $tahun = substr($tgl,0,4);
+    $jam = substr($tgl,11,5);
+    return $tanggal.' '.$bulan.' '.$tahun.' '.$jam;
+}
+
+function getBulan($bln){
+    switch ($bln){
+        case 1: 
+        return "Januari";
+        break;
+        case 2:
+        return "Februari";
+        break;
+        case 3:
+        return "Maret";
+        break;
+        case 4:
+        return "April";
+        break;
+        case 5:
+        return "Mei";
+        break;
+        case 6:
+        return "Juni";
+        break;
+        case 7:
+        return "Juli";
+        break;
+        case 8:
+        return "Agustus";
+        break;
+        case 9:
+        return "September";
+        break;
+        case 10:
+        return "Oktober";
+        break;
+        case 11:
+        return "November";
+        break;
+        case 12:
+        return "Desember";
+        break;
+    }
+}
+?>

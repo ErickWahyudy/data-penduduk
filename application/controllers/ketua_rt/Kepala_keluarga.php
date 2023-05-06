@@ -32,6 +32,13 @@ class Kepala_keluarga extends CI_controller
      $this->load->view('ketua_rt/kepala_keluarga/form',$view);
   }
 
+  private function datetime()
+   {
+    date_default_timezone_set('Asia/Jakarta');
+    $date = date('Y-m-d H:i:s');
+    return $date;
+   }
+
   public function generate_token($id='')
   {
     $token = $this->acak_id(20);
@@ -142,6 +149,7 @@ class Kepala_keluarga extends CI_controller
           'nama_kk'           =>$this->input->post('nama_kk'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
+          'tgl_update'        =>$this->datetime(),
           );
   
           if ($this->m_kk->add($SQLinsert)) {
@@ -214,7 +222,7 @@ $data=$this->m_kk->view_id($id)->row_array();
     'nama_kk'           =>$this->input->post('nama_kk'),
     'alamat'            =>$this->input->post('alamat'),
     'no_hp'             =>$this->input->post('no_hp'),
-
+    'tgl_update'        =>$this->datetime(),
     );
 
   $cek=$this->m_kk->update($id,$SQLupdate);
@@ -304,6 +312,7 @@ public function upload_fotoKK($id='')
 if(isset($_POST['kirim'])){
     $SQLupdate=array(
       'foto_kk'               =>$this->upload_bukti_kk(),
+      'tgl_update'            =>$this->datetime(),
     );
     $cek=$this->m_kk->update($id,$SQLupdate);
     if($cek){
