@@ -117,14 +117,6 @@ class Kepala_keluarga extends CI_controller
                 'errors' => array(
                     'required' => 'Alamat tidak boleh kosong',
                 ),
-            ),
-            array(
-                'field' => 'password',
-                'label' => 'Password',
-                'rules' => 'required',
-                'errors' => array(
-                    'required' => 'Password tidak boleh kosong',
-                ),
             )
         );
         $this->form_validation->set_rules($rules);
@@ -150,7 +142,6 @@ class Kepala_keluarga extends CI_controller
           'nama_kk'           =>$this->input->post('nama_kk'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
-          'password'          =>md5($this->input->post('password')),
           );
   
           if ($this->m_kk->add($SQLinsert)) {
@@ -202,7 +193,6 @@ public function detail($id='')
     'alamat'            =>$data['alamat'],
     'no_hp'             =>$data['no_hp'],
     'foto_kk'           =>$data['foto_kk'],
-    'password'          =>$data['password'],
     'id_rt'             =>$data['id_rt'],
     'rt'                =>$this->db->get('tb_rt')->result_array(),
     'level'             =>$data['level'],
@@ -328,28 +318,6 @@ if(isset($_POST['kirim'])){
         </script>';
      $this->session->set_flashdata('pesan',$pesan);
    redirect(base_url('ketua_rt/kepala_keluarga/detail/'.$id));
-    }
-  }
-}
-
-public function ganti_password($id='') {
-    if (isset($_POST['kirim'])) {
-        $SQLinsert=array(
-            'password'    =>md5($this->input->post('password'))
-    );
-    $cek=$this->m_kk->update($id,$SQLinsert);
-    if($cek){
-        $pesan='<script>
-            swal({
-                title: "Berhasil Ganti Password",
-                text: "",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
-                });
-        </script>';
-         $this->session->set_flashdata('pesan',$pesan);
-      redirect(base_url('ketua_rt/kepala_keluarga/detail/'.$id));
     }
   }
 }

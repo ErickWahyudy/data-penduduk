@@ -63,7 +63,6 @@ if($aksi == "detail"):
                 <th>Aksi</th>
                 <td>
                 <a href="" class="btn btn-warning" data-toggle="modal" data-target="#editKK<?= $id_kk ?>"><i class="fa fa-edit"></i></a> &nbsp;
-                <a href="" class="btn btn-info" data-toggle="modal" data-target="#ganti_password<?= $id_kk ?>"><i class="fa fa-key"></i></a> &nbsp;
                 </td>
             </tr>
         </table>
@@ -171,51 +170,6 @@ if($aksi == "detail"):
             </div>
         </div>
     </div>
-
-<!-- Modal ganti password  -->
-<div class="modal fade" id="ganti_password<?= $id_kk ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-green">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Ganti Password</h4>
-            </div>
-            <div class="modal-body table-responsive">
-                <table class="table table-bordered table-striped">
-                    <form action="<?= base_url('ketua_rt/kepala_keluarga/ganti_password/'.$id_kk) ?>" method="POST" enctype="multipart/form-data">
-                        <tr>
-                            <th class="col-md-12">Nama Kepala Keluarga</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="form-control"><?= $nama_kk ?></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Masukkan Password Baru</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="password" id="password" name="password" class="form-control" required=""> 
-								<input type="checkbox" onclick="viewPassword()"> Lihat Password
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
-                                &nbsp;&nbsp;
-                                <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
-                            </th>
-                        </tr>
-                    </form>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Modal -->
-
 
 <!-- anggota keluarga -->
 <div class="col-lg-12">

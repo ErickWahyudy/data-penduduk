@@ -85,12 +85,6 @@
                             <tr>
                                 <td><input name="alamat" class="form-control" required placeholder="Alamat"></td>
                             </tr>
-                           <tr>
-                                <th>Password *</th>
-                           </tr>
-                            <tr>
-                                  <td><input type="password" name="password" class="form-control" required placeholder="Password" title="Password harus berupa huruf dan angka" autocomplete="off"></td>
-                            </tr>
                             <tr>
                                 <th>Ketua RT *</th>
                             </tr>

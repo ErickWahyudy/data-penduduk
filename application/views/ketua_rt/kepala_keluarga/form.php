@@ -85,12 +85,6 @@
                             <tr>
                                 <td><input name="alamat" class="form-control" required placeholder="Alamat"></td>
                             </tr>
-                           <tr>
-                                <th>Password *</th>
-                           </tr>
-                            <tr>
-                                  <td><input type="password" name="password" class="form-control" required placeholder="Password" autocomplete="off"></td>
-                            </tr>
                             <tr>
                                 <td>
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>

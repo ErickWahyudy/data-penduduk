@@ -118,23 +118,6 @@ class Kepala_keluarga extends CI_controller
                 'errors' => array(
                     'required' => 'Alamat tidak boleh kosong',
                 ),
-            ),
-            array(
-                'field' => 'no_hp',
-                'label' => 'Nomor HP',
-                'rules' => 'required|numeric',
-                'errors' => array(
-                    'required' => 'Nomor HP tidak boleh kosong',
-                    'numeric' => 'Nomor HP harus berupa angka',
-                ),
-            ),
-            array(
-                'field' => 'password',
-                'label' => 'Password',
-                'rules' => 'required',
-                'errors' => array(
-                    'required' => 'Password tidak boleh kosong',
-                ),
             )
         );
         $this->form_validation->set_rules($rules);
@@ -159,7 +142,6 @@ class Kepala_keluarga extends CI_controller
           'nama_kk'           =>$this->input->post('nama_kk'),
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
-          'password'          =>md5($this->input->post('password')),
           'id_rt'             =>$this->input->post('id_rt'),
           );
   
@@ -212,7 +194,6 @@ public function detail($id='')
     'alamat'            =>$data['alamat'],
     'no_hp'             =>$data['no_hp'],
     'foto_kk'           =>$data['foto_kk'],
-    'password'          =>$data['password'],
     'id_rt'             =>$data['id_rt'],
     'rt'                =>$this->db->get('tb_rt')->result_array(),
     'ukk'               =>$this->db->get('tb_kk')->result_array(),
@@ -340,28 +321,6 @@ if(isset($_POST['kirim'])){
         </script>';
      $this->session->set_flashdata('pesan',$pesan);
    redirect(base_url('admin/kepala_keluarga/detail/'.$id));
-    }
-  }
-}
-
-public function ganti_password($id='') {
-    if (isset($_POST['kirim'])) {
-        $SQLinsert=array(
-            'password'    =>md5($this->input->post('password'))
-    );
-    $cek=$this->m_kk->update($id,$SQLinsert);
-    if($cek){
-        $pesan='<script>
-            swal({
-                title: "Berhasil Ganti Password",
-                text: "",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
-                });
-        </script>';
-         $this->session->set_flashdata('pesan',$pesan);
-      redirect(base_url('admin/kepala_keluarga/detail/'.$id));
     }
   }
 }
