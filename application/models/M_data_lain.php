@@ -13,19 +13,18 @@ private $table2 = 'tb_rt';
 public function view($value='')
 {
   $this->db->select ('*');
-  $this->db->from ($this->table);
-  $this->db->join($this->table2, 'tb_data_lain.id_rt = tb_rt.id_rt');
+  $this->db->from ($this->table2);
+  $this->db->join($this->table, 'tb_data_lain.id_rt = tb_rt.id_rt');
   $this->db->order_by('nama', 'ASC');
   return $this->db->get();
-
 }
 
 public function view_id($id='')
 {
  $this->db->select ('*');
-  $this->db->from ($this->table);
-  $this->db->join($this->table2, 'tb_data_lain.id_rt = tb_rt.id_rt');
-  $this->db->where('tb_data_lain.id_rt', $id);
+  $this->db->from ($this->table2);
+  $this->db->join($this->table, 'tb_data_lain.id_rt = tb_rt.id_rt');
+  $this->db->where('tb_data_lain.id_data_lain', $id);
   $this->db->order_by('nama', 'ASC');
   return $this->db->get();
 }

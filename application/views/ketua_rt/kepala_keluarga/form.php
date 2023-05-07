@@ -77,7 +77,7 @@
                             </tr>
                             <tr>
                                 <th>No HP
-                                    <small>(awali 62)</small> *
+                                    <small>(awali 62)</small>
                                 </th>
                             </tr>
                             <tr>
