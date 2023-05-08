@@ -503,6 +503,15 @@ if($aksi == "detail"):
                             <input type="hidden" name="token" value="<?= $kk['uuid'] ?>" class="form-control" required="">
                             </tr>
                             <tr>
+                                <th>NIK</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="nik" value="<?= $kk['nik'] ?>" class="form-control" autocomplete="off" required readonly>
+                                    <p>*hubungi ketua RT atau <a href="<?= base_url('contact') ?>" target="_blank">klik disini..</a> untuk memperbarui NIK</p>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th>Nama Anggota Keluarga</th>
                             </tr>
                             <tr>
@@ -510,13 +519,6 @@ if($aksi == "detail"):
                                     <input type="text" name="nama" value="<?= $kk['nama'] ?>" class="form-control" autocomplete="off" required>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>NIK</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="number" name="nik" value="<?= $kk['nik'] ?>" class="form-control" autocomplete="off" required>
-                                </td>
                             <tr>
                                 <th>Jenis Kelamin</th>
                             </tr>

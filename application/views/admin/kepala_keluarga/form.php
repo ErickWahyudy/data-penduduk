@@ -13,6 +13,7 @@
                 <th>Kepala Keluarga</th>
                 <th>No KK</th>
                 <th>RT / Alamat</th>
+                <th>Jumlah Keluarga</th>
                 <th>Kirim Link Pembaruan Data</th>
                 <th>Terakhir Update</th>
                 <th>Aksi</th>
@@ -25,11 +26,12 @@
                 <td><?= $kk['nama_kk'] ?></td>
                 <td><?= $kk['no_kk'] ?></td>
                 <td>RT <?= $kk['no_rt'] ?> / <?= $kk['alamat'] ?></td>
+                <td><?php $jml = $this->db->get_where('tb_anggota', ['id_kk' => $kk['id_kk']])->num_rows(); echo $jml; ?></td>
                 <td>
                     <?= $kk['no_hp'] ?>
                     <?php if($kk['uuid'] == null): ?>
                     <?php else: ?>
-                    <a href="https://api.whatsapp.com/send?phone=<?= $kk['no_hp'] ?>/&text=Assalamualaikum%20Sdr/i%20<?= $kk['nama_kk'] ?>%20kami%20dari%20ketua%20RT%20<?= $kk['no_rt'] ?>%20/%20<?= $kk['nama_rt'] ?>%20<?= $kk['alamat'] ?>%20mohon%20bantuannya%20untuk%20melakukan%20pembaruan%20data%20KK%20anda%20di%20sistem%20pendataan%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>,%20terima%20kasih%20atas%20perhatiannya.%0AUntuk%20pembaruan%20data%20KK%20anda%20silahkan%20klik%20link%20berikut%20<?= base_url('penduduk/kepala_keluarga/detail/'.$kk['uuid']) ?>"
+                    <a href="https://api.whatsapp.com/send?phone=<?= $kk['no_hp'] ?>/&text=Assalamualaikum%20Sdr/i%20<?= $kk['nama_kk'] ?>%20kami%20dari%20ketua%20RT%20<?= $kk['no_rt'] ?>%20/%20<?= $kk['nama_rt'] ?>%20<?= $kk['alamat'] ?>%20mohon%20bantuannya%20untuk%20melakukan%20pembaruan%20data%20KK%20anda%20di%20sistem%20pendataan%20RT%20<?= $kk['no_rt'] ?>%20<?= $kk['alamat'] ?>,%20terima%20kasih%20atas%20perhatiannya.%0AUntuk%20pembaruan%20data%20KK%20anda%20silahkan%20klik%20link%20berikut%20atau%20bisa%20mengirimkan%20foto%20KK%20terbaru%20di%20nomor%20ini..%0A<?= base_url('penduduk/kepala_keluarga/detail/'.$kk['uuid']) ?>"
                         class="btn btn-success" target="_blank"><i class="fa fa-whatsapp"></i></a>
                     <?php endif; ?>
                 </td>
