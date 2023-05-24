@@ -14,6 +14,7 @@
                 <th>No KK</th>
                 <th>RT / Alamat</th>
                 <th>Jumlah Keluarga</th>
+                <th>Foto KK</th>
                 <th>Kirim Link Pembaruan Data</th>
                 <th>Terakhir Update</th>
                 <th>Aksi</th>
@@ -27,6 +28,13 @@
                 <td><?= $kk['no_kk'] ?></td>
                 <td>RT <?= $kk['no_rt'] ?> / <?= $kk['alamat'] ?></td>
                 <td><?php $jml = $this->db->get_where('tb_anggota', ['id_kk' => $kk['id_kk']])->num_rows(); echo $jml; ?></td>
+                <td>
+                    <?php if($kk['foto_kk'] == null): ?>
+                     Belum Upload
+                    <?php else: ?>
+                        Ada
+                    <?php endif; ?>
+                </td>
                 <td>
                     <?= $kk['no_hp'] ?>
                     <?php if($kk['uuid'] == null): ?>
