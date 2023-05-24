@@ -91,12 +91,7 @@
                                         <input type="date" name="tgl_lahir" class="form-control" value="<?= date('Y-m-d') ?>" required autocomplete="off">
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Nama ibu</th>
-                                    <td>
-                                        <input type="text" name="nama_ibu" class="form-control" placeholder="Masukkan nama ibu" required autocomplete="off">
-                                    </td>
-                                </tr>
+                               
                                 <tr>
                                     <td></td>
                                     <th>
@@ -116,11 +111,11 @@
                                     <?php $no=1; foreach($data->result_array() as $penduduk): ?>
                                         <tr>
                                             <th class="col-xs-3">No KK</th>
-                                            <td><?= $penduduk['no_kk'] ?></td>
+                                            <td><?= tanda($penduduk['no_kk']) ?></td>
                                         </tr>
                                         <tr>
                                             <th>NIK</th>
-                                            <td><?= $penduduk['nik'] ?></td>
+                                            <td><?= tanda($penduduk['nik']) ?></td>
                                         </tr>
                                         <tr>
                                             <th>Nama</th>
@@ -172,14 +167,6 @@
                                             <td><?= $penduduk['kewarganegaraan'] ?></td>
                                         </tr>
                                         <tr>
-                                            <th>Nama Ayah</th>
-                                            <td><?= $penduduk['nama_ayah'] ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nama Ibu</th>
-                                            <td><?= $penduduk['nama_ibu'] ?></td>
-                                        </tr>
-                                        <tr>
                                             <th>Kepala Keluarga</th>
                                             <td><?= $penduduk['nama_kk'] ?></td>
                                         </tr>
@@ -209,6 +196,13 @@
         <?php $this->load->view('template/akses'); ?>
 
 <?php
+ //memberi tanda * pada 350211****
+    function tanda($nik){
+        $tanda = substr($nik, 0, 6);
+        $tanda .= "******";
+        return $tanda;
+    }
+
  //format tanggal indonesia
 function tgl_indo($tanggal){
     $bulan = array (
