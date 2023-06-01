@@ -18,13 +18,13 @@ class Home extends CI_controller
      redirect(base_url(''));
      exit;
 	};
-	 $this->load->model('M_admin');
+	 $this->load->model('m_rt');
 	 $this->load->model('M_count');
 	}
 
 	public function index()
 	{
-    $kode_tahun = date('Y');
+		$datart = $this->m_rt->view()->row_array();
 	 $view = array(
         'judul'             =>'Halaman Administrator',
         'count_rt'          => $this->M_count->count_rt(),
@@ -32,6 +32,13 @@ class Home extends CI_controller
         'count_anggota'     => $this->M_count->count_anggota_laki()+$this->M_count->count_anggota_perempuan(),
 		'count_kk_laki'     => $this->M_count->count_anggota_laki(),
 		'count_kk_perempuan'=> $this->M_count->count_anggota_perempuan(),
+		
+		'data'        				=>$this->m_rt->view()->result_array(),
+		// 'admin_count_kk'          	=> $this->M_count->admin_count_kk_rt($datart['id_rt']),
+        // 'admin_count_anggota'     	=> $this->M_count->admin_count_anggota_rt_laki($datart['id_rt'])+$this->M_count->admin_count_anggota_rt_perempuan($datart['id_rt']),
+		// 'admin_count_kk_laki'     	=> $this->M_count->admin_count_anggota_rt_laki($datart['id_rt']),
+		// 'admin_count_kk_perempuan'	=> $this->M_count->admin_count_anggota_rt_perempuan($datart['id_rt']),
+
      );
 	 $this->load->view('admin/home',$view);
 	}

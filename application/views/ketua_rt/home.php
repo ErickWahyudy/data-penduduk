@@ -1,4 +1,5 @@
 <?php $this->load->view('template/header'); ?>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <?php
  if($this->session->userdata('level') == "ketua_rt" ){
@@ -65,6 +66,54 @@
           </div>
         </div>
         </div>
+
+        
+    <div class="row">
+		<div class="col-md-12">
+			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header with-border"> 
+        <div class="col-lg-6 col-md-12">
+          <!-- small box -->
+        <canvas id="barChart"></canvas>
+        </div>
+
+        <script>
+        // Data diagram batang
+        var data = {
+          labels: ['Kepala Keluarga', 'Anggota KK Laki-laki', 'Anggota KK Perempuan', 'Jumlah KK Laki-laki Dan Perempuan'],
+          datasets: [{
+            label: 'Data RT <?= $no_rt;?>',
+            data: [<?= $count_kk;?>, <?= $count_kk_laki;?>, <?= $count_kk_perempuan;?>, <?= $count_anggota;?>],
+            backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(192, 75, 192, 0.6)', 'rgba(192, 192, 75, 0.6)', 'rgba(75, 75, 192, 0.6)'],
+            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(192, 75, 192, 1)', 'rgba(192, 192, 75, 1)', 'rgba(75, 75, 192, 1)'],
+            borderWidth: 1
+          }]
+        };
+
+        // Opsi diagram batang
+        var options = {
+          scales: {
+            x: {
+              barPercentage: 1, // Mengatur lebar batang (dalam persen dari lebar kategori)
+              categoryPercentage: 0.6 // Mengatur lebar kategori (dalam persen dari lebar kategori)
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        };
+
+        // Membuat diagram batang
+        var ctx = document.getElementById('barChart').getContext('2d');
+        var barChart = new Chart(ctx, {
+          type: 'bar',
+          data: data,
+          options: options
+        });
+      </script>
+        </div>
+        
 
 
     <div class="row">

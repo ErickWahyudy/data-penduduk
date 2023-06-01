@@ -42,6 +42,33 @@ public function count_rt($id='')
     return $this->db->get()->num_rows();
 }
 
+//count kk untuk admin
+public function admin_count_kk_rt($id='')
+{
+  $this->db->select ('*');
+  $this->db->from ($this->table)->where ('id_rt', $id);
+    return $this->db->get()->num_rows();
+}
+
+
+//count anggota untuk rt
+public function admin_count_anggota_rt_laki($id='')
+{
+  $this->db->select ('*');
+  $this->db->from ($this->table3)->where ('id_rt', $id)->where ('jenis_kelamin', 'Laki-laki');
+    return $this->db->get()->num_rows();
+}
+
+//count anggota untuk rt
+public function admin_count_anggota_rt_perempuan($id='')
+{
+  $this->db->select ('*');
+  $this->db->from ($this->table3)->where ('id_rt', $id)->where ('jenis_kelamin', 'Perempuan');
+    return $this->db->get()->num_rows();
+}
+
+
+
 
 
 //count kk untuk rt
