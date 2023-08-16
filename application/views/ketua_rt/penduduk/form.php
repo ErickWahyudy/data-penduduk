@@ -12,6 +12,7 @@
                 <th>NIK</th>
                 <th>Jenis Kelamin</th>
                 <th>Tanggal lahir</th>
+                <th>Usia</th>
                 <th>Tempat Lahir</th>
                 <th>Agama</th>
                 <th>Pendidikan</th>
@@ -34,6 +35,7 @@
                 <td><?= $anggota['nik'] ?></td>
                 <td><?= $anggota['jenis_kelamin'] ?></td>
                 <td><?= tgl_indo($anggota['tgl_lahir']) ?></td>
+                <td><?= hitung_usia($anggota['tgl_lahir']) ?> Tahun</td>
                 <td><?= $anggota['tempat_lahir'] ?></td>
                 <td><?= $anggota['agama'] ?></td>
                 <td><?= $anggota['pendidikan'] ?></td>
@@ -49,10 +51,18 @@
     <?php $this->load->view('template/footer'); ?>
     <?php 
 
-function rupiah($angka){
-  $hasil_rupiah = "Rp " . number_format($angka,2,',','.');
-  return $hasil_rupiah;
-}
+    function hitung_usia($tanggal_lahir){
+        list($year,$month,$day) = explode("-",$tanggal_lahir);
+        $year_diff  = date("Y") - $year;
+        $month_diff = date("m") - $month;
+        $day_diff   = date("d") - $day;
+        if ($month_diff < 0) {
+            $year_diff--;
+        } elseif (($month_diff==0) && ($day_diff < 0)) {
+            $year_diff--;
+        }
+        return $year_diff;
+    }
 
 //format tanggal indonesia
 function tgl_indo($tanggal){

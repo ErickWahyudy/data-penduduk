@@ -126,6 +126,10 @@
                                             <td><?= tgl_indo($penduduk['tgl_lahir']) ?></td>
                                         </tr>
                                         <tr>
+                                            <th>Usia</th>
+                                            <td><?= hitung_usia($penduduk['tgl_lahir']) ?> Tahun</td>
+                                        </tr>
+                                        <tr>
                                             <th>Tempat Lahir</th>
                                             <td><?= $penduduk['tempat_lahir'] ?></td>
                                         </tr>
@@ -227,5 +231,18 @@ function tgl_indo($tanggal){
     
     return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
   }
+
+  function hitung_usia($tanggal_lahir){
+    list($year,$month,$day) = explode("-",$tanggal_lahir);
+    $year_diff  = date("Y") - $year;
+    $month_diff = date("m") - $month;
+    $day_diff   = date("d") - $day;
+    if ($month_diff < 0) {
+        $year_diff--;
+    } elseif (($month_diff==0) && ($day_diff < 0)) {
+        $year_diff--;
+    }
+    return $year_diff;
+}
 
   ?>
