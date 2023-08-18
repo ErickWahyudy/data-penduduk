@@ -52,7 +52,8 @@ function viewPassword() {
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?= base_url('themes/admin') ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
- 
+<!-- Select2 -->
+<script src="<?= base_url('themes/admin') ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="<?= base_url('themes/admin') ?>/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
 <script src="<?= base_url('themes/admin') ?>/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
@@ -69,6 +70,12 @@ function viewPassword() {
 
 <script>
   $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2({
+        //modal
+        dropdownParent: $('#modal-default'),
+    })
+
     $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,

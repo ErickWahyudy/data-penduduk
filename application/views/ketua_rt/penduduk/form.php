@@ -10,6 +10,7 @@
                 <th>No KK</th>
                 <th>Nama Anggota</th>
                 <th>NIK</th>
+                <th>No HP</th>
                 <th>Jenis Kelamin</th>
                 <th>Tanggal lahir</th>
                 <th>Usia</th>
@@ -33,6 +34,7 @@
                 <td><?= $anggota['no_kk'] ?></td>
                 <td><?= $anggota['nama'] ?></td>
                 <td><?= $anggota['nik'] ?></td>
+                <td><?= $anggota['no_hp_anggota'] ?></td>
                 <td><?= $anggota['jenis_kelamin'] ?></td>
                 <td><?= tgl_indo($anggota['tgl_lahir']) ?></td>
                 <td><?= hitung_usia($anggota['tgl_lahir']) ?> Tahun</td>

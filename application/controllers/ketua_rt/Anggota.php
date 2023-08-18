@@ -115,6 +115,7 @@ class Anggota extends CI_controller
            'id_kk'                  =>$this->input->post('id_kk'),
            'nik'                    =>$this->input->post('nik'),
            'nama'                   =>$this->input->post('nama'),
+           'no_hp_anggota'          =>$this->input->post('no_hp_anggota'),
            'jenis_kelamin'          =>$this->input->post('jenis_kelamin'),
            'tgl_lahir'              =>$this->input->post('tgl_lahir'),
            'tempat_lahir'           =>$this->input->post('tempat_lahir'),
@@ -159,6 +160,7 @@ public function edit($id='')
     $SQLupdate=array(
     'nik'               =>$this->input->post('nik'),
     'nama'              =>$this->input->post('nama'),
+    'no_hp_anggota'     =>$this->input->post('no_hp_anggota'),
     'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
     'tgl_lahir'         =>$this->input->post('tgl_lahir'),
     'tempat_lahir'      =>$this->input->post('tempat_lahir'),

@@ -55,9 +55,17 @@
 <script src="<?= base_url('themes/admin') ?>/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="<?= base_url('themes/admin') ?>/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('themes/admin') ?>/bower_components/chart.js/Chart.js"></script>
+<!-- Select2 -->
+<script src="<?= base_url('themes/admin') ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 
 <script>
   $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2({
+        //modal
+        dropdownParent: $('#modal-default'),
+    })
+    
     $('#example1').DataTable()
     $('#example2').DataTable({
       'paging'      : true,

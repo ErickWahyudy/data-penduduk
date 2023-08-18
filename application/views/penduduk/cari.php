@@ -142,8 +142,14 @@
                                             <td><?= $penduduk['alamat'] ?></td>
                                         </tr>
                                         <tr>
-                                            <th>No HP</th>
-                                            <td><?= $penduduk['no_hp'] ?></td>
+                                            <th>No HP <?= $penduduk['nama'] ?></th>
+                                            <td>
+                                                <?php if($penduduk['no_hp_anggota'] == NULL): ?>
+                                                    -
+                                                <?php else: ?>
+                                                    <?= $penduduk['no_hp_anggota'] ?>
+                                                <?php endif; ?>
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -173,6 +179,10 @@
                                         <tr>
                                             <th>Kepala Keluarga</th>
                                             <td><?= $penduduk['nama_kk'] ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th>No HP Kepala Keluarga</th>
+                                            <td><?= $penduduk['no_hp'] ?></td>
                                         </tr>
                                         
                                     <?php endforeach; ?>

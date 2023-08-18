@@ -20,7 +20,9 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="<?= base_url('themes/admin/') ?>/plugins/iCheck/square/blue.css">
   <!-- Favicon -->
-  <link href="<?= base_url('themes/admin') ?>/favicon.ico" rel="icon">
+  <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
+  <!-- manifest json -->
+  <link rel="manifest" href="<?= base_url('static/manifest.json') ?>">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

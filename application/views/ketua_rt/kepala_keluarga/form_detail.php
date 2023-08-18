@@ -185,7 +185,9 @@ if($aksi == "detail"):
             <th>No</th>
             <th>Nama</th>
             <th>NIK</th>
+            <th>No HP</th>
             <th>Tanggal Lahir</th>
+            <th>Usia</th>
             <th>Tempat Lahir</th>
             <th>Jenis Kelamin</th>
             <th>Agama</th>
@@ -205,7 +207,9 @@ if($aksi == "detail"):
             <td><?= $no ?></td>
             <td><?= $kk['nama'] ?></td>
             <td><?= $kk['nik'] ?></td>
+            <td><?= $kk['no_hp_anggota'] ?></td>
             <td><?= tgl_indo($kk['tgl_lahir']) ?></td>
+            <td><?= hitung_usia($kk['tgl_lahir']) ?> Tahun</td>
             <td><?= $kk['tempat_lahir'] ?></td>
             <td><?= $kk['jenis_kelamin'] ?></td>
             <td><?= $kk['agama'] ?></td>
@@ -262,6 +266,23 @@ if($aksi == "detail"):
                             </tr>
                             <tr>
                                 <td><input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>No HP</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="no_hp_anggota" id="no_hp_anggota" class="form-control" placeholder="No HP" pattern="[0-9]+" maxlength="13" minlength="10" oninvalid="this.setCustomValidity('No HP harus 10-13 digit angka')" oninput="setCustomValidity('')" autocomplete="off">
+                                    <!-- mengambil no hp dari tb_kk jika nomor ingin sama menggunakan script button dibawah -->
+                                    <small>boleh kosong atau jika ingin sama dengan no hp KK klik tombol dibawah</small><br>
+                                    <button type="button" class="btn btn-info btn-xs" onclick="copyNoHP()">Copy No HP KK</button>
+                                </td>
+                                <script>
+                                    function copyNoHP() {
+                                        var copyText = document.getElementById("no_hp_anggota");
+                                        copyText.value = "<?= $no_hp ?>";
+                                    }
+                                </script>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir *</th>
@@ -328,7 +349,8 @@ if($aksi == "detail"):
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="pekerjaan" class="form-control" required>
+                                <div id="modal-default">
+                                    <select name="pekerjaan" class="form-control select2" style="width: 100%;" required>
                                         <option value="">-- Pilih Pekerjaan --</option>
                                         <option value="Belum/Tidak Bekerja">Belum/Tidak Bekerja</option>
                                         <option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
@@ -420,6 +442,7 @@ if($aksi == "detail"):
                                         <option value="Wiraswasta">Wiraswasta</option>
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -518,6 +541,17 @@ if($aksi == "detail"):
                                 <td>
                                     <input type="number" name="nik" value="<?= $kk['nik'] ?>" class="form-control" autocomplete="off" required>
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>No HP
+                                    <small>(awali 62)</small>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="no_hp_anggota" value="<?= $kk['no_hp_anggota'] ?>" class="form-control" autocomplete="off">
+                                </td>
+                            </tr>
                             <tr>
                                 <th>Jenis Kelamin</th>
                             </tr>
@@ -769,5 +803,18 @@ function tgl_indo($tanggal){
 	// variabel pecahkan 1 = bulan
 	// variabel pecahkan 2 = tahun
 	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+}
+
+function hitung_usia($tanggal_lahir){
+    list($year,$month,$day) = explode("-",$tanggal_lahir);
+    $year_diff  = date("Y") - $year;
+    $month_diff = date("m") - $month;
+    $day_diff   = date("d") - $day;
+    if ($month_diff < 0) {
+        $year_diff--;
+    } elseif (($month_diff==0) && ($day_diff < 0)) {
+        $year_diff--;
+    }
+    return $year_diff;
 }
  ?>

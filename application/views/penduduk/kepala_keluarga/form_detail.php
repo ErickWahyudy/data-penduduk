@@ -185,6 +185,7 @@ if($aksi == "detail"):
             <th>No</th>
             <th>Nama</th>
             <th>NIK</th>
+            <th>No HP</th>
             <th>Tanggal Lahir</th>
             <th>Tempat Lahir</th>
             <th>Jenis Kelamin</th>
@@ -205,6 +206,7 @@ if($aksi == "detail"):
             <td><?= $no ?></td>
             <td><?= $kk['nama'] ?></td>
             <td><?= $kk['nik'] ?></td>
+            <td><?= $kk['no_hp_anggota'] ?></td>
             <td><?= tgl_indo($kk['tgl_lahir']) ?></td>
             <td><?= $kk['tempat_lahir'] ?></td>
             <td><?= $kk['jenis_kelamin'] ?></td>
@@ -262,6 +264,23 @@ if($aksi == "detail"):
                             </tr>
                             <tr>
                                 <td><input type="text" name="nama" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z !@#$%^&*()_+}{:;?/.,><|+=-]*" oninvalid="this.setCustomValidity('Nama tidak boleh mengandung angka')" oninput="setCustomValidity('')" autocomplete="off"></td>
+                            </tr>
+                            <tr>
+                                <th>No HP</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="no_hp_anggota" id="no_hp_anggota" class="form-control" placeholder="No HP" pattern="[0-9]+" maxlength="13" minlength="10" oninvalid="this.setCustomValidity('No HP harus 10-13 digit angka')" oninput="setCustomValidity('')" autocomplete="off">
+                                    <!-- mengambil no hp dari tb_kk jika nomor ingin sama menggunakan script button dibawah -->
+                                    <small>boleh kosong atau jika ingin sama dengan no hp KK klik tombol dibawah</small><br>
+                                    <button type="button" class="btn btn-info btn-xs" onclick="copyNoHP()">Copy No HP KK</button>
+                                </td>
+                                <script>
+                                    function copyNoHP() {
+                                        var copyText = document.getElementById("no_hp_anggota");
+                                        copyText.value = "<?= $no_hp ?>";
+                                    }
+                                </script>
                             </tr>
                             <tr>
                                 <th>Tanggal Lahir *</th>
@@ -328,7 +347,8 @@ if($aksi == "detail"):
                             </tr>
                             <tr>
                                 <td>
-                                    <select name="pekerjaan" class="form-control" required>
+                                <div id="modal-default">
+                                    <select name="pekerjaan" class="form-control select2" style="width: 100%;" required>
                                         <option value="">-- Pilih Pekerjaan --</option>
                                         <option value="Belum/Tidak Bekerja">Belum/Tidak Bekerja</option>
                                         <option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
@@ -420,6 +440,7 @@ if($aksi == "detail"):
                                         <option value="Wiraswasta">Wiraswasta</option>
                                         <option value="Lainnya">Lainnya</option>
                                     </select>
+                                    </div>
                                 </td>
                             </tr>
                             <tr>
@@ -468,13 +489,13 @@ if($aksi == "detail"):
                                 <th>Nama ayah</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="ayah" class="form-control" placeholder="Nama ayah" autocomplete="off"></td>
+                                <td><input type="text" name="nama_ayah" class="form-control" placeholder="Nama ayah" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>Nama ibu</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="ibu" class="form-control" placeholder="Nama ibu" autocomplete="off"></td>
+                                <td><input type="text" name="nama_ibu" class="form-control" placeholder="Nama ibu" autocomplete="off"></td>
                             </tr>
                         </table>
                             <a href="" class="btn btn-default" data-dismiss="modal">Kembali</a> &nbsp; &nbsp;
@@ -517,6 +538,17 @@ if($aksi == "detail"):
                             <tr>
                                 <td>
                                     <input type="text" name="nama" value="<?= $kk['nama'] ?>" class="form-control" autocomplete="off" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    No HP
+                                    <small>(awali dengan 62)</small>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" name="no_hp_anggota" value="<?= $kk['no_hp_anggota'] ?>" class="form-control" required="" autocomplete="off">
                                 </td>
                             </tr>
                             <tr>

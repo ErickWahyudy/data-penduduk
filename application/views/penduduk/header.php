@@ -13,8 +13,9 @@
     <link rel="stylesheet"
         href="<?= base_url('themes/admin') ?>/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet"
-        href="<?= base_url('themes/admin') ?>/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Favicon -->
+    <link href="<?= base_url('themes/kassandra-wifi') ?>/img/favicon.ico" rel="icon">
     <!-- Ionicons -->
     <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
@@ -34,6 +35,8 @@
     <!-- <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/bootstrap-daterangepicker/daterangepicker.css"> -->
     <!-- bootstrap wysihtml5 - text editor -->
     <script src="<?= base_url('themes/admin') ?>/bower_components/jquery/jquery-1.11.2.min.js"></script>
+    <!-- select2 -->
+  <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/select2/dist/css/select2.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
