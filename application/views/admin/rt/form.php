@@ -145,7 +145,7 @@
                             <tr>
                                 <td>
                                     <input type="text" name="nama_rt" value="<?= $rt['nama_rt'] ?>"
-                                        class="form-control" required="">
+                                        class="form-control" required="" autocomplete="off">
                                 </td>
                             </tr>
                             <tr>
@@ -154,7 +154,7 @@
                             <tr>
                                 <td>
                                     <input type="number" name="no_rt" value="<?= $rt['no_rt'] ?>"
-                                        class="form-control" required="">
+                                        class="form-control" required="" autocomplete="off">
                                 </td>
                             </tr>
                             <tr>
@@ -162,7 +162,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <textarea name="alamat" class="form-control" required=""><?= $rt['alamat'] ?></textarea>
+                                    <textarea name="alamat" class="form-control" required=""autocomplete="off"><?= $rt['alamat'] ?></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -171,7 +171,7 @@
                             <tr>
                                 <td>
                                     <input type="number" name="no_hp" value="<?= $rt['no_hp'] ?>"
-                                        class="form-control" required="">
+                                        class="form-control" required="" autocomplete="off">
                                 </td>
                             </tr>
                             <tr>
@@ -180,7 +180,7 @@
                             <tr>
                                 <td>
                                     <input type="email" name="email" value="<?= $rt['email'] ?>"
-                                        class="form-control" required="">
+                                        class="form-control" required="" autocomplete="off">
                                 </td>
                             </tr>
                             

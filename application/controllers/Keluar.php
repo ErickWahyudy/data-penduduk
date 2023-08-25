@@ -16,13 +16,19 @@ class Keluar extends CI_controller
   
 }
 
-public function index($value='')
-{
 
-$this->session->sess_destroy();
-echo "<script>alert('Anda Telah Keluar Dari Halaman Pelanggan')</script>";;
-redirect(base_url(''));
+//API keluar dari halaman admin
+public function index()
+{
+    $this->session->sess_destroy(); // hapus semua data sesi pengguna
+    $response = array(
+        'success' => true,
+        'message' => 'Anda berhasil keluar dari halaman menu.'
+    );
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
+
 
 	
 }

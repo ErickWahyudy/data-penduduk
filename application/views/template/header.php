@@ -39,7 +39,9 @@
   <!-- select2 -->
   <link rel="stylesheet" href="<?= base_url('themes/admin') ?>/bower_components/select2/dist/css/select2.min.css">
 
-
+  <!-- sweetalert -->
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
   <!-- Favicon -->
   <link rel="shortcut icon" href="<?= base_url('themes') ?>/favicon.ico" type="image/x-icon">
  
@@ -127,7 +129,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('admin/user_admin') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi Data Penduduk'))" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php }elseif($this->session->userdata('level') == "ketua_rt"){ ?>
@@ -136,7 +138,7 @@ if($this->session->userdata('level') =="Administrator"){
                   <a href="<?= base_url('ketua_rt/profile') ?>" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi Data Penduduk'))" class="btn btn-default btn-flat">Sign out</a>
+                <a href="javascript:void(0)" onclick="keluar()" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
               <?php } ?>
@@ -233,7 +235,7 @@ if($this->session->userdata('level') =="Administrator"){
   
 <?php } ?>
   <!-- logout -->
-  <li> <a href="<?= base_url('keluar') ?>" onclick="return(confirm('Anda yakin keluar dari aplikasi ? Setelah keluar, Anda harus masuk lagi untuk mengakses fitur-fitur dalam aplikasi Data Penduduk'))"><i class="fa fa-sign-out"></i>Sign out</a>
+  <li> <a href="javascript:void(0)" onclick="keluar()"><i class="fa fa-sign-out"></i>Sign out</a>
   <li class="header">END MAIN NAVIGATION</li>
       </ul>
     </section>
