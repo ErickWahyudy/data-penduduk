@@ -49,7 +49,8 @@ if($aksi == "detail"):
                     <a href="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" target="_blank">
                         <img src="<?= base_url('themes/foto_kk/'.$foto_kk) ?>" width="50%">
                         <a href="<?= base_url('admin/kepala_keluarga/hapusimage/'.$id_kk) ?>" class="btn btn-danger btn-xs" onclick="return confirm('Yakin ingin menghapus foto ini?')" title="Hapus Foto KK untuk memperbarui"><i class="fa fa-trash"></i></a>
-                    </a>
+                    </a> <br>
+                    <?= round(filesize('themes/foto_kk/'.$foto_kk)/1024,2) ?> KB
                     <?php endif; ?>
                 </td>
             </tr>
