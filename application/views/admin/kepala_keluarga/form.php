@@ -2,6 +2,7 @@
 
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahRT"><i class="fa fa-plus"></i>
     Tambah</a>
+<a href="<?php echo site_url('admin/export/exportExcel'); ?>" class="btn btn-success">Export to Excel</a>
 <br /><br /><br />
 <?= $this->session->flashdata('pesan') ?>
 

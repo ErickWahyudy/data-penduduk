@@ -210,6 +210,7 @@ if($this->session->userdata('level') =="Administrator"){
       <li class="header">OTHER</li>
          <li><a href="<?= base_url('admin/informasi') ?>"><i class="fa fa-bullhorn"></i> <span>Informasi</span></a></li>
          <li><a href="<?= base_url('admin/user_admin') ?>" class="active"><i class="fa fa-user"></i> Data Administrator</a></li>
+         <li><a href="<?= base_url('admin/backup') ?>"><i class="fa fa-database"></i> <span>Backup Database</span></a></li>
         </li>
 
 <?php }elseif($this->session->userdata('level') == "ketua_rt"){ ?>
