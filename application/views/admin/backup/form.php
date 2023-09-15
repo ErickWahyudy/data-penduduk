@@ -40,7 +40,7 @@
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('admin/Backup/restoreDatabase') ?>" method="POST" enctype="multipart/form-data">
+                        <form id="restoreDatabase" method="POST" enctype="multipart/form-data">
                             <tr>
                                 <th>Upload File</th>
                             </tr>
@@ -65,7 +65,7 @@
 
 <script type="text/javascript">
 
-    //ajax hapus pengguna
+    //ajax backup database
     function backupdatabase() {
         swal({
             title: "Apakah Anda Yakin?",
@@ -108,6 +108,55 @@
             }
         });
     }
+
+    //ajax restore database
+    $('#restoreDatabase').submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        swal({
+            title: "Apakah Anda Yakin?",
+            text: "Data Akan Di Restore",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Ya, Restore!",
+            cancelButtonText: "Tidak, Batalkan!",
+            closeOnConfirm: false,
+            closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+        }).then(function(result) {
+            if (result.value) { // Only restore the database if the user clicked "OK"
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/Backup/restoreDatabase/') ?>",
+                    data: formData,
+                    dataType: "json",
+                    processData: false,
+                    contentType: false,
+                }).done(function() {
+                    swal({
+                        title: "Berhasil",
+                        text: "Data Berhasil Di Restore",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                }).fail(function() {
+                    swal({
+                        title: "Gagal",
+                        text: "Data Gagal Di Restore",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    }).then(function() {
+                        location.reload();
+                    });
+                });
+            } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+                swal("Batal Restore", "Data Tidak Jadi Di Restore", "error");
+            }
+        });
+    });
 
     //ajax hapus backup
     function hapusbackup(backup) {

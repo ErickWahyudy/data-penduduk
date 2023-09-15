@@ -80,36 +80,51 @@ class Backup extends CI_controller
   public function restoreDatabase() {
     $file_path = 'themes/backup/' . $_FILES['file']['name'];
 
+    // Disable foreign key constraints
+    $this->db->query('SET FOREIGN_KEY_CHECKS=0');
+
     // Baca isi file cadangan SQL
     $sql = file_get_contents($file_path);
 
     // Pisahkan pernyataan SQL
     $sql_commands = explode(";\n", $sql);
 
-    // Eksekusi setiap pernyataan SQL
+    // Mulai transaksi
+    $this->db->trans_start();
+
+    // Eksekusi pernyataan SQL kembali untuk mengembalikan data
     foreach ($sql_commands as $command) {
-        if(trim($command) !== "") {
+        if (trim($command) !== "") {
             $this->db->query($command);
         }
     }
 
-    // Response
-    $response = array(
-        'status' => 'success',
-        'message' => 'Database restore successful'
-    );
+    // Selesaikan transaksi
+    $this->db->trans_complete();
 
-    //error response
-    $response = array(
-        'status' => 'error',
-        'message' => 'Database restore failed'
-    );
+    // Enable foreign key constraints
+    $this->db->query('SET FOREIGN_KEY_CHECKS=1');
+
+    if ($this->db->trans_status() === FALSE) {
+        // Transaksi gagal, ada kesalahan dalam mengembalikan data
+        $response = array(
+            'status' => 'error',
+            'message' => 'Failed to restore data'
+        );
+    } else {
+        // Transaksi berhasil, data telah dikembalikan
+        $response = array(
+            'status' => 'success',
+            'message' => 'Database restore successful'
+        );
+    }
 
     // Set response content type to JSON
     $this->output->set_content_type('application/json');
     // Encode the response as JSON and send it to the client
     $this->output->set_output(json_encode($response));
 }
+
 
 public function hapusBackup() {
     $backup = $this->input->post('backup'); // Ambil nilai dari parameter backup
