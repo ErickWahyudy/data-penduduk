@@ -22,6 +22,26 @@
   <!-- sweetalert -->
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+  <style>
+  .bottom-left {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 36px; /* Sesuaikan ukuran sesuai kebutuhan Anda */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .clock {
+    font-weight: bold;
+  }
+
+  .date {
+    font-weight: normal;
+    font-size: 24px; /* Sesuaikan ukuran sesuai kebutuhan Anda */
+  }
+  </style>
 </head>
 <body style="background: url('<?= base_url('themes/admin/dist/img/windows11.jpg') ?>') no-repeat center center fixed; background-size: cover;">
 <div class="container mt-5 mb-5">
@@ -73,6 +93,33 @@
         </div>
     </div>
     
+    <!-- Menambah jam dan tanggal di pojok kiri bawah seperti Windows 11 -->
+    <div class="bottom-left">
+        <div id="clock" class="clock"></div>
+        <div id="date" class="date"></div>
+    </div>
+    <script>
+    //jam dan tanggal
+    function updateTime() {
+    const now = new Date();
+    const clockElement = document.getElementById("clock");
+    const dateElement = document.getElementById("date");
+
+    const options = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = now.toLocaleDateString("id-ID", options);
+    const timeString = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+
+    clockElement.textContent = timeString;
+    dateElement.textContent = formattedDate;
+    }
+
+    // Memanggil updateTime setiap detik
+    setInterval(updateTime, 1000);
+
+    // Memanggil updateTime untuk pertama kali
+    updateTime();
+    </script>
+
     <!-- Tautan ke file JavaScript Bootstrap 4 (jika diperlukan) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
