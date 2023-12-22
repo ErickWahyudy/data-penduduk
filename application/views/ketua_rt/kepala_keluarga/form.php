@@ -2,6 +2,7 @@
 
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahRT"><i class="fa fa-plus"></i>
     Tambah</a>
+<a href="<?php echo site_url('ketua_rt/export/exportExcel'); ?>" class="btn btn-success">Export to Excel</a>
 <br /><br /><br />
 <?= $this->session->flashdata('pesan') ?>
 
@@ -12,10 +13,10 @@
                 <th>No</th>
                 <th>Kepala Keluarga</th>
                 <th>No KK</th>
-                <th>Alamat</th>
+                <th>RT / Alamat</th>
                 <th>Jumlah Keluarga</th>
                 <th>Foto KK</th>
-                <th>Kirim Link Update Data</th>
+                <th>Kirim Link Pembaruan Data</th>
                 <th>Terakhir Update</th>
                 <th>Aksi</th>
             </tr>
@@ -26,7 +27,7 @@
                 <td><?= $no ?></td>
                 <td><?= $kk['nama_kk'] ?></td>
                 <td><?= $kk['no_kk'] ?></td>
-                <td><?= $kk['alamat'] ?></td>
+                <td>RT <?= $kk['no_rt'] ?> / <?= $kk['alamat'] ?></td>
                 <td><?php $jml = $this->db->get_where('tb_anggota', ['id_kk' => $kk['id_kk']])->num_rows(); echo $jml; ?></td>
                 <td>
                     <?php if($kk['foto_kk'] == null): ?>
@@ -45,9 +46,9 @@
                 </td>
                 <td><?= tgl_indo($kk['tgl_update']) ?></td>
                 <td>
-                    <a href="<?= base_url('ketua_rt/kepala_keluarga/detail/'.$kk['id_kk']) ?>"
+                    <a href="<?= base_url('ketua_rt/kepala_keluarga/detail/'.$kk['id_kk']) ?>" title="Detail Data KK"
                         class="btn btn-info"><i class="fa fa-eye"></i></a> &emsp;
-                        <a href="<?= base_url('ketua_rt/kepala_keluarga/generate_token/'.$kk['id_kk']) ?>"
+                    <a href="<?= base_url('ketua_rt/kepala_keluarga/generate_token/'.$kk['id_kk']) ?>"
                         class="btn btn-warning" title="Refresh Token"><i class="fa fa-refresh"></i></a>
                 </td>
             </tr>
@@ -61,14 +62,14 @@
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header bg_green">
+                <div class="modal-header bg-green">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Tambah <?= $judul ?></h4>
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                    <p style="color: red;">Yang bertanda * wajib diisi</p>
+                        <p style="color: red;">Yang bertanda * wajib diisi</p>
                         <form action="<?= base_url('ketua_rt/kepala_keluarga/add') ?>" method="post"
                             enctype="multipart/form-data">
                             <tr>
@@ -76,14 +77,14 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="number" name="no_kk" class="form-control" required placeholder="No KK" pattern="[0-9]+">
+                                    <input type="number" name="no_kk" class="form-control" required placeholder="No KK" pattern="[0-9]+" maxlength="16" minlength="16" title="No KK harus 16 digit">
                                 </td>
                             </tr>
                             <tr>
                                 <th>Nama *</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="nama_kk" class="form-control" required placeholder="Nama" autocomplete="off"></td>
+                                <td><input type="text" name="nama_kk" class="form-control" required placeholder="Nama Lengkap" title="Nama harus berupa huruf" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>No HP
@@ -98,6 +99,25 @@
                             </tr>
                             <tr>
                                 <td><input name="alamat" class="form-control" required placeholder="Alamat"></td>
+                            </tr>
+                            <tr>
+                                <th>Ketua RT *</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select name="id_rt" class="form-control" required>
+                                        <option value="">--Pilih Ketua RT--</option>
+                                        <?php 
+                                          $rt = $this->db->get('tb_rt')->result_array();
+                                          foreach($rt as $pkt): ?>
+                                        <option value="<?= $pkt['id_rt'] ?>"> RT
+                                            <?= ucfirst($pkt['no_rt']) ?> |
+                                            <?= ucfirst($pkt['nama_rt']) ?> |
+                                            <?= ucfirst($pkt['alamat']) ?>
+                                        </option>
+                                        <?php endforeach; ?>
+
+                                </td>
                             </tr>
                             <tr>
                                 <td>

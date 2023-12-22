@@ -9,6 +9,7 @@ class M_kk extends CI_model
 private $table  = 'tb_kk';
 private $table2 = 'tb_rt';
 private $table3 = 'tb_anggota';
+private $table4 = 'tb_maps';
 
 //kk join rt
 public function view($value='')
@@ -32,7 +33,12 @@ public function view_anggota($id='',$value='')
 
 public function view_id($id='')
 {
- return $this->db->select ('*')->from ($this->table)->where ('id_kk', $id)->get ();
+ //join table tb_kk dan tb_maps
+  $this->db->select ('*');
+  $this->db->from ($this->table);
+  $this->db->join($this->table4, 'tb_kk.id_maps = tb_maps.id_maps');
+  $this->db->where('tb_kk.id_kk', $id);
+  return $this->db->get();
 }
 
 //mengambil id rt urut terakhir
@@ -66,6 +72,26 @@ public function view_id_kk($id='')
   $this->db->where('tb_kk.id_rt', $id);
   $this->db->order_by('nama_kk', 'ASC');
   return $this->db->get();
+}
+
+public function view_id_maps($id='')
+{
+  //join table tb_kk dan tb_maps
+  $this->db->select ('*');
+  $this->db->from ($this->table);
+  $this->db->join($this->table4, 'tb_kk.id_maps = tb_maps.id_maps');
+  $this->db->where('tb_kk.id_kk', $id);
+  return $this->db->get();
+}
+
+//add maps
+public function add_maps($SQLinsert2){
+  return $this -> db -> insert($this->table4, $SQLinsert2);
+}
+
+public function update_maps($id='',$SQLupdate){
+  $this->db->where('id_maps', $id);
+  return $this->db-> update($this->table4, $SQLupdate);
 }
 
 }

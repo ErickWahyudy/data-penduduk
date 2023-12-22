@@ -61,7 +61,7 @@
                         <form action="" method="post">
                             <div class="form-group">
                                 <div class="input-group">
-                                <input type="text" class="form-control" name="email" placeholder="Nama / Email / No HP" required="">
+                                <input type="text" class="form-control" name="email" placeholder="Nama / Email / No HP" required="" autocomplete="off">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
-                                <input type="password" class="form-control" name="password" placeholder="Password" required="">
+                                <input type="password" class="form-control" name="password" placeholder="Password" required="" autocomplete="off">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
                                     </div>

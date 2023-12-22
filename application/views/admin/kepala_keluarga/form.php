@@ -84,7 +84,7 @@
                                 <th>Nama *</th>
                             </tr>
                             <tr>
-                                <td><input type="text" name="nama_kk" class="form-control" required placeholder="Nama Lengkap" pattern="[A-Za-z ]+" title="Nama harus berupa huruf" autocomplete="off"></td>
+                                <td><input type="text" name="nama_kk" class="form-control" required placeholder="Nama Lengkap" title="Nama harus berupa huruf" autocomplete="off"></td>
                             </tr>
                             <tr>
                                 <th>No HP

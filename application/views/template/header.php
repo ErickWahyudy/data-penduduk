@@ -47,6 +47,11 @@
  
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <!-- maps -->
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZe7HOqihPIijMcH43anmVsJTZLcYdg28&callback=initMap" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
   <style>
 
   #preview_kk {

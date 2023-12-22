@@ -142,6 +142,8 @@ class Kepala_keluarga extends CI_controller
             redirect(base_url('admin/kepala_keluarga'));
         }
       else
+      
+      $id_maps = $this->acak_id(20);
 
       $SQLinsert=array(
           'id_kk'             =>$this->id_kk_urut(),
@@ -150,22 +152,30 @@ class Kepala_keluarga extends CI_controller
           'alamat'            =>$this->input->post('alamat'),
           'no_hp'             =>$this->input->post('no_hp'),
           'id_rt'             =>$this->input->post('id_rt'),
+          'id_maps'           =>$id_maps,
           'tgl_update'        =>$this->datetime(),
           );
-  
-          if ($this->m_kk->add($SQLinsert)) {
-  
-     $pesan='<script>
-                swal({
-                    title: "Berhasil Menambahkan Data",
-                    text: "",
-                    type: "success",
-                    showConfirmButton: true,
-                    confirmButtonText: "OKEE"
-                    });
-            </script>';
-         $this->session->set_flashdata('pesan',$pesan);
-      redirect(base_url('admin/kepala_keluarga'));
+
+          $cek=$this->m_kk->add($SQLinsert);
+
+       $SQLinsert2=array(
+            'id_maps'             =>$id_maps,
+        );
+        $cek=$this->m_kk->add_maps($SQLinsert2);
+
+        if($cek) {
+
+        $pesan='<script>
+                    swal({
+                        title: "Berhasil Menambahkan Data",
+                        text: "",
+                        type: "success",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                        });
+                </script>';
+            $this->session->set_flashdata('pesan',$pesan);
+        redirect(base_url('admin/kepala_keluarga'));
      }
     }
 }
@@ -176,18 +186,22 @@ public function detail($id='')
   
   if (empty($data['id_kk'])) {
     $pesan='<script>
-              swal({
-                  title: "Gagal Lihat Data",
-                  text: "ID Kepala Keluarga Tidak Ditemukan",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonColor: "#DD6B55",
-                  confirmButtonText: "OK",
-                  closeOnConfirm: false
-              },
-              function(){
-                  window.location.href="'.base_url('admin/kepala_keluarga').'";
-              });
+                    swal({
+                        title: "Gagal Lihat Data Karena Belum Update ID Maps",
+                        text: "Silakan Klik Generate ID Maps",
+                        type: "error",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3CB371",
+                        confirmButtonText: "Generate ID Maps",
+                        cancelButtonText: "Kembali",
+                        closeOnConfirm: false,
+                        closeOnCancel: true
+                    }).then(function(result) {
+                        if (result.value) {
+                            window.location.href="'.base_url('admin/kepala_keluarga/generate_id_maps/'.$id).'";
+                        }
+                    });
+                    
             </script>';
     $this->session->set_flashdata('pesan',$pesan);
     redirect(base_url('admin/kepala_keluarga'));
@@ -203,6 +217,9 @@ public function detail($id='')
     'no_hp'             =>$data['no_hp'],
     'foto_kk'           =>$data['foto_kk'],
     'id_rt'             =>$data['id_rt'],
+    'id_maps'           =>$data['id_maps'],
+    'latitude'          =>$data['latitude'],
+    'longitude'         =>$data['longitude'],
     'rt'                =>$this->db->get('tb_rt')->result_array(),
     'ukk'               =>$this->db->get('tb_kk')->result_array(),
     'level'             =>$data['level'],
@@ -381,6 +398,130 @@ public function hapus($id='')
      $this->session->set_flashdata('pesan',$pesan);
     redirect(base_url('admin/kepala_keluarga/detail/'.$id));
         }
+    }
+
+
+    //MAPS
+    public function generate_id_maps($id='')
+    {
+        $id_maps = $this->acak_id(20);
+
+        $SQLinsert2=array(
+            'id_maps'             =>$id_maps,
+        );
+        $cek=$this->m_kk->add_maps($SQLinsert2);
+
+        $SQLupdate=array(
+            'id_maps'             =>$id_maps,
+            'tgl_update'          =>$this->datetime(),
+        );
+        $cek=$this->m_kk->update($id,$SQLupdate);
+        if($cek){
+            $pesan='<script>
+                  swal({
+                      title: "Berhasil Generate ID Maps",
+                      text: "",
+                      type: "success",
+                      showConfirmButton: true,
+                      confirmButtonText: "OKEE"
+                      });
+              </script>';
+            $this->session->set_flashdata('pesan',$pesan);
+            redirect(base_url('admin/kepala_keluarga/detail/'.$id));
+        }
+    }
+        
+
+    public function edit_maps($id='')
+    {
+        $data=$this->m_kk->view_id_maps($id)->row_array();
+        if (empty($data['id_kk'])) {
+        $pesan='<script>
+                    swal({
+                        title: "Gagal Edit Data",
+                        text: "ID KK Tidak Ditemukan",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "OK",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        window.location.href="'.base_url('admin/kepala_keluarga').'";
+                    });
+                </script>';
+        $this->session->set_flashdata('pesan',$pesan);
+        redirect(base_url('admin/kepala_keluarga'));
+        }
+
+        $x = array(
+        'judul'           =>'Edit Lokasi Kepala Keluarga',
+        'id_kk'           =>$data['id_kk'],
+        'id_maps'         =>$data['id_maps'],
+        'nama_kk'         =>$data['nama_kk'],
+        'alamat'          =>$data['alamat'],
+        'latitude'        =>$data['latitude'],
+        'longitude'       =>$data['longitude']
+        );
+
+        $this->load->view('admin/kepala_keluarga/edit_maps',$x);
+    }
+
+    //API api_edit_map
+    public function api_edit_maps($id='')
+    {
+        $data=$this->m_kk->view_id_maps($id)->row_array();
+        $x = array(
+        'judul'           =>'Edit Lokasi Kepala Keluarga',
+        'id_kk'           =>$data['id_kk'],
+        'id_maps'         =>$data['id_maps'],
+        'nama_kk'         =>$data['nama_kk'],
+        'alamat'          =>$data['alamat'],
+        'latitude'        =>$data['latitude'],
+        'longitude'       =>$data['longitude']
+        );
+
+        $rules = array(
+        array(
+            'field' => 'latitude',
+            'label' => 'latitude',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'longitude',
+            'label' => 'longitude',
+            'rules' => 'required'
+        )
+        );
+        $this->form_validation->set_rules($rules);
+        if ($this->form_validation->run() == FALSE) {
+        $response = [
+            'status' => false,
+            'message' => 'Tidak ada data'
+        ];
+        } else {
+        $SQLupdate = [
+            'latitude'    => $this->input->post('latitude'),
+            'longitude'   => $this->input->post('longitude')
+        ];
+
+        $SQLupdate2 = [
+            'tgl_update'  => $this->datetime()
+        ];
+
+        $cek=$this->m_kk->update($id,$SQLupdate2);
+        $cek=$this->m_kk->update_maps($id=$data['id_maps'],$SQLupdate);
+        if($cek){
+            $response = [
+            'status' => true,
+            'message' => 'Berhasil mengubah data'
+            ];
+        }
+        }
+        
+        $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
     }
         
 

@@ -70,6 +70,19 @@ if($aksi == "detail"):
         </div>
     </div>
 </div>
+<div class="col-lg-12">
+    <?php if($id_maps == ''): ?>
+    <b>
+        <span class="text-danger">ID Maps Belum Dibuat</span> <br>
+        <a href="<?= base_url('ketua_rt/kepala_keluarga/generate_id_maps/'.$id_kk) ?>" class="btn btn-warning btn-xs"
+            onclick="return confirm('Yakin ingin membuat ID Maps?')"><i class="fa fa-plus"></i> Generate ID Maps</a>
+    </b>
+    <?php else: ?>
+        <a href="<?= base_url('ketua_rt/kepala_keluarga/edit_maps/'.$id_kk) ?>" class="btn btn-warning btn-xs"><i
+            class="fa fa-map-marker"></i> Edit Maps</a>
+        <div id="map" style="width: auto; height: 250px;"></div>
+    <?php endif; ?>
+    </div>
 
 <!-- Modal Edit KK -->
 <div class="modal fade" id="editKK<?= $id_kk ?>" tabindex="-1" role="dialog"
@@ -778,6 +791,38 @@ if($aksi == "detail"):
     </div>
 <?php endforeach; ?>
 
+<script type="text/javascript">
+//menampilkan data maps berdasarkan id_pelanggan dengan select
+var locations = [
+    ['<h4><?= $nama_kk ?></h4><p><?= $alamat ?> <br> <?= $no_hp ?></p>', <?= $latitude ?>, <?= $longitude ?>],
+];
+
+
+var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 18,
+    center: new google.maps.LatLng(<?= $latitude ?>, <?= $longitude ?>),
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+
+var infowindow = new google.maps.InfoWindow();
+
+var marker, i;
+
+for (i = 0; i < locations.length; i++) {
+    marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+        icon: '<?= base_url('themes/marker.png') ?>',
+    });
+
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+        }
+    })(marker, i));
+}
+</script>
 
 <?php endif; ?>
 
