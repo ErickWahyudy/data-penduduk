@@ -64,19 +64,7 @@
 
 </div>
 <!-- ./wrapper -->
-<script>
-    //preview gambar
-    function previewKK() {
-    document.getElementById("preview_kk").style.display = "block";
-    var oFReader = new FileReader();
-    oFReader.readAsDataURL(document.getElementById("kk").files[0]);
-
-    oFReader.onload = function(oFREvent) {
-        document.getElementById("preview_kk").src = oFREvent.target.result;
-    };
-
-};
-
+<script type="text/javascript">
 //view password
 function viewPassword() {
 	var x = document.getElementById("password");
@@ -88,6 +76,7 @@ function viewPassword() {
 }
 
 </script>
+
 <!-- jQuery 3 -->
 <script src="<?= base_url('themes/admin') ?>/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

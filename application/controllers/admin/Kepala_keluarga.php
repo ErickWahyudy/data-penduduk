@@ -282,74 +282,117 @@ private function compress($source, $destination, $quality)
 }
 
 //menyimpan gambar foto_kk ke dalam folder
-//upload file ke server
-private function upload_bukti_kk($value='')
+private function upload_bukti_kk()
 {
-    $ekstensi_diperbolehkan = array('png','jpg','jpeg','pdf','doc', 'docx');
+    $ekstensi_diperbolehkan = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
     $nama = $_FILES['foto_kk']['name'];
     $x = explode('.', $nama);
     $ekstensi = strtolower(end($x));
     $ukuran = $_FILES['foto_kk']['size'];
-    $file_tmp = $_FILES['foto_kk']['tmp_name'];
     $folderPath = "./themes/foto_kk/";
-    if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
-        if($ukuran < 10044070){      
-            $fileName = $this->input->post('nama_kk').'_'.uniqid() . '.' . $ekstensi;
-            $file = $folderPath . $fileName;
-            move_uploaded_file($file_tmp, $file);
-            $this->compress($file, $file, 40);
+
+    if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+        if ($ukuran < 10044070) {      
+            // Menggunakan data hasil crop yang disimpan di elemen dengan id 'cropped_image'
+            $cropped_image_data = $_POST['cropped_image'];
+
+            // Mendapatkan nama file tanpa ekstensi
+            $nama_file = pathinfo($nama, PATHINFO_FILENAME);
+
+            // Ekstensi file
+            $ext = pathinfo($nama, PATHINFO_EXTENSION);
+
+            //menyimpan gambar ke database
+            $fileName = $this->input->post('nama_kk'). '_' . uniqid() . '.' . $ext;
+            // Konversi data hasil crop menjadi file gambar
+            $cropped_image = $folderPath . $fileName;
+            file_put_contents($cropped_image, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $cropped_image_data)));
+            $this->compress($cropped_image, $cropped_image, 40);
+
             return $fileName;
-        }else{
+        } else {
             $this->session->set_flashdata('pesan', '<script>
                 swal({
                     title: "Gagal",
                     text: "Ukuran File Terlalu Besar",
                     type: "error",
                     timer: 2000,
-                    showConfirmButton: true,,
+                    showConfirmButton: true,
                     confirmButtonText: "OKEE"
                 });
             </script>');
-            redirect('promo');
+            redirect(base_url('admin/kepala_keluarga'));
         }
-    }else{
+    } else {
         $this->session->set_flashdata('pesan', '<script>
             swal({
                 title: "Gagal",
                 text: "Ekstensi File Tidak Diperbolehkan",
                 type: "error",
                 timer: 2000,
-                showConfirmButton: true,,
+                showConfirmButton: true,
                 confirmButtonText: "OKEE"
             });
         </script>');
-        redirect('promo');
+        redirect(base_url('admin/kepala_keluarga'));
     }
 }
-    
+
 public function upload_fotoKK($id='')
 {
-if(isset($_POST['kirim'])){
-    $SQLupdate=array(
-      'foto_kk'               =>$this->upload_bukti_kk(),
-      'tgl_update'            =>$this->datetime(),
-    );
-    $cek=$this->m_kk->update($id,$SQLupdate);
-    if($cek){
-     $pesan='<script>
-            swal({
-                title: "Berhasil Upload Foto KK",
-                text: "",
-                type: "success",
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
+    if(isset($_POST['kirim'])){
+        $SQLupdate=array(
+            'foto_kk'     => $this->upload_bukti_kk(),
+            'tgl_update'  => $this->datetime(),
+        );
+        
+        $cek = $this->m_kk->update($id, $SQLupdate);
+        if ($cek) {
+            $pesan = '<script>
+                swal({
+                    title: "Berhasil Upload Foto KK",
+                    text: "",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
                 });
-        </script>';
-     $this->session->set_flashdata('pesan',$pesan);
-   redirect(base_url('admin/kepala_keluarga/detail/'.$id));
+            </script>';
+            $this->session->set_flashdata('pesan', $pesan);
+            redirect(base_url('admin/kepala_keluarga/detail/'.$id));
+        }
+    }
+}
+
+//API upload foto ke database dan folder
+public function api_uploadKK($id='', $SQLupdate='')
+{
+  if (empty($_FILES['foto_kk']['name'])) {
+    $data = [
+      'status'  => 'error',
+      'message' => 'Tidak Ada File Yang Diupload',
+    ];
+  } else {
+    $SQLupdate = [
+        'foto_kk'     => $this->upload_bukti_kk(),
+        'tgl_update'  => $this->datetime(),
+    ];
+    if ($this->m_kk->update($id, $SQLupdate)) {
+      $data = [
+        'status'  => 'success',
+        'message' => 'Berhasil Upload File',
+      ];
+    } else {
+      $data = [
+        'status'  => 'error',
+        'message' => 'Gagal Upload File',
+      ];
     }
   }
+  $this->output
+    ->set_content_type('application/json')
+    ->set_output(json_encode($data));
 }
+
       
 public function hapus($id='')
     {

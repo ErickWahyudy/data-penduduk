@@ -156,7 +156,7 @@ if($aksi == "detail"):
                 </div>
                 <div class="modal-body table-responsive">
                     <table class="table table-bordered table-striped">
-                        <form action="<?= base_url('ketua_rt/kepala_keluarga/upload_fotoKK/'.$id_kk) ?>" method="post" enctype="multipart/form-data">
+                        <form id="uploadFoto" method="post" enctype="multipart/form-data">
                             <tr>
                                 <th>Kepala Keluarga</th>
                             </tr>
@@ -169,23 +169,75 @@ if($aksi == "detail"):
                                 <th>Foto KK</th>
                             </tr>
                             <tr>
-                                <td>
-                                    <input type="file" name="foto_kk" class="form-control" onchange="previewKK()" id="kk">
-                                    <img id="preview_kk" alt="image preview" width="50%" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="" class="btn btn-default" data-dismiss="modal">Kembali</a> &nbsp; &nbsp;
-                                    <input type="submit" name="kirim" value="Simpan" class="btn btn-success">
-                                </td>
-                            </tr>
+                           <td>
+                                <input type="file" name="foto_kk" class="form-control" id="kkInput" required accept="image/*">
+                                <img id="preview_kk" alt="image preview" width="50%" style="display: none;">
+                                <!-- Tambahkan input hidden untuk menyimpan data hasil cropping -->
+                                <input type="hidden" name="cropped_image" id="cropped_image" value="">
+                                <!-- Tambahkan tombol "Rotate Left" -->
+                                <a href="#" class="btn btn-warning" id="rotateLeft"><i class="fa fa-rotate-left"></i></a>
+                                <!-- Tambahkan tombol "Rotate Right" -->
+                                <a href="#" class="btn btn-warning" id="rotateRight"><i class="fa fa-rotate-right"></i></a>
+                                    <!-- Tambahkan tombol "Crop" -->
+                                    <a href="#" class="btn btn-primary" id="cropKK">Crop Foto</a>
+                            </td>
+                            
+                            </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="" class="btn btn-default" data-dismiss="modal">Kembali</a> &nbsp; &nbsp;
+                                        <input type="submit" name="kirim" value="Simpan" class="btn btn-success" id="simpanBtn" style="display: none;">
+                                    </td>
+                                </tr>
                         </form>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    //upload logo
+    $(document).on('submit', '#uploadFoto', function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('ketua_rt/kepala_keluarga/api_uploadKK/'.$id_kk) ?>",
+            dataType: "json",
+            data: form_data,
+            processData: false,
+            contentType: false,
+            //memanggil swall ketika berhasil
+            success: function(data) {
+                $('#uploadFoto' + form_data.get('id_kk'));
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Diubah",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            },
+            //memanggil swall ketika gagal
+            error: function(data) {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Diubah",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE",
+                }).then(function() {
+                    location.reload();
+                });
+            }
+        });
+    });
+
+</script>
 
 <!-- anggota keluarga -->
 <div class="col-lg-12">
@@ -825,6 +877,80 @@ for (i = 0; i < locations.length; i++) {
 </script>
 
 <?php endif; ?>
+<script>
+    var cropperKK;
+
+document.getElementById('kkInput').addEventListener('change', function (e) {
+    var files = e.target.files;
+    var reader = new FileReader();
+
+    reader.onload = function () {
+        document.getElementById('preview_kk').style.display = 'block';
+        document.getElementById('preview_kk').src = reader.result;
+
+        // Inisialisasi Cropper pada gambar yang diunggah
+        cropperKK = new Cropper(document.getElementById('preview_kk'), {
+            viewMode: 2,
+        });
+
+        // Tampilkan tombol "Crop", "Rotate Left", dan "Rotate Right" setelah gambar diambil
+        document.getElementById('cropKK').style.display = 'inline-block';
+        document.getElementById('rotateLeft').style.display = 'inline-block';
+        document.getElementById('rotateRight').style.display = 'inline-block';
+    };
+
+    reader.readAsDataURL(files[0]);
+});
+
+document.getElementById('cropKK').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // Dapatkan data hasil cropping
+    var croppedCanvas = cropperKK.getCroppedCanvas();
+
+    // Dapatkan Data URL hasil cropping
+    var croppedDataURL = croppedCanvas.toDataURL('image/jpeg');
+
+    // Tambahkan Data URL ke input form yang tersembunyi
+    document.getElementById('cropped_image').value = croppedDataURL;
+
+    // Setelah berhasil melakukan crop, tampilkan tombol "Simpan"
+    document.getElementById('simpanBtn').style.display = 'inline-block';
+
+    // Bersihkan objek Cropper untuk penggunaan berikutnya
+    cropperKK.destroy();
+    cropperKK = null;
+
+    // Sembunyikan tombol "Crop", "Rotate Left", "Rotate Right" pada akhir cropping
+    document.getElementById('cropKK').style.display = 'none';
+    document.getElementById('rotateLeft').style.display = 'none';
+    document.getElementById('rotateRight').style.display = 'none';
+
+    // Ganti gambar pratinjau dengan hasil cropping
+    document.getElementById('preview_kk').src = croppedDataURL;
+});
+
+document.getElementById('rotateLeft').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // Rotasi gambar ke kiri
+    cropperKK.rotate(-90);
+});
+
+document.getElementById('rotateRight').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // Rotasi gambar ke kanan
+    cropperKK.rotate(90);
+});
+
+// Sembunyikan tombol "Crop", "Rotate Left", "Rotate Right", dan "Simpan" pada awalnya
+document.getElementById('cropKK').style.display = 'none';
+document.getElementById('rotateLeft').style.display = 'none';
+document.getElementById('rotateRight').style.display = 'none';
+document.getElementById('simpanBtn').style.display = 'none';
+
+</script>
 
 <?php $this->load->view('template/footer'); ?>
 <?php 
