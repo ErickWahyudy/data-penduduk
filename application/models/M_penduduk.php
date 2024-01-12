@@ -9,6 +9,7 @@ class M_penduduk extends CI_model
 private $table  = 'tb_kk';
 private $table2 = 'tb_rt';
 private $table3 = 'tb_anggota';
+private $table4 = 'tb_maps';
 
 public function view_anggota($id='')
 {
@@ -22,7 +23,12 @@ public function view_anggota($id='')
 
 public function view_id($token='')
 {
- return $this->db->select ('*')->from ($this->table)->where ('uuid', $token)->get ();
+ //join table tb_kk dan tb_maps
+  $this->db->select ('*');
+  $this->db->from ($this->table);
+  $this->db->join($this->table4, 'tb_kk.id_maps = tb_maps.id_maps');
+  $this->db->where('tb_kk.uuid', $token);
+  return $this->db->get();
 }
 
 //mengambil id rt urut terakhir

@@ -337,12 +337,20 @@ private function upload_bukti_kk()
 //API upload foto ke database dan folder
 public function api_uploadKK($id='', $SQLupdate='')
 {
-  if (empty($_FILES['foto_kk']['name'])) {
+    $rules = array(
+        array(
+          'field' => 'cropped_image',
+          'label' => 'Foto KK',
+          'rules' => 'required',
+        ),
+        );
+    $this->form_validation->set_rules($rules);
+    if ($this->form_validation->run() == FALSE) {
     $data = [
       'status'  => 'error',
       'message' => 'Tidak Ada File Yang Diupload',
     ];
-  } else {
+    } else {
     $SQLupdate = [
         'foto_kk'     => $this->upload_bukti_kk(),
         'tgl_update'  => $this->datetime(),
@@ -358,8 +366,8 @@ public function api_uploadKK($id='', $SQLupdate='')
         'message' => 'Gagal Upload File',
       ];
     }
-  }
-  $this->output
+    }
+    $this->output
     ->set_content_type('application/json')
     ->set_output(json_encode($data));
 }

@@ -116,7 +116,8 @@
                                             <?= ucfirst($pkt['alamat']) ?>
                                         </option>
                                         <?php endforeach; ?>
-
+                                        </option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>

@@ -106,17 +106,15 @@
                             <tr>
                                 <td>
                                     <select name="id_rt" class="form-control" required>
-                                        <option value="">--Pilih Ketua RT--</option>
                                         <?php 
                                           $rt = $this->db->get('tb_rt')->result_array();
+                                          $id_rt = $this->session->userdata('id_rt');
                                           foreach($rt as $pkt): ?>
-                                        <option value="<?= $pkt['id_rt'] ?>"> RT
-                                            <?= ucfirst($pkt['no_rt']) ?> |
-                                            <?= ucfirst($pkt['nama_rt']) ?> |
-                                            <?= ucfirst($pkt['alamat']) ?>
-                                        </option>
-                                        <?php endforeach; ?>
-
+                                            <?php if($id_rt == $pkt['id_rt']): ?>
+                                            <option value="<?= $pkt['id_rt'] ?>" selected><?= $pkt['nama_rt'] ?></option>
+                                            <?php endif; ?>
+                                          <?php endforeach; ?>
+                                    </select>
                                 </td>
                             </tr>
                             <tr>
