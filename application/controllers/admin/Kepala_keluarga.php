@@ -284,37 +284,64 @@ private function compress($source, $destination, $quality)
 //menyimpan gambar foto_kk ke dalam folder
 private function upload_bukti_kk()
 {
-    $ekstensi_diperbolehkan = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
-    $nama = $_FILES['foto_kk']['name'];
-    $x = explode('.', $nama);
-    $ekstensi = strtolower(end($x));
-    $ukuran = $_FILES['foto_kk']['size'];
-    $folderPath = "./themes/foto_kk/";
+    $rules = array(
+        array(
+          'field' => 'cropped_image',
+          'label' => 'Foto KK',
+          'rules' => 'required',
+        ),
+        );
+    $this->form_validation->set_rules($rules);
+    if ($this->form_validation->run() == FALSE) {
+    $data = [
+      'status'  => 'error',
+      'message' => 'Tidak Ada File Yang Diupload',
+    ];
+    } else {
+        $ekstensi_diperbolehkan = array('png', 'jpg', 'jpeg', 'PNG', 'JPG', 'JPEG');
+        $nama = $_FILES['foto_kk']['name'];
+        $x = explode('.', $nama);
+        $ekstensi = strtolower(end($x));
+        $ukuran = $_FILES['foto_kk']['size'];
+        $folderPath = "./themes/foto_kk/";
 
-    if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
-        if ($ukuran < 10044070) {      
-            // Menggunakan data hasil crop yang disimpan di elemen dengan id 'cropped_image'
-            $cropped_image_data = $_POST['cropped_image'];
+        if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+            if ($ukuran < 10044070) {      
+                // Menggunakan data hasil crop yang disimpan di elemen dengan id 'cropped_image'
+                $cropped_image_data = $_POST['cropped_image'];
 
-            // Mendapatkan nama file tanpa ekstensi
-            $nama_file = pathinfo($nama, PATHINFO_FILENAME);
+                // Mendapatkan nama file tanpa ekstensi
+                $nama_file = pathinfo($nama, PATHINFO_FILENAME);
 
-            // Ekstensi file
-            $ext = pathinfo($nama, PATHINFO_EXTENSION);
+                // Ekstensi file
+                $ext = pathinfo($nama, PATHINFO_EXTENSION);
 
-            //menyimpan gambar ke database
-            $fileName = $this->input->post('nama_kk'). '_' . uniqid() . '.' . $ext;
-            // Konversi data hasil crop menjadi file gambar
-            $cropped_image = $folderPath . $fileName;
-            file_put_contents($cropped_image, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $cropped_image_data)));
-            $this->compress($cropped_image, $cropped_image, 40);
+                //menyimpan gambar ke database
+                $fileName = $this->input->post('nama_kk'). '_' . uniqid() . '.' . $ext;
+                // Konversi data hasil crop menjadi file gambar
+                $cropped_image = $folderPath . $fileName;
+                file_put_contents($cropped_image, base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $cropped_image_data)));
+                $this->compress($cropped_image, $cropped_image, 40);
 
-            return $fileName;
+                return $fileName;
+            } else {
+                $this->session->set_flashdata('pesan', '<script>
+                    swal({
+                        title: "Gagal",
+                        text: "Ukuran File Terlalu Besar",
+                        type: "error",
+                        timer: 2000,
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                    });
+                </script>');
+                redirect(base_url('admin/kepala_keluarga'));
+            }
         } else {
             $this->session->set_flashdata('pesan', '<script>
                 swal({
                     title: "Gagal",
-                    text: "Ukuran File Terlalu Besar",
+                    text: "Ekstensi File Tidak Diperbolehkan",
                     type: "error",
                     timer: 2000,
                     showConfirmButton: true,
@@ -323,18 +350,6 @@ private function upload_bukti_kk()
             </script>');
             redirect(base_url('admin/kepala_keluarga'));
         }
-    } else {
-        $this->session->set_flashdata('pesan', '<script>
-            swal({
-                title: "Gagal",
-                text: "Ekstensi File Tidak Diperbolehkan",
-                type: "error",
-                timer: 2000,
-                showConfirmButton: true,
-                confirmButtonText: "OKEE"
-            });
-        </script>');
-        redirect(base_url('admin/kepala_keluarga'));
     }
 }
 

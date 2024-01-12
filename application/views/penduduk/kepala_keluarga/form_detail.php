@@ -173,13 +173,14 @@ if($aksi == "detail"):
                                 <!-- Tambahkan tombol "Rotate Right" -->
                                 <a href="#" class="btn btn-warning" id="rotateRight"><i class="fa fa-rotate-right"></i></a>
                                 <!-- Tambahkan tombol "Crop" -->
-                                <a href="#" class="btn btn-primary" id="cropKK">Crop Foto</a>
+                                <a href="#" class="btn btn-primary" id="cropKK">Simpan</a>
                             </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="<?= base_url('penduduk/kepala_keluarga/detail/'.$token) ?>" class="btn btn-default" id="resetBtn">Reset Foto</a> &nbsp; &nbsp;
-                                    <input type="submit" name="kirim" value="Simpan" class="btn btn-success" id="simpanBtn" style="display: none;">
+                                    <a href="<?= base_url('penduduk/kepala_keluarga/detail/'.$token) ?>" class="btn btn-default" id="resetBtn">Reset Form</a> &nbsp; &nbsp;
+                                    <input type="submit" name="kirim" value="Simpan Permanen" class="btn btn-success" id="simpanBtn" style="display: none;">
+                                    <span id="loading" style="display: none;" class="btn btn-success"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
                                 </td>
                             </tr>
                         </form>
@@ -947,7 +948,28 @@ document.getElementById('rotateRight').style.display = 'none';
 document.getElementById('simpanBtn').style.display = 'none';
 document.getElementById('resetBtn').style.display = 'none';
 document.getElementById('info').style.display = 'none';
-document.getElementById('info').innerHTML = '<p><strong>Perhatian!</strong> Pastikan foto yang diunggah terlihat jelas dan tidak buram. Karena Foto KK yang sudah diupload tidak dapat diubah lagi tanpa persetujuan admin ketua RT jadi pastikan foto yang diupload sudah benar.</p>';
+document.getElementById('info').innerHTML = '<p><strong>Perhatian!</strong> Pastikan foto yang diunggah terlihat jelas. Karena Foto KK yang sudah diupload tidak dapat diubah lagi tanpa persetujuan admin ketua RT jadi pastikan foto yang diupload sudah benar.</p>';
+
+
+//disable tombol simpan ketika proses upload dan menampilkan loading
+$(document).ready(function () {
+    $('#simpanBtn').click(function () {
+        var x = document.getElementById('simpanBtn');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+
+        var y = document.getElementById('loading');
+        if (y.style.display === 'none') {
+            y.style.display = 'block';
+        } else {
+            y.style.display = 'none';
+        }
+
+    });
+});
 
 </script>
 

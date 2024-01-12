@@ -179,19 +179,21 @@ if($aksi == "detail"):
                                 <!-- Tambahkan tombol "Rotate Right" -->
                                 <a href="#" class="btn btn-warning" id="rotateRight"><i class="fa fa-rotate-right"></i></a>
                                     <!-- Tambahkan tombol "Crop" -->
-                                    <a href="#" class="btn btn-primary" id="cropKK">Crop Foto</a>
+                                    <a href="#" class="btn btn-primary" id="cropKK">Simpan</a>
                             </td>
                             
                             </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a href="" class="btn btn-default" data-dismiss="modal">Kembali</a> &nbsp; &nbsp;
-                                        <input type="submit" name="kirim" value="Simpan" class="btn btn-success" id="simpanBtn" style="display: none;">
+                                        <a href="<?= base_url('ketua_rt/kepala_keluarga/detail/' . $id_kk) ?>" class="btn btn-default" id="resetBtn">Reset Form</a> &nbsp; &nbsp;
+                                        <input type="submit" name="kirim" value="Simpan Permanen" class="btn btn-success" id="simpanBtn" style="display: none;">
+                                        <span id="loading" style="display: none;" class="btn btn-success"><i class="fa fa-spinner fa-spin"></i> Loading...</span>
                                     </td>
                                 </tr>
                         </form>
                     </table>
+                    <div id="info" class="alert alert-info"></div>
                 </div>
             </div>
         </div>
@@ -897,6 +899,8 @@ document.getElementById('kkInput').addEventListener('change', function (e) {
         document.getElementById('cropKK').style.display = 'inline-block';
         document.getElementById('rotateLeft').style.display = 'inline-block';
         document.getElementById('rotateRight').style.display = 'inline-block';
+        document.getElementById('info').style.display = 'inline-block';
+        document.getElementById('resetBtn').style.display = 'inline-block';
     };
 
     reader.readAsDataURL(files[0]);
@@ -916,6 +920,7 @@ document.getElementById('cropKK').addEventListener('click', function (e) {
 
     // Setelah berhasil melakukan crop, tampilkan tombol "Simpan"
     document.getElementById('simpanBtn').style.display = 'inline-block';
+    document.getElementById('resetBtn').style.display = 'inline-block';
 
     // Bersihkan objek Cropper untuk penggunaan berikutnya
     cropperKK.destroy();
@@ -925,6 +930,7 @@ document.getElementById('cropKK').addEventListener('click', function (e) {
     document.getElementById('cropKK').style.display = 'none';
     document.getElementById('rotateLeft').style.display = 'none';
     document.getElementById('rotateRight').style.display = 'none';
+    document.getElementById('info').style.display = 'none';
 
     // Ganti gambar pratinjau dengan hasil cropping
     document.getElementById('preview_kk').src = croppedDataURL;
@@ -949,6 +955,29 @@ document.getElementById('cropKK').style.display = 'none';
 document.getElementById('rotateLeft').style.display = 'none';
 document.getElementById('rotateRight').style.display = 'none';
 document.getElementById('simpanBtn').style.display = 'none';
+document.getElementById('resetBtn').style.display = 'none';
+document.getElementById('info').style.display = 'none';
+document.getElementById('info').innerHTML = '<p><strong>Perhatian!</strong> Pastikan foto yang diunggah terlihat jelas.</p>';
+
+//disable tombol simpan ketika proses upload dan menampilkan loading
+$(document).ready(function () {
+    $('#simpanBtn').click(function () {
+        var x = document.getElementById('simpanBtn');
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        } else {
+            x.style.display = 'none';
+        }
+
+        var y = document.getElementById('loading');
+        if (y.style.display === 'none') {
+            y.style.display = 'block';
+        } else {
+            y.style.display = 'none';
+        }
+
+    });
+});
 
 </script>
 
