@@ -108,13 +108,22 @@ class Anggota extends CI_controller
       $this->session->set_flashdata('pesan',$pesan);
       redirect(base_url('ketua_rt/kepala_keluarga/detail/'.$this->input->post('id_kk')));
   }else
+     
+     $nama = $this->input->post('nama');
+     $nama = mb_convert_case($nama, MB_CASE_TITLE, "UTF-8");
 
+     $nama_ayah = $this->input->post('nama_ayah');
+     $nama_ayah = mb_convert_case($nama_ayah, MB_CASE_TITLE, "UTF-8");
+
+     $nama_ibu = $this->input->post('nama_ibu');
+     $nama_ibu = mb_convert_case($nama_ibu, MB_CASE_TITLE, "UTF-8");
+     
      $SQLinsert=array(
            'id_anggota'             =>$this->id_anggota_urut(),
            'id_rt'                  =>$this->session->userdata('id_rt'),
            'id_kk'                  =>$this->input->post('id_kk'),
            'nik'                    =>$this->input->post('nik'),
-           'nama'                   =>$this->input->post('nama'),
+           'nama'                   =>$nama,
            'no_hp_anggota'          =>$this->input->post('no_hp_anggota'),
            'jenis_kelamin'          =>$this->input->post('jenis_kelamin'),
            'tgl_lahir'              =>$this->input->post('tgl_lahir'),
@@ -125,8 +134,8 @@ class Anggota extends CI_controller
            'hubungan'               =>$this->input->post('hubungan'),
            'perkawinan'             =>$this->input->post('perkawinan'),
            'kewarganegaraan'        =>$this->input->post('kewarganegaraan'),
-           'nama_ayah'              =>$this->input->post('nama_ayah'),
-           'nama_ibu'               =>$this->input->post('nama_ibu')
+           'nama_ayah'              =>$nama_ayah,
+           'nama_ibu'               =>$nama_ibu
          );
  
          if ($this->m_anggota->add($SQLinsert)) {
@@ -157,9 +166,18 @@ public function edit($id='')
     
  if (isset($_POST['kirim'])) {     
 
+    $nama = $this->input->post('nama');
+    $nama = mb_convert_case($nama, MB_CASE_TITLE, "UTF-8");
+
+    $nama_ayah = $this->input->post('nama_ayah');
+    $nama_ayah = mb_convert_case($nama_ayah, MB_CASE_TITLE, "UTF-8");
+
+    $nama_ibu = $this->input->post('nama_ibu');
+    $nama_ibu = mb_convert_case($nama_ibu, MB_CASE_TITLE, "UTF-8");
+
     $SQLupdate=array(
     'nik'               =>$this->input->post('nik'),
-    'nama'              =>$this->input->post('nama'),
+    'nama'              =>$nama,
     'no_hp_anggota'     =>$this->input->post('no_hp_anggota'),
     'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
     'tgl_lahir'         =>$this->input->post('tgl_lahir'),
@@ -170,8 +188,8 @@ public function edit($id='')
     'hubungan'          =>$this->input->post('hubungan'),
     'perkawinan'        =>$this->input->post('perkawinan'),
     'kewarganegaraan'   =>$this->input->post('kewarganegaraan'),
-    'nama_ayah'         =>$this->input->post('nama_ayah'),
-    'nama_ibu'          =>$this->input->post('nama_ibu'),
+    'nama_ayah'         =>$nama_ayah,
+    'nama_ibu'          =>$nama_ibu
     );
 
   $cek=$this->m_anggota->update($id,$SQLupdate);

@@ -13,6 +13,8 @@ class Kepala_keluarga extends CI_controller
       $this->load->database();
       $this->load->library('session');
       $this->load->library('form_validation');
+      // Load library PHPExcel
+      $this->load->library('PHPExcel');
       
 	 // error_reporting(0);
 	 if($this->session->userdata('admin') != TRUE){
@@ -145,11 +147,17 @@ class Kepala_keluarga extends CI_controller
       
       $id_maps = $this->acak_id(20);
 
+      $nama_kk = $this->input->post('nama_kk');
+      $nama_kk = mb_convert_case($nama_kk, MB_CASE_TITLE, "UTF-8");
+
+      $alamat = $this->input->post('alamat');
+      $alamat = mb_convert_case($alamat, MB_CASE_TITLE, "UTF-8");
+
       $SQLinsert=array(
           'id_kk'             =>$this->id_kk_urut(),
           'no_kk'             =>$this->input->post('no_kk'),
-          'nama_kk'           =>$this->input->post('nama_kk'),
-          'alamat'            =>$this->input->post('alamat'),
+          'nama_kk'           =>$nama_kk,
+          'alamat'            =>$alamat,
           'no_hp'             =>$this->input->post('no_hp'),
           'id_rt'             =>$this->input->post('id_rt'),
           'id_maps'           =>$id_maps,
@@ -236,10 +244,16 @@ $data=$this->m_kk->view_id($id)->row_array();
     
  if (isset($_POST['kirim'])) {     
 
+    $nama_kk = $this->input->post('nama_kk');
+    $nama_kk = mb_convert_case($nama_kk, MB_CASE_TITLE, "UTF-8");
+
+    $alamat = $this->input->post('alamat');
+    $alamat = mb_convert_case($alamat, MB_CASE_TITLE, "UTF-8");
+
     $SQLupdate=array(
     'no_kk'             =>$this->input->post('no_kk'),
-    'nama_kk'           =>$this->input->post('nama_kk'),
-    'alamat'            =>$this->input->post('alamat'),
+    'nama_kk'           =>$nama_kk,
+    'alamat'            =>$alamat,
     'no_hp'             =>$this->input->post('no_hp'),
     'id_rt'             =>$this->input->post('id_rt'),
     'tgl_update'        =>$this->datetime(),

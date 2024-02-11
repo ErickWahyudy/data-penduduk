@@ -13,7 +13,7 @@ public function view($value='')
 {
   $this->db->select ('*');
   $this->db->from ($this->table);
-  $this->db->order_by('id_rt');
+  $this->db->order_by('no_rt');
   return $this->db->get();
 }
 

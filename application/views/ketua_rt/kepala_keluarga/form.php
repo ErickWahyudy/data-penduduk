@@ -2,7 +2,8 @@
 
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahRT"><i class="fa fa-plus"></i>
     Tambah</a>
-<a href="<?php echo site_url('ketua_rt/export/exportExcel'); ?>" class="btn btn-success">Export to Excel</a>
+<a href="" class="btn btn-success" data-toggle="modal" data-target="#import_excel_KK"><i class="fa fa-upload"></i> Import Data KK</a>
+<!-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#import_excel_anggota"><i class="fa fa-upload"></i> Import Data Anggota KK</a> -->
 <br /><br /><br />
 <?= $this->session->flashdata('pesan') ?>
 
@@ -125,6 +126,86 @@
                                 </td>
                             </tr>
 
+                        </form>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal Import Excel KK -->
+    <div class="modal fade" id="import_excel_KK" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-green">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Import Data Excel <?= $judul ?></h4>
+                </div>
+                <div class="modal-body table-responsive">
+                    <div>
+                        <!-- template contoh -->
+                        <a href="<?= base_url('ketua_rt/excel/generate_template_KK') ?>" class="btn btn-primary"><i
+                                class="fa fa-download"></i> Download Template</a>
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <form action="<?= base_url('ketua_rt/excel/import_excel_KK') ?>" method="post"
+                            enctype="multipart/form-data">
+                            <tr>
+                                <th>File Excel *</th>
+                            </tr>
+                            <tr>
+                                <td><input type="file" name="excel_file" class="form-control" required accept=".xls, .xlsx"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                                    &nbsp;&nbsp;
+                                    <input type="submit" name="kirim" value="Import" class="btn btn-success">
+                                </td>
+                            </tr>
+                        </form>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal Import Excel Anggota KK -->
+    <div class="modal fade" id="import_excel_anggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-green">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Import Data Excel Anggota <?= $judul ?></h4>
+                </div>
+                <div class="modal-body table-responsive">
+                    <div>
+                        <!-- template contoh -->
+                        <a href="<?= base_url('ketua_rt/excel/generate_template_anggota').'/'.$id_rt ?>" class="btn btn-primary"><i
+                                class="fa fa-download"></i> Download Template</a>
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <form action="<?= base_url('ketua_rt/excel/import_excel_anggota') ?>" method="post"
+                            enctype="multipart/form-data">
+                            <tr>
+                                <th>File Excel *</th>
+                            </tr>
+                            <tr>
+                                <td><input type="file" name="excel_file" class="form-control" required accept=".xls, .xlsx"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+                                    &nbsp;&nbsp;
+                                    <input type="submit" name="kirim" value="Import" class="btn btn-success">
+                                </td>
+                            </tr>
                         </form>
                     </table>
                 </div>

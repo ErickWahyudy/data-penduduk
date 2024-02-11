@@ -91,10 +91,16 @@ $data=$this->m_penduduk->view_id($token)->row_array();
     
  if (isset($_POST['kirim'])) {     
 
+    $nama_kk = $this->input->post('nama_kk');
+    $nama_kk = mb_convert_case($nama_kk, MB_CASE_TITLE, "UTF-8");
+
+    $alamat = $this->input->post('alamat');
+    $alamat = mb_convert_case($alamat, MB_CASE_TITLE, "UTF-8");
+
     $SQLupdate=array(
     'no_kk'             =>$this->input->post('no_kk'),
-    'nama_kk'           =>$this->input->post('nama_kk'),
-    'alamat'            =>$this->input->post('alamat'),
+    'nama_kk'           =>$nama_kk,
+    'alamat'            =>$alamat,
     'no_hp'             =>$this->input->post('no_hp'),
     'tgl_update'        =>$this->datetime(),
 

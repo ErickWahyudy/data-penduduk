@@ -75,10 +75,21 @@ function viewPassword() {
 	}
 }
 
+//select2 modal
+$(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2({
+        //modal
+        dropdownParent: $('#modal-default'),
+    })
+    })
+
 </script>
 
 <!-- jQuery 3 -->
 <script src="<?= base_url('themes/admin') ?>/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- select2 -->
+<script src="<?= base_url('themes/admin') ?>/bower_components/select2/dist/js/select2.full.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="<?= base_url('themes/admin') ?>/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

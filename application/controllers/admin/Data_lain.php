@@ -112,14 +112,23 @@ class Data_lain extends CI_controller
         }
       else
 
+      $nama = $this->input->post('nama');
+      $nama = mb_convert_case($nama, MB_CASE_TITLE, "UTF-8");
+      
+      $alamat = $this->input->post('alamat');
+      $alamat = mb_convert_case($alamat, MB_CASE_TITLE, "UTF-8");
+
+      $keterangan = $this->input->post('keterangan');
+      $keterangan = mb_convert_case($keterangan, MB_CASE_TITLE, "UTF-8");
+
       $SQLinsert=array(
           'id_data_lain'      =>$this->id_data_lain_urut(),
-          'nama'              =>$this->input->post('nama'),
+          'nama'              =>$nama,
           'nik'               =>$this->input->post('nik'),
           'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
-          'alamat'            =>$this->input->post('alamat'),
+          'alamat'            =>$alamat,
           'tanggal'           =>$this->input->post('tanggal'),
-          'keterangan'        =>$this->input->post('keterangan'),
+          'keterangan'        =>$keterangan,
           'id_rt'             =>$this->input->post('id_rt'),
           );
   
@@ -147,13 +156,22 @@ $data=$this->m_data_lain->view_id($id)->row_array();
     
  if (isset($_POST['kirim'])) {     
 
+    $nama = $this->input->post('nama');
+    $nama = mb_convert_case($nama, MB_CASE_TITLE, "UTF-8");
+
+    $alamat = $this->input->post('alamat');
+    $alamat = mb_convert_case($alamat, MB_CASE_TITLE, "UTF-8");
+
+    $keterangan = $this->input->post('keterangan');
+    $keterangan = mb_convert_case($keterangan, MB_CASE_TITLE, "UTF-8");
+
     $SQLupdate=array(
-    'nama'              =>$this->input->post('nama'),
+    'nama'              =>$nama,
     'nik'               =>$this->input->post('nik'),
     'jenis_kelamin'     =>$this->input->post('jenis_kelamin'),
-    'alamat'            =>$this->input->post('alamat'),
+    'alamat'            =>$alamat,
     'tanggal'           =>$this->input->post('tanggal'),
-    'keterangan'        =>$this->input->post('keterangan'),
+    'keterangan'        =>$keterangan,
     'id_rt'             =>$this->input->post('id_rt'),
 
     );

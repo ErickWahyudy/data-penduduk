@@ -78,7 +78,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <input name="alamat" class="form-control" placeholder="Alamat" required="">
+                                    <input name="alamat" class="form-control" placeholder="Alamat" required="" autocomplete="off">
                                 </td>
                             </tr>
                             <tr>

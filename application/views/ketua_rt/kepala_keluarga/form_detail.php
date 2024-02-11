@@ -290,7 +290,7 @@ if($aksi == "detail"):
             <td><?= $kk['nama_ibu'] ?></td>
             <td>
                 <a href="" class="btn btn-warning" data-toggle="modal" data-target="#editAnggotaKK<?= $kk['id_anggota'] ?>"><i class="fa fa-edit"></i></a> &nbsp;
-                <a href="<?= base_url('admin/anggota/hapus/'.$kk['id_anggota']) ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                <a href="<?= base_url('ketua_rt/anggota/hapus/'.$kk['id_anggota']) ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
         <?php $no++; endforeach; ?> 
