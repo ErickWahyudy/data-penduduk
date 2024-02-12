@@ -399,37 +399,28 @@ public function api_uploadKK($id='', $SQLupdate='')
     ->set_output(json_encode($data));
 }
       
-public function hapus($id='')
-  {
-
-    $cek=$this->m_kk->delete($id);
-	 if ($cek) {
-	 	$pesan='<script>
-              swal({
-                  title: "Berhasil Hapus Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-	 	redirect(base_url('ketua_rt/kepala_keluarga/detail/'.$id));
-	 }
-     else{
-      $pesan='<script>
-              swal({
-                  title: "Gagal Hapus Data",
-                  text: "",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-        $this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('ketua_rt/kepala_keluarga/detail/'.$id));
-     }
-  } 
+    //API hapus
+    public function api_hapus($id='')
+    {
+        $data=$this->m_kk->view_id($id)->row_array();
+        $file=$data['foto_kk'];
+        $cek=$this->m_kk->delete($id);
+        if ($cek) {
+            unlink('./themes/foto_kk/'.$file);
+            $data = [
+            'status'  => 'success',
+            'message' => 'Berhasil Hapus Data',
+            ];
+        } else {
+            $data = [
+            'status'  => 'error',
+            'message' => 'Gagal Hapus Data',
+            ];
+        }
+        $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($data));
+    }
 
   public function hapusimage($id='')
     {

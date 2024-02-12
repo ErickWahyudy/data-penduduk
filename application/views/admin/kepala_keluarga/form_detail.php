@@ -70,8 +70,8 @@ if($aksi == "detail"):
                     <td>
                         <a href="" class="btn btn-warning" data-toggle="modal" data-target="#editKK<?= $id_kk ?>"><i
                                 class="fa fa-edit"></i></a> &nbsp;
-                        <a href="<?= base_url('admin/kepala_keluarga/hapus/'.$id_kk) ?>" class="btn btn-danger"
-                            onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a href="javascript:void(0)" onclick="hapuskk('<?= $id_kk ?>')"
+                                    class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             </table>
@@ -320,8 +320,8 @@ if($aksi == "detail"):
                     <td>
                         <a href="" class="btn btn-warning" data-toggle="modal"
                             data-target="#editAnggotaKK<?= $kk['id_anggota'] ?>"><i class="fa fa-edit"></i></a> &nbsp;
-                        <a href="<?= base_url('admin/anggota/hapus/'.$kk['id_anggota']) ?>" class="btn btn-danger"
-                            onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
+                        <a href="javascript:void(0)" onclick="hapusAnggota('<?= $kk['id_anggota'] ?>')"
+                                    class="btn btn-danger"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php $no++; endforeach; ?>
@@ -1254,6 +1254,98 @@ $(document).ready(function () {
 
     });
 });
+
+//ajax hapus kk
+function hapuskk(id_kk) {
+    swal({
+        title: "Apakah Anda Yakin?",
+        text: "Data Akan Dihapus",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Tidak, Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+    }).then(function(result) {
+        if (result.value) { // Only delete the data if the user clicked on the confirm button
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('admin/kepala_keluarga/api_hapus/') ?>" +
+                    id_kk,
+                dataType: "json",
+            }).done(function() {
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Dihapus",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                }).then(function() {
+                    window.location.href = "<?php echo site_url('admin/kepala_keluarga') ?>";
+                });
+            }).fail(function() {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Dihapus",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                }).then(function() {
+                    location.reload();
+                });
+            });
+        } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+            swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+        }
+    });
+}
+
+//ajax hapus kk
+function hapusAnggota(id_anggota) {
+    swal({
+        title: "Apakah Anda Yakin?",
+        text: "Data Akan Dihapus",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Ya, Hapus!",
+        cancelButtonText: "Tidak, Batalkan!",
+        closeOnConfirm: false,
+        closeOnCancel: true // Set this to true to close the dialog when the cancel button is clicked
+    }).then(function(result) {
+        if (result.value) { // Only delete the data if the user clicked on the confirm button
+            $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('admin/anggota/api_hapus/') ?>" +
+                    id_anggota,
+                dataType: "json",
+            }).done(function() {
+                swal({
+                    title: "Berhasil",
+                    text: "Data Berhasil Dihapus",
+                    type: "success",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                }).then(function() {
+                    location.reload();
+                });
+            }).fail(function() {
+                swal({
+                    title: "Gagal",
+                    text: "Data Gagal Dihapus",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                }).then(function() {
+                    location.reload();
+                });
+            });
+        } else { // If the user clicked on the cancel button, show a message indicating that the deletion was cancelled
+            swal("Batal hapus", "Data Tidak Jadi Dihapus", "error");
+        }
+    });
+}
 
 </script>
 <?php $this->load->view('template/footer'); ?>

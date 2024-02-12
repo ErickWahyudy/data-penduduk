@@ -221,38 +221,31 @@ public function edit($id='')
     }
     
     
-    public function hapus($id='')
-  {
-
-    $cek=$this->m_anggota->delete($id);
-	 if ($cek) {
-	 	$pesan='<script>
-              swal({
-                  title: "Berhasil Hapus Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-	 	redirect(base_url('ketua_rt/kepala_keluarga'));
-	 }
-     else{
-      $pesan='<script>
-              swal({
-                  title: "Gagal Hapus Data",
-                  text: "",
-                  type: "error",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-        $this->session->set_flashdata('pesan',$pesan);
-        redirect(base_url('ketua_rt/kepala_keluarga'));
-     }
-  }
-   
+    //API hapus
+    public function api_hapus($id='')
+    {
+      if(empty($id)){
+        $response = [
+          'status' => false,
+          'message' => 'Data kosong'
+        ];
+      }else{
+        if ($this->m_anggota->delete($id)) {
+          $response = [
+            'status' => true,
+            'message' => 'Berhasil menghapus data'
+          ];
+        } else {
+          $response = [
+            'status' => false,
+            'message' => 'Gagal menghapus data'
+          ];
+        }
+      }
+      $this->output
+        ->set_content_type('application/json')
+        ->set_output(json_encode($response));
+    }
  
 	
 }

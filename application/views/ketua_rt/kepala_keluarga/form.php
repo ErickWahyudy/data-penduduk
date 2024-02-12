@@ -3,7 +3,7 @@
 <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalTambahRT"><i class="fa fa-plus"></i>
     Tambah</a>
 <a href="" class="btn btn-success" data-toggle="modal" data-target="#import_excel_KK"><i class="fa fa-upload"></i> Import Data KK</a>
-<!-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#import_excel_anggota"><i class="fa fa-upload"></i> Import Data Anggota KK</a> -->
+<a href="" class="btn btn-success" data-toggle="modal" data-target="#import_excel_anggota"><i class="fa fa-upload"></i> Import Data Anggota KK</a>
 <br /><br /><br />
 <?= $this->session->flashdata('pesan') ?>
 

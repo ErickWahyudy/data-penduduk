@@ -160,15 +160,6 @@ class Excel extends CI_controller
     // Set validation rules for each field
     $rules = array(
         array(
-            'field' => 'no_kk',
-            'label' => 'Nomor KK',
-            'rules' => 'numeric|is_unique[tb_kk.no_kk]',
-            'errors' => array(
-                'numeric' => 'Nomor KK harus berupa angka',
-                'is_unique' => 'Nomor KK sudah terdaftar',
-            ),
-        ),
-        array(
             'field' => 'excel_file',
             'label' => 'Excel File',
             'rules' => 'callback_validate_excel_KK',
@@ -184,7 +175,7 @@ class Excel extends CI_controller
         // If validation fails, redirect back with error messages
         $pesan = '<script>
             swal({
-                title: "'.form_error('no_kk').'",
+                title: "'.form_error('excel_file').'",
                 text: "",
                 type: "error",
                 showConfirmButton: true,
@@ -234,6 +225,11 @@ public function process_excel_data_KK()
     $highestRow = $worksheet->getHighestRow();
     $highestColumn = $worksheet->getHighestColumn();
     
+    // Run form validation before processing data
+    $validation_result = $this->form_validation->run();
+
+    // Check if form validation passed
+    if ($validation_result) {
     // Loop through each row of the worksheet
     for ($row = 2; $row <= $highestRow; $row++) {
         // Get cell values
@@ -242,11 +238,42 @@ public function process_excel_data_KK()
         $no_hp      = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
         $alamat     = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
         $id_rt      = $this->session->userdata('id_rt');
-        $id_maps    = $this->acak_id(20);
 
         //awal kata dijadikan huruf besar
         $nama_kk = mb_convert_case($nama_kk, MB_CASE_TITLE, "UTF-8");
         $alamat = mb_convert_case($alamat, MB_CASE_TITLE, "UTF-8");
+
+        // Check if no_kk is not empty
+        if (!empty($no_kk)) {
+            // Check if no_kk is already registered
+            if ($this->is_no_kk_registered($no_kk)) {
+                // If no_kk is already registered, set error message and continue to next row
+                $pesan = '<script>
+                    swal({
+                        title: "Nomor KK '.$no_kk.' sudah terdaftar",
+                        text: "",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                        });
+                </script>';
+                $this->session->set_flashdata('pesan', $pesan);
+                continue; // Skip to next row
+            }
+        } else {
+            // If no_kk is empty, set error message and continue to next row
+            $pesan = '<script>
+                swal({
+                    title: "Nomor KK tidak boleh kosong",
+                    text: "",
+                    type: "error",
+                    showConfirmButton: true,
+                    confirmButtonText: "OKEE"
+                    });
+            </script>';
+            $this->session->set_flashdata('pesan', $pesan);
+            continue; // Skip to next row
+        }
 
         // Insert into database
         $SQLinsert = array(
@@ -256,16 +283,10 @@ public function process_excel_data_KK()
             'no_hp' => $no_hp,
             'alamat' => $alamat,
             'id_rt' => $id_rt,
-            'id_maps' => $id_maps,
             'tgl_update' => $this->datetime(),
         );
 
         $cek = $this->m_kk->add($SQLinsert);
-
-        $SQLinsert2=array(
-            'id_maps'             =>$id_maps,
-        );
-        $cek=$this->m_kk->add_maps($SQLinsert2);
     }
 
     if ($cek) {
@@ -292,8 +313,15 @@ public function process_excel_data_KK()
                 </script>';
         $this->session->set_flashdata('pesan', $pesan);
         redirect(base_url('ketua_rt/kepala_keluarga'));
+     }
     }
 }
+
+    private function is_no_kk_registered($no_kk) {
+        // Query database to check if no_kk is already registered
+        $query = $this->db->get_where('tb_kk', array('no_kk' => $no_kk));
+        return $query->num_rows() > 0;
+    }
 
     //mengambil id anggota urut terakhir
     private function id_anggota_urut($value='')
@@ -334,21 +362,20 @@ public function process_excel_data_KK()
 
         // Add data to the Excel file foreach data from database tb_kk
         $objPHPExcel->setActiveSheetIndex(0)
-        ->setCellValueExplicit('A1', 'id_kk', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('B1', 'No KK', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('C1', 'Nama KK', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('D1', 'NIK', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('E1', 'Nama', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('F1', 'No HP', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('G1', 'Jenis Kelamin', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('H1', 'Tempat Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('I1', 'Tanggal Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('J1', 'Agama', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('K1', 'Pendidikan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('L1', 'Pekerjaan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('M1', 'Status Perkawinan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('N1', 'Status Hubungan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('O1', 'Kewarganegaraan', PHPExcel_Cell_DataType::TYPE_STRING);
+        ->setCellValueExplicit('A1', 'No KK', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('B1', 'Nama KK', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('C1', 'NIK', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('D1', 'Nama', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('E1', 'No HP', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('F1', 'Jenis Kelamin', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('G1', 'Tempat Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('H1', 'Tanggal Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('I1', 'Agama', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('J1', 'Pendidikan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('K1', 'Pekerjaan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('L1', 'Status Perkawinan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('M1', 'Status Hubungan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('N1', 'Kewarganegaraan', PHPExcel_Cell_DataType::TYPE_STRING);
 
         // Data pekerjaan
         $pekerjaanOptions = array(
@@ -374,21 +401,20 @@ public function process_excel_data_KK()
                 $i = 2;
                 foreach ($data as $row) {
                     $objPHPExcel->setActiveSheetIndex(0)
-                    ->setCellValueExplicit('A'.$i, $row['id_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('B'.$i, $row['no_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('C'.$i, $row['nama_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('F'.$i, $row['no_hp'], PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('G'.$i, 'Laki-laki / Perempuan', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('H'.$i, 'Ponorogo', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('J'.$i, 'Islam', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('K'.$i, 'SD / SMP / SMA', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('L'.$i, 'Pelajar / Mahasiswa', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('M'.$i, 'Belum Kawin', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('N'.$i, 'Kepala Keluarga', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('O'.$i, 'WNI', PHPExcel_Cell_DataType::TYPE_STRING);
+                    ->setCellValueExplicit('A'.$i, $row['no_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('B'.$i, $row['nama_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('E'.$i, $row['no_hp'], PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('F'.$i, 'Laki-laki / Perempuan', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('G'.$i, 'Ponorogo', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('I'.$i, 'Islam', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('J'.$i, 'SD / SMP / SMA', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('K'.$i, 'Pelajar / Mahasiswa', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('L'.$i, 'Belum Kawin', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('M'.$i, 'Kepala Keluarga', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('N'.$i, 'WNI', PHPExcel_Cell_DataType::TYPE_STRING);
 
                     // Set date format for "Tanggal Lahir" column
-                    $objPHPExcel->getActiveSheet()->getStyle('I'.$i)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
+                    $objPHPExcel->getActiveSheet()->getStyle('H'.$i)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
 
                     
                     $i++;
@@ -401,21 +427,20 @@ public function process_excel_data_KK()
         }
 
         // Set column width
-        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(30);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('O')->setWidth(20);
 
         // Set header style
         $headerStyleArray = array(
@@ -426,7 +451,7 @@ public function process_excel_data_KK()
                 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
             ),
         );
-        $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($headerStyleArray);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray($headerStyleArray);
 
         // Set active sheet index to the first sheet
         $objPHPExcel->setActiveSheetIndex(0);
@@ -518,35 +543,80 @@ public function process_excel_data_KK()
         $highestRow = $worksheet->getHighestRow();
         $highestColumn = $worksheet->getHighestColumn();
         
-        // Loop through each row of the worksheet
-        for ($row = 2; $row <= $highestRow; $row++) {
-            // Get cell values
-            $id_kk      = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-            $no_kk      = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-            $nama_kk    = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-            $nik        = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-            $nama       = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-            $no_hp      = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-            $jenis_kelamin = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-            $tempat_lahir = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-            $tanggal_lahir = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-            $agama = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-            $pendidikan = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-            $pekerjaan = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-            $status_perkawinan = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-            $status_hubungan = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
-            $kewarganegaraan = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+      // Run form validation before processing data
+      $validation_result = $this->form_validation->run();
 
+      // Check if form validation passed
+      if ($validation_result) {
+        // Loop through each row of the worksheet
+       for ($row = 2; $row <= $highestRow; $row++) {
+            // Get cell values
+            $no_kk      = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+             // Menemukan id_kk berdasarkan no_kk
+            $id_kk = $this->db->get_where('tb_kk', array('no_kk' => $no_kk))->row_array()['id_kk'];
+
+            $nik       = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+            $nama      = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+            $no_hp     = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+            $jenis_kelamin = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+            $tempat_lahir = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+            $tanggal_lahir = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+            $agama = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+            $pendidikan = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+            $pekerjaan = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+            $status_perkawinan = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+            $status_hubungan = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+            $kewarganegaraan = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+
+            $id_rt = $this->session->userdata('id_rt');
+            $nama = mb_convert_case($nama, MB_CASE_TITLE, "UTF-8");
+            $tempat_lahir = mb_convert_case($tempat_lahir, MB_CASE_TITLE, "UTF-8");
+            //format tanggal lahir ke format Y-m-d
+            $tgl_lahir = date('Y-m-d', PHPExcel_Shared_Date::ExcelToPHP($tanggal_lahir));
+
+             // Check if NIK is not empty
+             if (!empty($nik)) {
+                // Check if NIK is already registered
+                if ($this->is_nik_registered($nik)) {
+                    // If NIK is already registered, set error message and continue to next row
+                    $pesan = '<script>
+                        swal({
+                            title: "NIK '.$nik.' sudah terdaftar",
+                            text: "",
+                            type: "error",
+                            showConfirmButton: true,
+                            confirmButtonText: "OKEE"
+                            });
+                    </script>';
+                    $this->session->set_flashdata('pesan', $pesan);
+                    continue; // Skip to next row
+                }
+            } else {
+                // If NIK is empty, set error message and continue to next row
+                $pesan = '<script>
+                    swal({
+                        title: "NIK tidak boleh kosong",
+                        text: "",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmButtonText: "OKEE"
+                        });
+                </script>';
+                $this->session->set_flashdata('pesan', $pesan);
+                continue; // Skip to next row
+            }
+        
             // Insert into database
             $SQLinsert = array(
                 'id_anggota' => $this->id_anggota_urut(),
-                'id_rt' => $this->session->userdata('id_rt'),
+                'id_rt' => $id_rt,
                 'id_kk' => $id_kk,
                 'nik' => $nik,
                 'nama' => $nama,
                 'no_hp_anggota' => $no_hp,
                 'jenis_kelamin' => $jenis_kelamin,
                 'tempat_lahir' => $tempat_lahir,
+                'tgl_lahir' => $tgl_lahir,
                 'agama' => $agama,
                 'pendidikan' => $pendidikan,
                 'pekerjaan' => $pekerjaan,
@@ -557,12 +627,12 @@ public function process_excel_data_KK()
 
             $cek = $this->m_anggota->add($SQLinsert);
 
-            $SQLinsert2=array(
+            $SQLUpdate1=array(
                 'tgl_update'             =>$this->datetime(),
             );
-            $cek=$this->m_kk->update($id_kk,$SQLinsert2);
+            $cek=$this->m_kk->update($id_kk,$SQLUpdate1);
 
-            if ($cek) {
+            if ($cek == $success_count++) {
                 $pesan = '<script>
                             swal({
                                 title: "Berhasil Mengimpor Data",
@@ -573,8 +643,7 @@ public function process_excel_data_KK()
                             });
                         </script>';
                 $this->session->set_flashdata('pesan', $pesan);
-                redirect(base_url('ketua_rt/kepala_keluarga'));
-            } else {
+                } else {
                 $pesan = '<script>
                             swal({
                                 title: "Gagal Mengimpor Data",
@@ -585,10 +654,101 @@ public function process_excel_data_KK()
                             });
                         </script>';
                 $this->session->set_flashdata('pesan', $pesan);
-                redirect(base_url('ketua_rt/kepala_keluarga'));
             } 
         }
+        
+        redirect(base_url('ketua_rt/kepala_keluarga'));
     }
+       
+    }
+
+    // Function to check if NIK is already registered
+    private function is_nik_registered($nik) {
+        // Query database to check if NIK is already registered
+        $query = $this->db->get_where('tb_anggota', array('nik' => $nik));
+        return $query->num_rows() > 0;
+    }
+
+
+    public function export_excel_all()
+    {
+        // Load PHPExcel library
+        $this->load->library('PHPExcel');
+
+        // Create new PHPExcel object
+        $objPHPExcel = new PHPExcel();
+
+        // Set properties
+        $objPHPExcel->getProperties()->setCreator($this->session->userdata('nama_rt'))
+                                    ->setLastModifiedBy($this->session->userdata('nama_rt'))
+                                    ->setTitle("Data Kepala Keluarga")
+                                    ->setSubject("Data Kepala Keluarga")
+                                    ->setDescription("Data Kepala Keluarga")
+                                    ->setKeywords("excel template")
+                                    ->setCategory("Data");
+
+        // Add data to the Excel file
+        $objPHPExcel->setActiveSheetIndex(0)
+        ->setCellValueExplicit('A1', 'No KK', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('B1', 'Nama KK', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('C1', 'No HP', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('D1', 'Alamat', PHPExcel_Cell_DataType::TYPE_STRING);
+
+        // Get data from model
+        $data = $this->db->get_where('tb_kk', array('id_rt' => $this->session->userdata('id_rt')))->result_array();
+
+        // Check if data exists
+        if ($data) {
+            $i = 2;
+            foreach ($data as $row) {
+                $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValueExplicit('A'.$i, $row['no_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
+                ->setCellValueExplicit('B'.$i, $row['nama_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
+                ->setCellValueExplicit('C'.$i, $row['no_hp'], PHPExcel_Cell_DataType::TYPE_STRING)
+                ->setCellValueExplicit('D'.$i, $row['alamat'], PHPExcel_Cell_DataType::TYPE_STRING);
+                $i++;
+            }
+        } else {
+            echo "Data not found";
+            exit;
+        }
+
+        // Set column width
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+
+        // Set header style
+        $headerStyleArray = array(
+            'font' => array(
+                'bold' => true,
+            ),
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            ),
+        );
+        $objPHPExcel->getActiveSheet()->getStyle('A1:D1')->applyFromArray($headerStyleArray);
+
+        // Set active sheet index to the first sheet
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        // Set filename and mime type
+        $filename = 'data_kepala_keluarga.xlsx';
+        $mime_type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+
+        // Redirect output to a client’s web browser (Excel2007)
+        header('Content-Type: ' . $mime_type);
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+        $objWriter->save('php://output');
+
+        exit;
+    }
+    
+    
 
 
 
