@@ -29,6 +29,7 @@ class Login extends CI_controller
      
      //cek data login
      $admin     = $this->Login_m->Admin($email,md5($password));
+     $operator  = $this->Login_m->Operator($nama,$email,md5($password));
      $ketua_rt  = $this->Login_m->Ketua_RT($nama,$no_hp,$email,md5($password));
      
      if($admin->num_rows() > 0 ){
@@ -39,12 +40,26 @@ class Login extends CI_controller
             'email'    => $DataAdmin['email'],
             'password' => $DataAdmin['password'],
             'nama'     => $DataAdmin['nama'],
-            'level'    => $DataAdmin['level'] );        
+            'level'    => $DataAdmin['level'] 
+          );        
      $this->session->set_userdata($sessionAdmin);
      $this->session->set_flashdata('pesan','<div class="btn btn-primary">Anda Berhasil Login .....</div>');
      redirect(base_url('admin/home'));
 
-
+     }elseif($operator->num_rows() > 0){
+        $DataOperator=$operator->row_array();
+        $sessionOperator = array(
+            'operator'      => TRUE,
+            'id_admin'      => $DataOperator['id_admin'],
+            'nama'          => $DataOperator['nama'],
+            'email'         => $DataOperator['email'],
+            'password'      => $DataOperator['password'],
+            'level'         => 'operator',
+              );
+      $this->session->set_userdata($sessionOperator);
+      $this->session->set_flashdata('pesan','<div class="btn btn-success">Anda Berhasil Login .....</div>');
+      redirect(base_url('operator/role'));
+      
      }elseif($ketua_rt->num_rows() > 0){
         $DataKetuaRT=$ketua_rt->row_array();
         $sessionKetuaRT = array(

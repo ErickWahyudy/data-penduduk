@@ -25,45 +25,78 @@ class User_admin extends CI_controller
 public function index($value='')
 {
  $view = array('judul'  =>'Data Admin',
-            'data'      =>$this->m_admin->view(),);
+                'data'      =>$this->m_admin->view(),);
   $this->load->view('admin/user/user_admin',$view);
 }
 
-
-public function tambah($value='') {
-  if (isset($_POST['kirim'])) {
-            
-$SQLinsert=array(
-'nama'                =>$this->input->post('nama'),
-'email'            =>$this->input->post('email'),
-'password'            =>md5($this->input->post('password')),
-'level'               =>'Administrator'
-);
-
-$cek=$this->m_admin->add($SQLinsert);
-if($cek){
-   $pesan='<script>
-              swal({
-                  title: "Berhasil Menambahkan Data",
-                  text: "",
-                  type: "success",
-                  showConfirmButton: true,
-                  confirmButtonText: "OKEE"
-                  });
-          </script>';
-  	 	$this->session->set_flashdata('pesan',$pesan);
-    redirect(base_url('admin/user_admin'));
+private function acak_id($panjang)
+{
+    $karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
+    $string = '';
+    for ($i = 0; $i < $panjang; $i++) {
+        $pos = rand(0, strlen($karakter) - 1);
+        $string .= $karakter{$pos};
     }
-  }
+    return $string;
 }
+  
+   //mengambil id admin urut terakhir
+   private function id_admin_urut($value='')
+   {
+    $this->m_admin->id_urut();
+    $query    = $this->db->get();
+    $data     = $query->row_array();
+    $id       = $data['id_admin'];
+    $urut     = substr($id, 1, 3);
+    $tambah   = (int) $urut + 1;
+    $karakter = $this->acak_id(12);
+    
+    if (strlen($tambah) == 1){
+    $newID = "A"."00".$tambah.$karakter;
+       }else if (strlen($tambah) == 2){
+       $newID = "A"."0".$tambah.$karakter;
+          }else (strlen($tambah) == 3){
+          $newID = "A".$tambah.$karakter
+            };
+     return $newID;
+   }
+
+    public function tambah($value='') {
+      if (isset($_POST['kirim'])) {
+                
+    $SQLinsert=array(
+    'id_admin'            =>$this->id_admin_urut(),
+    'nama'                =>$this->input->post('nama'),
+    'email'               =>$this->input->post('email'),
+    'password'            =>md5($this->input->post('password')),
+    'level'               =>$this->input->post('level'),
+    );
+
+    $cek=$this->m_admin->add($SQLinsert);
+    if($cek){
+      $pesan='<script>
+                  swal({
+                      title: "Berhasil Menambahkan Data",
+                      text: "",
+                      type: "success",
+                      showConfirmButton: true,
+                      confirmButtonText: "OKEE"
+                      });
+              </script>';
+          $this->session->set_flashdata('pesan',$pesan);
+        redirect(base_url('admin/user_admin'));
+        }
+      }
+    }
 
     
   public function edit($id='') {	
     if(isset($_POST['kirim'])){
       $SQLupdate=array(
       	'nama'                      =>$this->input->post('nama'),
-        'email'                  =>$this->input->post('email'),
+        'email'                     =>$this->input->post('email'),
         'password'                  =>md5($this->input->post('password')),
+        'level'                     =>$this->input->post('level'),
       );
       $cek=$this->m_admin->update($id,$SQLupdate);
       if($cek){

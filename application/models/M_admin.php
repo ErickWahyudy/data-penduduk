@@ -12,7 +12,10 @@ private $table = 'tb_admin';
 //Admin INTERNET
 public function view($value='')
 {
- return $this->db->select ('*')->from ($this->table)->get ();
+  $this->db->select ('*');
+  $this->db->from ($this->table);
+  $this->db->order_by('nama', 'ASC');
+  return $this->db->get();
 }
 
 public function admin($id='')

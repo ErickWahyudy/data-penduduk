@@ -108,7 +108,7 @@
         var data = {
           labels: ['Kepala Keluarga', 'Anggota KK Laki-laki', 'Anggota KK Perempuan', 'Jumlah KK Laki-laki Dan Perempuan'],
           datasets: [{
-            label: 'Data RT <?= $rt['no_rt'];?>',
+            label: 'Data RT <?= $rt['no_rt'];?> | <?= $rt['nama_rt'];?>',
             data: [<?= $admin_count_kk;?>, <?= $admin_count_kk_laki;?>, <?= $admin_count_kk_perempuan;?>, <?= $admin_count_anggota;?>],
             backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(192, 75, 192, 0.6)', 'rgba(192, 192, 75, 0.6)', 'rgba(75, 75, 192, 0.6)'],
             borderColor: ['rgba(75, 192, 192, 1)', 'rgba(192, 75, 192, 1)', 'rgba(192, 192, 75, 1)', 'rgba(75, 75, 192, 1)'],

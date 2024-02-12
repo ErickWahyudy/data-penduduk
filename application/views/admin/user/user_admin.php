@@ -49,19 +49,31 @@
                                     <th>Nama</th>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="nama" class="form-control" required=""></td>
+                                    <td><input type="text" name="nama" class="form-control" required="" autocomplete="off"></td>
                                 </tr>
                                 <tr>
                                     <th>Email</th>
                                 </tr>
                                 <tr>
-                                    <td><input type="text" name="email" class="form-control" required=""></td>
+                                    <td><input type="text" name="email" class="form-control" required="" autocomplete="off"></td>
                                 </tr>
                                 <tr>
                                     <th>Password</th>
                                 </tr>
                                 <tr>
-                                    <td><input type="password" name="password" class="form-control" required=""></td>
+                                    <td><input type="password" name="password" class="form-control" required="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>Hak Akses</th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select name="level" class="form-control" required="">
+                                            <option value="">--Pilih--</option>
+                                            <option value="Administrator">Administrator</option>
+                                            <option value="Operator">Operator</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -97,17 +109,27 @@
                                 <tr>
                                     <th>Nama</th>
                                     <td><input type="text" name="nama" class="form-control"
-                                            value="<?= $admin['nama'] ?>" required=""></td>
+                                            value="<?= $admin['nama'] ?>" required="" autocomplete="off"></td>
                                 </tr>
                                 <tr>
                                     <th>Email</th>
                                     <td><input type="text" name="email" class="form-control"
-                                            value="<?= $admin['email'] ?>" required=""></td>
+                                            value="<?= $admin['email'] ?>" required="" autocomplete="off"></td>
                                 </tr>
                                 <tr>
                                     <th>Password</th>
                                     <td><input type="password" name="password" class="form-control" value="<?= $admin['password'] ?>"
-                                            required=""></td>
+                                            required="" autocomplete="off"></td>
+                                </tr>
+                                <tr>
+                                    <th>Hak Akses</th>
+                                    <td>
+                                        <select name="level" class="form-control" required="">
+                                            <option value="">--Pilih--</option>
+                                            <option value="Administrator" <?php if($admin['level']=='Administrator'){echo 'selected';} ?>>Administrator</option>
+                                            <option value="Operator" <?php if($admin['level']=='Operator'){echo 'selected';} ?>>Operator</option>
+                                        </select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td></td>
