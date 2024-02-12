@@ -366,16 +366,15 @@ public function process_excel_data_KK()
         ->setCellValueExplicit('B1', 'Nama KK', PHPExcel_Cell_DataType::TYPE_STRING)
         ->setCellValueExplicit('C1', 'NIK', PHPExcel_Cell_DataType::TYPE_STRING)
         ->setCellValueExplicit('D1', 'Nama', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('E1', 'No HP', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('F1', 'Jenis Kelamin', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('G1', 'Tempat Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('H1', 'Tanggal Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('I1', 'Agama', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('J1', 'Pendidikan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('K1', 'Pekerjaan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('L1', 'Status Perkawinan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('M1', 'Status Hubungan', PHPExcel_Cell_DataType::TYPE_STRING)
-        ->setCellValueExplicit('N1', 'Kewarganegaraan', PHPExcel_Cell_DataType::TYPE_STRING);
+        ->setCellValueExplicit('E1', 'Jenis Kelamin', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('F1', 'Tempat Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('G1', 'Tanggal Lahir', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('H1', 'Agama', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('I1', 'Pendidikan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('J1', 'Pekerjaan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('K1', 'Status Perkawinan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('L1', 'Status Hubungan', PHPExcel_Cell_DataType::TYPE_STRING)
+        ->setCellValueExplicit('M1', 'Kewarganegaraan', PHPExcel_Cell_DataType::TYPE_STRING);
 
         // Data pekerjaan
         $pekerjaanOptions = array(
@@ -403,15 +402,14 @@ public function process_excel_data_KK()
                     $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValueExplicit('A'.$i, $row['no_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
                     ->setCellValueExplicit('B'.$i, $row['nama_kk'], PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('E'.$i, $row['no_hp'], PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('F'.$i, 'Laki-laki / Perempuan', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('G'.$i, 'Ponorogo', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('I'.$i, 'Islam', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('J'.$i, 'SD / SMP / SMA', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('K'.$i, 'Pelajar / Mahasiswa', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('L'.$i, 'Belum Kawin', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('M'.$i, 'Kepala Keluarga', PHPExcel_Cell_DataType::TYPE_STRING)
-                    ->setCellValueExplicit('N'.$i, 'WNI', PHPExcel_Cell_DataType::TYPE_STRING);
+                    ->setCellValueExplicit('E'.$i, 'Laki-laki / Perempuan', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('F'.$i, 'Ponorogo', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('G'.$i, 'Islam', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('I'.$i, 'SD / SMP / SMA', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('J'.$i, 'Pelajar / Mahasiswa', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('K'.$i, 'Belum Kawin', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('L'.$i, 'Kepala Keluarga', PHPExcel_Cell_DataType::TYPE_STRING)
+                    ->setCellValueExplicit('M'.$i, 'WNI', PHPExcel_Cell_DataType::TYPE_STRING);
 
                     // Set date format for "Tanggal Lahir" column
                     $objPHPExcel->getActiveSheet()->getStyle('H'.$i)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_DATE_DDMMYYYY);
@@ -429,18 +427,17 @@ public function process_excel_data_KK()
         // Set column width
         $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(15);
         $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(15);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(20);
         $objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(20);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(20);
 
         // Set header style
         $headerStyleArray = array(
@@ -451,7 +448,7 @@ public function process_excel_data_KK()
                 'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
             ),
         );
-        $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray($headerStyleArray);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:M1')->applyFromArray($headerStyleArray);
 
         // Set active sheet index to the first sheet
         $objPHPExcel->setActiveSheetIndex(0);
@@ -557,16 +554,15 @@ public function process_excel_data_KK()
 
             $nik       = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
             $nama      = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-            $no_hp     = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-            $jenis_kelamin = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-            $tempat_lahir = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-            $tanggal_lahir = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-            $agama = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-            $pendidikan = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-            $pekerjaan = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
-            $status_perkawinan = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
-            $status_hubungan = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
-            $kewarganegaraan = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+            $jenis_kelamin = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+            $tempat_lahir = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+            $tanggal_lahir = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+            $agama = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+            $pendidikan = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+            $pekerjaan = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+            $status_perkawinan = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+            $status_hubungan = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+            $kewarganegaraan = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
 
             $id_rt = $this->session->userdata('id_rt');
             $nama = mb_convert_case($nama, MB_CASE_TITLE, "UTF-8");
@@ -613,7 +609,6 @@ public function process_excel_data_KK()
                 'id_kk' => $id_kk,
                 'nik' => $nik,
                 'nama' => $nama,
-                'no_hp_anggota' => $no_hp,
                 'jenis_kelamin' => $jenis_kelamin,
                 'tempat_lahir' => $tempat_lahir,
                 'tgl_lahir' => $tgl_lahir,
